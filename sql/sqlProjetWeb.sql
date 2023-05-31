@@ -7,6 +7,7 @@
 ------------------------------------------------------------
 -- Table: User
 ------------------------------------------------------------
+DROP TABLE IF EXISTS public.User CASCADE;
 CREATE TABLE public.User(
                             id_user       SERIAL NOT NULL ,
                             mail          VARCHAR (50) NOT NULL ,
@@ -22,6 +23,7 @@ CREATE TABLE public.User(
 ------------------------------------------------------------
 -- Table: Musique
 ------------------------------------------------------------
+DROP TABLE IF EXISTS public.Musique CASCADE;
 CREATE TABLE public.Musique(
                                id_musique      SERIAL NOT NULL ,
                                titre_musique   VARCHAR (50) NOT NULL ,
@@ -34,6 +36,7 @@ CREATE TABLE public.Musique(
 ------------------------------------------------------------
 -- Table: Playlist
 ------------------------------------------------------------
+DROP TABLE IF EXISTS public.Playlist CASCADE;
 CREATE TABLE public.Playlist(
                                 id_playlist      SERIAL NOT NULL ,
                                 titre_playlist   CHAR (50)  NOT NULL ,
@@ -45,6 +48,7 @@ CREATE TABLE public.Playlist(
 ------------------------------------------------------------
 -- Table: Artiste
 ------------------------------------------------------------
+DROP TABLE IF EXISTS public.Artiste CASCADE;
 CREATE TABLE public.Artiste(
                                id_artiste     SERIAL NOT NULL ,
                                nom_artiste    VARCHAR (50) NOT NULL ,
@@ -56,6 +60,7 @@ CREATE TABLE public.Artiste(
 ------------------------------------------------------------
 -- Table: Album
 ------------------------------------------------------------
+DROP TABLE IF EXISTS public.Album CASCADE;
 CREATE TABLE public.Album(
                              id_album      SERIAL NOT NULL ,
                              image_album   VARCHAR (100) NOT NULL ,
@@ -74,6 +79,7 @@ CREATE TABLE public.Album(
 ------------------------------------------------------------
 -- Table: user_playlist
 ------------------------------------------------------------
+DROP TABLE IF EXISTS public.user_playlist CASCADE;
 CREATE TABLE public.user_playlist(
                                      id_playlist   INT  NOT NULL ,
                                      id_user       INT  NOT NULL  ,
@@ -87,6 +93,7 @@ CREATE TABLE public.user_playlist(
 ------------------------------------------------------------
 -- Table: artiste_musique
 ------------------------------------------------------------
+DROP TABLE IF EXISTS public.artiste_musique CASCADE;
 CREATE TABLE public.artiste_musique(
                                        id_artiste   INT  NOT NULL ,
                                        id_musique   INT  NOT NULL  ,
@@ -100,6 +107,7 @@ CREATE TABLE public.artiste_musique(
 ------------------------------------------------------------
 -- Table: playlist_musique
 ------------------------------------------------------------
+DROP TABLE IF EXISTS public.playlist_musique CASCADE;
 CREATE TABLE public.playlist_musique(
                                         id_musique    INT  NOT NULL ,
                                         id_playlist   INT  NOT NULL  ,
@@ -113,6 +121,7 @@ CREATE TABLE public.playlist_musique(
 ------------------------------------------------------------
 -- Table: historique
 ------------------------------------------------------------
+DROP TABLE IF EXISTS public.historique CASCADE;
 CREATE TABLE public.historique(
                                   id_musique   INT  NOT NULL ,
                                   id_user      INT  NOT NULL  ,
@@ -121,4 +130,7 @@ CREATE TABLE public.historique(
     ,CONSTRAINT historique_Musique_FK FOREIGN KEY (id_musique) REFERENCES public.Musique(id_musique)
     ,CONSTRAINT historique_User0_FK FOREIGN KEY (id_user) REFERENCES public.User(id_user)
 )WITHOUT OIDS;
+
+
+
 
