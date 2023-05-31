@@ -1,5 +1,5 @@
 ------------------------------------------------------------
---        Script Postgres
+--        Script Postgre
 ------------------------------------------------------------
 
 
@@ -72,52 +72,53 @@ CREATE TABLE public.Album(
 
 
 ------------------------------------------------------------
--- Table: Appartenir
+-- Table: user_playlist
 ------------------------------------------------------------
-CREATE TABLE public.Appartenir(
-                                  id_playlist   INT  NOT NULL ,
-                                  id_user       INT  NOT NULL  ,
-                                  CONSTRAINT Appartenir_PK PRIMARY KEY (id_playlist,id_user)
+CREATE TABLE public.user_playlist(
+                                     id_playlist   INT  NOT NULL ,
+                                     id_user       INT  NOT NULL  ,
+                                     CONSTRAINT user_playlist_PK PRIMARY KEY (id_playlist,id_user)
 
-    ,CONSTRAINT Appartenir_Playlist_FK FOREIGN KEY (id_playlist) REFERENCES public.Playlist(id_playlist)
-    ,CONSTRAINT Appartenir_User0_FK FOREIGN KEY (id_user) REFERENCES public.User(id_user)
+    ,CONSTRAINT user_playlist_Playlist_FK FOREIGN KEY (id_playlist) REFERENCES public.Playlist(id_playlist)
+    ,CONSTRAINT user_playlist_User0_FK FOREIGN KEY (id_user) REFERENCES public.User(id_user)
 )WITHOUT OIDS;
 
 
 ------------------------------------------------------------
--- Table: Feat
+-- Table: artiste_musique
 ------------------------------------------------------------
-CREATE TABLE public.Feat(
-                            id_artiste   INT  NOT NULL ,
-                            id_musique   INT  NOT NULL  ,
-                            CONSTRAINT Feat_PK PRIMARY KEY (id_artiste,id_musique)
+CREATE TABLE public.artiste_musique(
+                                       id_artiste   INT  NOT NULL ,
+                                       id_musique   INT  NOT NULL  ,
+                                       CONSTRAINT artiste_musique_PK PRIMARY KEY (id_artiste,id_musique)
 
-    ,CONSTRAINT Feat_Artiste_FK FOREIGN KEY (id_artiste) REFERENCES public.Artiste(id_artiste)
-    ,CONSTRAINT Feat_Musique0_FK FOREIGN KEY (id_musique) REFERENCES public.Musique(id_musique)
+    ,CONSTRAINT artiste_musique_Artiste_FK FOREIGN KEY (id_artiste) REFERENCES public.Artiste(id_artiste)
+    ,CONSTRAINT artiste_musique_Musique0_FK FOREIGN KEY (id_musique) REFERENCES public.Musique(id_musique)
 )WITHOUT OIDS;
 
 
 ------------------------------------------------------------
--- Table: Contenir
+-- Table: playlist_musique
 ------------------------------------------------------------
-CREATE TABLE public.Contenir(
-                                id_musique    INT  NOT NULL ,
-                                id_playlist   INT  NOT NULL  ,
-                                CONSTRAINT Contenir_PK PRIMARY KEY (id_musique,id_playlist)
+CREATE TABLE public.playlist_musique(
+                                        id_musique    INT  NOT NULL ,
+                                        id_playlist   INT  NOT NULL  ,
+                                        CONSTRAINT playlist_musique_PK PRIMARY KEY (id_musique,id_playlist)
 
-    ,CONSTRAINT Contenir_Musique_FK FOREIGN KEY (id_musique) REFERENCES public.Musique(id_musique)
-    ,CONSTRAINT Contenir_Playlist0_FK FOREIGN KEY (id_playlist) REFERENCES public.Playlist(id_playlist)
+    ,CONSTRAINT playlist_musique_Musique_FK FOREIGN KEY (id_musique) REFERENCES public.Musique(id_musique)
+    ,CONSTRAINT playlist_musique_Playlist0_FK FOREIGN KEY (id_playlist) REFERENCES public.Playlist(id_playlist)
 )WITHOUT OIDS;
 
 
 ------------------------------------------------------------
--- Table: Historique
+-- Table: historique
 ------------------------------------------------------------
-CREATE TABLE public.Historique(
+CREATE TABLE public.historique(
                                   id_musique   INT  NOT NULL ,
                                   id_user      INT  NOT NULL  ,
-                                  CONSTRAINT Historique_PK PRIMARY KEY (id_musique,id_user)
+                                  CONSTRAINT historique_PK PRIMARY KEY (id_musique,id_user)
 
-    ,CONSTRAINT Historique_Musique_FK FOREIGN KEY (id_musique) REFERENCES public.Musique(id_musique)
-    ,CONSTRAINT Historique_User0_FK FOREIGN KEY (id_user) REFERENCES public.User(id_user)
+    ,CONSTRAINT historique_Musique_FK FOREIGN KEY (id_musique) REFERENCES public.Musique(id_musique)
+    ,CONSTRAINT historique_User0_FK FOREIGN KEY (id_user) REFERENCES public.User(id_user)
 )WITHOUT OIDS;
+
