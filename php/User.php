@@ -1,10 +1,10 @@
 <?php
-
+require_once ('database.php');
 class User
 {
     static function authentification($email, $mdp)
     {
-        $db = dbConnect();
+        $db = $db = Db::connectionDB();
         $request = 'SELECT "user".id_user FROM "user" WHERE "user".mail = :email AND "user".motdepasse = crypt(:mdp, motdepasse)';
         $stmt = $db->prepare($request);
         $stmt->bindParam(':email', $email);
@@ -18,7 +18,7 @@ class User
     //
     static function getUsers()
     {
-        $db = dbConnect();
+        $db = Db::connectionDB();dbConnect();
         $request = 'SELECT * FROM "user"';
         $query = $db->prepare($request);
         $query->execute();
@@ -31,7 +31,7 @@ class User
     //
     static function getUnUser($id)
     {
-        $db = dbConnect();
+        $db = $db = Db::connectionDB();
         $request = 'SELECT * FROM "user"
                     WHERE "user".id_user = :id';
         $query = $db->prepare($request);
@@ -45,7 +45,7 @@ class User
     //
     static function playlistUser($id)
     {
-        $db = dbConnect();
+        $db = Db::connectionDB();
         $request = 'SELECT * FROM "user"
                     INNER JOIN user_playlist up on up.id_user = "user".id_user
                     INNER JOIN playlist p on p.id_playlist = up.id_playlist
@@ -62,7 +62,7 @@ class User
     //
     static function modificationUser($id, $parametre, $valeur)
     {
-        $db = dbConnect();
+        $db = Db::connectionDB();
         $request = 'UPDATE "user"
                     SET :parametre = :valeur
                     WHERE id_user = :iduser';
@@ -79,7 +79,7 @@ class User
     //
     static function historiqueUser($id)
     {
-        $db = dbConnect();
+        $db = Db::connectionDB();
         $request = 'SELECT * FROM "user"
                     INNER JOIN historique h on h.id_user = "user".id_user
                     INNER JOIN musique m on m.id_musique = h.id_musique
@@ -97,7 +97,7 @@ class User
     //
     static function ajoutHistorique($iduser, $idmusique)
     {
-        $db = dbConnect();
+        $db = Db::connectionDB();
         $request = "INSERT INTO historique (id_user, id_musique)
                     VALUES(:iduser, :idmus)";
         $query = $db->prepare($request);

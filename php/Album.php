@@ -1,12 +1,12 @@
 <?php
-
+require_once ('database.php');
 class Album
 {
     //
     // Renvoie tous les albums
     //
     static function getAlbums(){
-        $db = dbConnect();
+        $db = Db::connectionDB();
         $request ='SELECT * FROM album';
         $query=$db->prepare($request);
         $query->execute();
@@ -19,7 +19,7 @@ class Album
     //
     static function getUnAlbum($id)
     {
-        $db = dbConnect();
+        $db = Db::connectionDB();
         $request = 'SELECT * FROM album
                     INNER JOIN musique m on m.id_musique = album.id_musique
                     WHERE album.id_album = :id';
@@ -38,7 +38,7 @@ class Album
         $char = '%';
         $recherchesql = $char . $recherche . $char;
 
-        $db = dbConnect();
+        $db = Db::connectionDB();
         $request = "SELECT * FROM album
                     WHERE titre_album LIKE ':recherche'";
         $query = $db->prepare($request);

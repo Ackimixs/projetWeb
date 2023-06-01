@@ -1,12 +1,12 @@
 <?php
-
+require_once ('database.php');
 class Musique
 {
     //
     // Renvoie toutes les musiques
     //
     static function getMusiques(){
-        $db = dbConnect();
+        $db = Db::connectionDB();
         $request ='SELECT * FROM musique';
         $query=$db->prepare($request);
         $query->execute();
@@ -19,7 +19,7 @@ class Musique
     //
     static function getUneMusique($id)
     {
-        $db = dbConnect();
+        $db = Db::connectionDB();
         $request = 'SELECT * FROM musique
                     WHERE id_musique = :id';
         $query = $db->prepare($request);
@@ -37,7 +37,7 @@ class Musique
         $char = '%';
         $recherchesql = $char . $recherche . $char;
 
-        $db = dbConnect();
+        $db = Db::connectionDB();
         $request = "SELECT * FROM musique
                     WHERE titre_musique LIKE ':recherche'";
         $query = $db->prepare($request);
@@ -52,7 +52,7 @@ class Musique
     //
     static function ajoutPlaylist($idplaylist, $idmusique)
     {
-        $db = dbConnect();
+        $db = Db::connectionDB();
         $request = "INSERT INTO user_playlist (id_playlist, id_musique)
                     VALUES(:idplay, :idmus)";
         $query = $db->prepare($request);
@@ -67,7 +67,7 @@ class Musique
     //
     static function deleteMusique($idplaylist, $idmusique)
     {
-        $db = dbConnect();
+        $db = Db::connectionDB();
         $request = "DELETE FROM playlist_musique
                     WHERE id_playlist = :idplay AND id_musique = :idmus";
         $query = $db->prepare($request);
