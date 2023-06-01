@@ -97,7 +97,7 @@ body {
   .input-container {
     height: 50px;
     position: relative;
-    width: 100%;
+    width: 50%;
   }
   
   .ic1 {
@@ -112,7 +112,7 @@ body {
     background-color: #F8EDEB;
     border-radius: 17px;
     border: 2px solid #2A0949;
-    box-sizing: border-box;
+    box-sizing:border-box;
     color: #450C7C;
     font-size: 18px;
     height: 100%;
@@ -186,7 +186,7 @@ body {
     background-color: #450C7C;
   }
   
-  .sign{
+  .log{
     color: #2A0949;
     position: relative;
     top: 57%;
@@ -205,6 +205,6 @@ body {
     transition: background-color 0.3s ease;
 }
     
-    .sign:hover {
+    .log:hover {
     background-color: #450C7C;
     }
