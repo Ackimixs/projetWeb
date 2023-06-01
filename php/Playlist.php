@@ -1,17 +1,17 @@
 <?php
 
+require_once ('database.php');
 class Playlist
 {
     //
     // Renvoie toutes les playlists
     //
     static function getPlaylists(){
-        $db = dbConnect();
+        $db = Db::connectionDB();
         $request ='SELECT * FROM playlist';
-        $query=$db->prepare($request);
+        $query = $db->prepare($request);
         $query->execute();
-        $resultat = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $resultat;
+        return $query->fetch(PDO::FETCH_ASSOC);
     }
 
     //
@@ -19,14 +19,13 @@ class Playlist
     //
     static function getUnePlaylist($id)
     {
-        $db = dbConnect();
+        $db = Db::connectionDB();
         $request = 'SELECT * FROM playlist
                     WHERE id_playlist = :id';
         $query = $db->prepare($request);
         $query->bindParam(':id', $id);
         $query->execute();
-        $resultat = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $resultat;
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     //
@@ -37,7 +36,7 @@ class Playlist
         $char = '%';
         $recherchesql = $char . $recherche . $char;
 
-        $db = dbConnect();
+        $db = Db::connectionDB();
         $request = "SELECT * FROM playlist
                     WHERE titre_playlist LIKE ':recherche'";
         $query = $db->prepare($request);
@@ -52,7 +51,7 @@ class Playlist
     //
     static function musiquePlaylist($idplaylist)
     {
-        $db = dbConnect();
+        $db = Db::connectionDB();
         $request = 'SELECT * FROM playlist
                     INNER JOIN playlist_musique pm on pm.id_playlist = playlist.id_playlist
                     INNER JOIN musique m on m.id_musique = pm.id_musique
@@ -69,7 +68,7 @@ class Playlist
     //
     static function deletePlaylist($idplaylist, $iduser)
     {
-        $db = dbConnect();
+        $db = Db::connectionDB();
         $request = "DELETE FROM user_playlist
                     WHERE id_playlist = :idplay AND id_user = :iduser";
         $query = $db->prepare($request);
@@ -78,4 +77,34 @@ class Playlist
         $query->execute();
         $query->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    //
+    // Création d'une playlist
+    //
+    static function creationPlaylist($titre, $date)
+    {
+        $db = Db::connectionDB();
+        $request = "INSERT INTO playlist (titre_playlist, date_playlist)
+                    VALUES(:titre, :date)";
+        $query = $db->prepare($request);
+        $query->bindParam(':titre', $titre);
+        $query->bindParam(':date', $date);
+        $query->execute();
+        $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    //
+    // Renvoie la dernière playlist (la plus récente)
+    //
+    static function dernierePlaylist()
+    {
+        $db = Db::connectionDB();
+        $request = "SELECT * FROM playlist
+                    ORDER BY Id DESC
+                    LIMIT 1";
+        $query = $db->prepare($request);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

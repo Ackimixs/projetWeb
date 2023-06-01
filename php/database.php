@@ -1,23 +1,28 @@
 <?php
 
+extension_loaded('pdo_pgsql') or die('The PDO PostgreSQL extension is not enabled.');
+//require_once('../config.php');
 require_once('constants.php');
 
-//----------------------------------------------------------------------------
-//--- dbConnect --------------------------------------------------------------
-//----------------------------------------------------------------------------
-// Create the connection to the database.
-// \return False on error and the database otherwise.
-function dbConnect()
+class Db
 {
-    try
+    static $db = null;
+
+    static function connectionDB()
     {
-        $db = new PDO('pgsql:host='.DB_SERVER.';port='.DB_PORT.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        if (self::$db != null) {
+            return self::$db;
+        }
+        try {
+            $db = new PDO('pgsql:host=' . DB_SERVER . ';port=' . DB_PORT . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
+        } catch (PDOException $exception) {
+            echo "in the catch";
+            error_log('Connection error: ' . $exception->getMessage());
+            echo 'Connection error: ' . $exception->getMessage();
+            return false;
+        }
+        self::$db = $db;
+        return $db;
     }
-    catch (PDOException $exception)
-    {
-        error_log('Connection error: '.$exception->getMessage());
-        return false;
-    }
-    return $db;
 }
+

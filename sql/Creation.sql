@@ -29,7 +29,9 @@ CREATE TABLE public.Musique(
                                titre_musique   VARCHAR (50) NOT NULL ,
                                temps_musique   FLOAT  NOT NULL ,
                                url_musique     CHAR (50)  NOT NULL  ,
+                               id_album    INT  NOT NULL ,
                                CONSTRAINT Musique_PK PRIMARY KEY (id_musique)
+    ,CONSTRAINT Album_Musique_FK FOREIGN KEY (id_album) REFERENCES public.Album(id_album)
 )WITHOUT OIDS;
 
 
@@ -67,11 +69,9 @@ CREATE TABLE public.Album(
                              genre_album   VARCHAR (50) NOT NULL ,
                              date_album    DATE  NOT NULL ,
                              titre_album   CHAR (5)  NOT NULL ,
-                             id_musique    INT  NOT NULL ,
                              id_artiste    INT  NOT NULL  ,
                              CONSTRAINT Album_PK PRIMARY KEY (id_album)
 
-    ,CONSTRAINT Album_Musique_FK FOREIGN KEY (id_musique) REFERENCES public.Musique(id_musique)
     ,CONSTRAINT Album_Artiste0_FK FOREIGN KEY (id_artiste) REFERENCES public.Artiste(id_artiste)
 )WITHOUT OIDS;
 
@@ -130,7 +130,6 @@ CREATE TABLE public.historique(
     ,CONSTRAINT historique_Musique_FK FOREIGN KEY (id_musique) REFERENCES public.Musique(id_musique)
     ,CONSTRAINT historique_User0_FK FOREIGN KEY (id_user) REFERENCES public.User(id_user)
 )WITHOUT OIDS;
-
 
 
 
