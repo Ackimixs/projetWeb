@@ -1,0 +1,53 @@
+.bodylogin{
+    display: grid ;
+    grid-template-columns: 350px 1180px 350px;
+    grid-template-rows: 70px 837px 70px;
+    background-color: #2A0949;
+}
+
+.one{
+    grid-column:2;
+    grid-row:2;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    background-color: #F8EDEB;
+    border-radius: 30px;
+}
+
+
+.two{
+    grid-column:1;
+    grid-row:1/3;
+    display: flex;
+    justify-content: center;
+}
+
+.img{
+    color: #F8EDEB;
+    margin-top: 60px;
+}
+
+.title{
+    color: #2A0949;
+    font-size: 50px;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.bienvenue{
+    color: #2A0949;
+    font-size: 80px;
+    font-weight: bold;
+}
+
+.inp, input{
+    border:2px solid #2A0949;
+    background-color: #F8EDEB;
+    border-radius:13px;
+    font-family: "Lucida Console";
+}
+.inp{
+    margin-top: 150px;
+}

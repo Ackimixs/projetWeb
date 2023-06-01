@@ -1,10 +1,9 @@
-body{
+.bodyone{
     display: grid ;
     grid-template-columns: 150px 450px;
     grid-template-rows: 125px 727px 125px;
-    background-color: #cdbddb;
+    
 }
-
 
 .left{
     grid-column: 1;
