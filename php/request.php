@@ -4,6 +4,8 @@ require_once('database.php');
 require_once('Playlist.php');
 require_once('Musique.php');
 
+session_start();
+
 // Database connection.
 $db = Db::connectionDB();
 if (!$db)
@@ -49,6 +51,22 @@ switch($requestRessource)
 
                 break;
             default:
+                // Requête invalide
+                header("HTTP/1.0 405 Method Not Allowed");
+                break;
+        }
+        break;
+
+    case 'user':
+        switch ($request_method) {
+            case 'GET':
+                if ($id != null) {
+                    if ($id == "session") {
+                        $data = $_SESSION['user'];
+                    }
+                }
+                break;
+           default:
                 // Requête invalide
                 header("HTTP/1.0 405 Method Not Allowed");
                 break;

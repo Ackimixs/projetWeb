@@ -1,5 +1,5 @@
 /*********** Baseline, reset styles ***********/
-input[type="range"] {
+#musicProgressBar {
   -webkit-appearance: none;
   appearance: none;
   background: transparent;
@@ -8,20 +8,20 @@ input[type="range"] {
 }
 
 /* Removes default focus */
-input[type="range"]:focus {
+#musicProgressBar:focus {
   outline: none;
 }
 
 /******** Chrome, Safari, Opera and Edge Chromium styles ********/
 /* slider track */
-input[type="range"]::-webkit-slider-runnable-track {
+#musicProgressBar::-webkit-slider-runnable-track {
   background-color: #d1dde0;
   border-radius: 1.5rem;
   height: 0.5rem;
 }
 
 /* slider thumb */
-input[type="range"]::-webkit-slider-thumb {
+#musicProgressBar::-webkit-slider-thumb {
   -webkit-appearance: none; /* Override default look */
   appearance: none;
   margin-top: -4px; /* Centers thumb on the track */
@@ -34,14 +34,14 @@ input[type="range"]::-webkit-slider-thumb {
 
 /*********** Firefox styles ***********/
 /* slider track */
-input[type="range"]::-moz-range-track {
+#musicProgressBar::-moz-range-track {
   background-color: #d1dde0;
   border-radius: 1.5rem;
   height: 0.5rem;
 }
 
 /* slider thumb */
-input[type="range"]::-moz-range-thumb {
+#musicProgressBar::-moz-range-thumb {
   background-color: #837272;
   border: none; /*Removes extra border that FF applies*/
   border-radius: 0.5rem;

@@ -9,6 +9,10 @@ let musiqueName = document.querySelector('#musicName');
 let musiqueImage = document.querySelector('#imgMusic')
 let nextButton = document.querySelector('.nextButton');
 let previousButton = document.querySelector('.previousButton');
+const volumeSlider = document.querySelector('.volume-slider');
+
+const audioMuted = document.querySelector('#audioMuted');
+const audioNotMuted = document.querySelector('#audioNotMuted');
 
 const setMusique = (musique) => {
 
@@ -24,6 +28,7 @@ const setMusique = (musique) => {
 
     audioTag.onloadedmetadata = () => {
         let duration = audioTag.duration;
+        audioTag.volume = volumeSlider.value / 100;
         document.querySelector("#timeOfTheMusic").textContent = parseSeconds(audioTag.duration);
         progressBar.max = duration;
         progressBar.value = 0;
@@ -76,6 +81,24 @@ nextButton.addEventListener('click', () => {
     getMusique(getRandomInteger(1, 200))
 })
 
+audioMuted.addEventListener('click', () => {
+    audioMuted.hidden = true;
+    audioNotMuted.hidden = false;
+    volumeSlider.disabled = false;
+    audioTag.volume = volumeSlider.value / 100;
+});
+
+audioNotMuted.addEventListener('click', () => {
+    audioMuted.hidden = false;
+    audioNotMuted.hidden = true;
+    volumeSlider.disabled = true;
+    audioTag.volume = 0;
+})
+
+volumeSlider.addEventListener('change', () => {
+  audioTag.volume = volumeSlider.value / 100;
+});
+
 function parseSeconds(seconds) {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = Math.floor(seconds % 60);
@@ -94,4 +117,4 @@ function getMusique(id_musique) {
     ajaxRequest("GET", "../php/request.php/musique/" + id_musique, setMusique);
 }
 
-getMusique(205);
+getMusique(36);
