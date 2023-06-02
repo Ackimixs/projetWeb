@@ -55,7 +55,13 @@ class Album
             $stmt = $db->prepare($request);
             $stmt->bindParam(':recherche', $recherche);
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ( $result[0]['id_album'] == ''){
+                return 'Album introuvable.';
+            }
+            else {
+                return $result;
+            }
         }
         catch (PDOException $exception){
             error_log($exception->getMessage());

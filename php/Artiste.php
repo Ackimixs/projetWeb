@@ -48,13 +48,20 @@ class Artiste
     {
         try {
             $db = Db::connectionDB();
-            $request = "SELECT * FROM artiste
-                        WHERE nom_artiste ILIKE CONCAT('%', :recherche::text, '%'); 
-                        ";
+            $request = "
+            SELECT * FROM artiste
+            WHERE nom_artiste ILIKE CONCAT('%', :recherche::text, '%'); 
+            ";
             $stmt = $db->prepare($request);
             $stmt->bindParam(':recherche', $recherche);
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ( $result[0]['id_artiste'] == ''){
+                return 'Artiste introuvable.';
+            }
+            else {
+                return $result;
+            }
         }
         catch (PDOException $exception){
             error_log($exception->getMessage());

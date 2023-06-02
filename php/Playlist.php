@@ -54,10 +54,16 @@ class Playlist
             $stmt = $db->prepare($request);
             $stmt->bindParam(':recherche', $recherche);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ( $result[0]['id_playlist'] == ''){
+                return 'Playlist introuvable.';
+            }
+            else {
+                return $result;
+            }
         }
         catch (PDOException $exception){
-            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
+            error_log($exception->getMessage());
             return false;
         }
     }
