@@ -44,7 +44,7 @@ class Artiste
     //
     // Renvoie les artistes dont le titre contient les lettres de la recherche du user
     //
-    static function rechercheArtiste($recherche)
+    static function rechercheArtistes($recherche)
     {
         try {
             $db = Db::connectionDB();

@@ -53,6 +53,23 @@ switch($requestRessource)
                 header("HTTP/1.0 405 Method Not Allowed");
                 break;
         }
+    case 'recherchemusique':
+        //print_r('get :'.$_GET['stringrecherche']);
+        $data = Musique::rechercheMusiques($_GET['stringrecherche']);
+        break;
+    case 'rechercheplaylist':
+        $data = Playlist::recherchePlaylists($_GET['stringrecherche']);
+        break;
+    case 'recherchealbum':
+        $data = Album::rechercheAlbums($_GET['stringrecherche']);
+        break;
+    case 'rechercheartiste':
+        $data = Artiste::rechercheArtistes($_GET['stringrecherche']);
+        break;
+    default:
+        // Requête invalide
+        header("HTTP/1.0 405 Method Not Allowed");
+        break;
     break;
 }
 
