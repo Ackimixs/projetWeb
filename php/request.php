@@ -2,6 +2,7 @@
 
 require_once('database.php');
 require_once('Playlist.php');
+require_once('Musique.php');
 
 // Database connection.
 $db = Db::connectionDB();
@@ -15,8 +16,6 @@ $request_method = $_SERVER["REQUEST_METHOD"];
 $request = substr($_SERVER['PATH_INFO'], 1);
 $request = explode('/', $request);
 $requestRessource = array_shift($request);
-
-
 
 
 $data = false;
@@ -37,6 +36,24 @@ switch($requestRessource)
                 break;
         }
         break;
+
+    case 'musique':
+        switch ($request_method) {
+            case 'GET':
+
+                if ($id != null) {
+                    $data = Musique::getUneMusiqueAvecAlbumEtArtiste($id);
+                } else {
+                    $data = Musique::getMusiques();
+                }
+
+                break;
+            default:
+                // Requête invalide
+                header("HTTP/1.0 405 Method Not Allowed");
+                break;
+        }
+    break;
 }
 
 
