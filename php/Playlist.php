@@ -49,6 +49,8 @@ class Playlist
             $db = Db::connectionDB();
             $request = "
             SELECT * FROM playlist
+            INNER JOIN user_playlist up on playlist.id_playlist = up.id_playlist
+            INNER JOIN \"user\" u on u.id_user = up.id_user
             WHERE titre_playlist ILIKE CONCAT('%', :recherche::text, '%'); 
             ";
             $stmt = $db->prepare($request);

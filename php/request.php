@@ -3,6 +3,8 @@
 require_once('database.php');
 require_once('Playlist.php');
 require_once('Musique.php');
+require_once('Artiste.php');
+require_once('Album.php');
 
 session_start();
 
