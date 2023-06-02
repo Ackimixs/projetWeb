@@ -105,7 +105,7 @@ class Playlist
         $query->execute();
         $query->fetchAll(PDO::FETCH_ASSOC);
     }
-
+*/
     //
     // Création d'une playlist
     //
@@ -113,14 +113,26 @@ class Playlist
     {
         $db = Db::connectionDB();
         $request = "INSERT INTO playlist (titre_playlist, date_playlist)
-                    VALUES(:titre, :date)";
+                    VALUES(:titre, :date) RETURNING *";
         $query = $db->prepare($request);
         $query->bindParam(':titre', $titre);
         $query->bindParam(':date', $date);
         $query->execute();
-        $query->fetchAll(PDO::FETCH_ASSOC);
+        return $query->fetch(PDO::FETCH_ASSOC);
     }
 
+    static function createPlaylistUser($id_playlist, $id_user, $date_ajout) {
+        $db = Db::connectionDB();
+        $request = "INSERT INTO user_playlist (id_playlist, id_user, date_playlist)
+                    VALUES(:id_playlist, :id_user, :date_playlist) RETURNING *";
+        $query = $db->prepare($request);
+        $query->bindParam(':id_playlist', $id_playlist);
+        $query->bindParam(':id_user', $id_user);
+        $query->bindParam(':date_playlist', $date_ajout);
+        $query->execute();
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+/*
     //
     // Renvoie la dernière playlist (la plus récente)
     //

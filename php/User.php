@@ -180,7 +180,7 @@ class User
             $str = "profile/" . $nom . $prenom . ".jpg";
             $stmt->bindParam(':image', $str);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception){
             error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
