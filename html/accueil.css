@@ -96,3 +96,27 @@
     background-color: #581896;
     border-top : #F8EDEB solid 2px ;
 }
+
+.footerBar {
+    height: 100%;
+    margin-left: 2rem;
+}
+
+.controlButton {
+    padding-left: 1rem;
+}
+
+#likeButton > div {
+    margin: 0 10px;
+}
+
+.timestampMusic {
+    margin: 0 !important;
+    height: 100%;
+    align-items: center;
+    padding: 0.2rem 1rem;
+}
+
+#attenteMusic {
+    margin-right: 3rem;
+}
