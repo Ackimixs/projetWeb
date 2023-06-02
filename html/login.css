@@ -167,7 +167,7 @@ body {
     color: #2A0949;
   }
   
-  .submit {
+  .valider {
     background-color: #2A0949;
     border-radius: 12px;
     border: 0;
@@ -182,7 +182,7 @@ body {
     width: 100%;
   }
   
-  .submit:active {
+  .valider:active {
     background-color: #450C7C;
   }
   
