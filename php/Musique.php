@@ -6,12 +6,18 @@ class Musique
     // Renvoie toutes les musiques
     //
     static function getMusiques(){
-        $db = Db::connectionDB();
-        $request ='SELECT * FROM musique';
-        $query=$db->prepare($request);
-        $query->execute();
-        $resultat = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $resultat;
+        try {
+            $db = Db::connectionDB();
+            $request = 'SELECT * FROM musique';
+            $stmt = $db->prepare($request);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log($exception->getMessage());
+            return false;
+        }
+
     }
 
     //
@@ -19,14 +25,19 @@ class Musique
     //
     static function getUneMusique($id)
     {
-        $db = Db::connectionDB();
-        $request = 'SELECT * FROM musique
+        try {
+            $db = Db::connectionDB();
+            $request = 'SELECT * FROM musique
                     WHERE id_musique = :id';
-        $query = $db->prepare($request);
-        $query->bindParam(':id', $id);
-        $query->execute();
-        $resultat = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $resultat;
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log($exception->getMessage());
+            return false;
+        }
     }
 
     //
@@ -34,17 +45,21 @@ class Musique
     //
     static function rechercheMusiques($recherche)
     {
-        $char = '%';
-        $recherchesql = $char . $recherche . $char;
-
-        $db = Db::connectionDB();
-        $request = "SELECT * FROM musique
-                    WHERE titre_musique LIKE ':recherche'";
-        $query = $db->prepare($request);
-        $query->bindParam(':recherche', $recherchesql);
-        $query->execute();
-        $resultat = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $resultat;
+        try {
+            $db = Db::connectionDB();
+            $request = "
+            SELECT * FROM musique
+            WHERE titre_musique ILIKE CONCAT('%', :recherche::text, '%'); 
+            ";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':recherche', $recherche);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log($exception->getMessage());
+            return false;
+        }
     }
 
     //
@@ -52,14 +67,20 @@ class Musique
     //
     static function ajoutPlaylist($idplaylist, $idmusique)
     {
-        $db = Db::connectionDB();
-        $request = "INSERT INTO user_playlist (id_playlist, id_musique)
+        try {
+            $db = Db::connectionDB();
+            $request = "INSERT INTO user_playlist (id_playlist, id_musique)
                     VALUES(:idplay, :idmus)";
-        $query = $db->prepare($request);
-        $query->bindParam(':idplay', $idplaylist);
-        $query->bindParam(':idmus', $idmusique);
-        $query->execute();
-        $query->fetchAll(PDO::FETCH_ASSOC);
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':idplay', $idplaylist);
+            $stmt->bindParam(':idmus', $idmusique);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log($exception->getMessage());
+            return false;
+        }
     }
 
     //
@@ -67,13 +88,19 @@ class Musique
     //
     static function deleteMusique($idplaylist, $idmusique)
     {
-        $db = Db::connectionDB();
-        $request = "DELETE FROM playlist_musique
+        try {
+            $db = Db::connectionDB();
+            $request = "DELETE FROM playlist_musique
                     WHERE id_playlist = :idplay AND id_musique = :idmus";
-        $query = $db->prepare($request);
-        $query->bindParam(':idplay', $idplaylist);
-        $query->bindParam(':idmus', $idmusique);
-        $query->execute();
-        $query->fetchAll(PDO::FETCH_ASSOC);
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':idplay', $idplaylist);
+            $stmt->bindParam(':idmus', $idmusique);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log($exception->getMessage());
+            return false;
+        }
     }
 }

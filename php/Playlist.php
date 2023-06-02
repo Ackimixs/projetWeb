@@ -7,11 +7,17 @@ class Playlist
     // Renvoie toutes les playlists
     //
     static function getPlaylists(){
-        $db = Db::connectionDB();
-        $request ='SELECT * FROM playlist';
-        $query = $db->prepare($request);
-        $query->execute();
-        return $query->fetch(PDO::FETCH_ASSOC);
+        try {
+            $db = Db::connectionDB();
+            $request = 'SELECT * FROM playlist';
+            $stmt = $db->prepare($request);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log($exception->getMessage());
+            return false;
+        }
     }
 
     //
@@ -19,13 +25,19 @@ class Playlist
     //
     static function getUnePlaylist($id)
     {
-        $db = Db::connectionDB();
-        $request = 'SELECT * FROM playlist
+        try {
+            $db = Db::connectionDB();
+            $request = 'SELECT * FROM playlist
                     WHERE id_playlist = :id';
-        $query = $db->prepare($request);
-        $query->bindParam(':id', $id);
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log($exception->getMessage());
+            return false;
+        }
     }
 
     //
@@ -33,17 +45,21 @@ class Playlist
     //
     static function recherchePlaylists($recherche)
     {
-        $char = '%';
-        $recherchesql = $char . $recherche . $char;
-
-        $db = Db::connectionDB();
-        $request = "SELECT * FROM playlist
-                    WHERE titre_playlist LIKE ':recherche'";
-        $query = $db->prepare($request);
-        $query->bindParam(':recherche', $recherchesql);
-        $query->execute();
-        $resultat = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $resultat;
+        try {
+            $db = Db::connectionDB();
+            $request = "
+            SELECT * FROM playlist
+            WHERE titre_playlist ILIKE CONCAT('%', :recherche::text, '%'); 
+            ";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':recherche', $recherche);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log($exception->getMessage());
+            return false;
+        }
     }
 
     //
@@ -51,21 +67,27 @@ class Playlist
     //
     static function musiquePlaylist($idplaylist)
     {
-        $db = Db::connectionDB();
-        $request = 'SELECT * FROM playlist
+        try {
+            $db = Db::connectionDB();
+            $request = 'SELECT * FROM playlist
                     INNER JOIN playlist_musique pm on pm.id_playlist = playlist.id_playlist
                     INNER JOIN musique m on m.id_musique = pm.id_musique
                     WHERE playlist.id_playlist = :idplaylist';
-        $query = $db->prepare($request);
-        $query->bindParam(':idplaylist', $idplaylist);
-        $query->execute();
-        $resultat = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $resultat;
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':idplaylist', $idplaylist);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log($exception->getMessage());
+            return false;
+        }
     }
 
     //
     // Delete une playlist d'un user
     //
+    /*
     static function deletePlaylist($idplaylist, $iduser)
     {
         $db = Db::connectionDB();
@@ -105,6 +127,6 @@ class Playlist
         $query = $db->prepare($request);
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
-    }
+    }*/
 
 }

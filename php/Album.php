@@ -6,12 +6,18 @@ class Album
     // Renvoie tous les albums
     //
     static function getAlbums(){
-        $db = Db::connectionDB();
-        $request ='SELECT * FROM album';
-        $query=$db->prepare($request);
-        $query->execute();
-        $resultat = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $resultat;
+        try {
+            $db = Db::connectionDB();
+            $request = 'SELECT * FROM album';
+            $stmt = $db->prepare($request);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log($exception->getMessage());
+            return false;
+        }
+
     }
 
     //
@@ -19,15 +25,20 @@ class Album
     //
     static function getUnAlbum($id)
     {
-        $db = Db::connectionDB();
-        $request = 'SELECT * FROM album
+        try {
+            $db = Db::connectionDB();
+            $request = 'SELECT * FROM album
                     INNER JOIN musique m on m.id_musique = album.id_musique
                     WHERE album.id_album = :id';
-        $query = $db->prepare($request);
-        $query->bindParam(':id', $id);
-        $query->execute();
-        $resultat = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $resultat;
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log($exception->getMessage());
+            return false;
+        }
     }
 
     //
@@ -35,16 +46,20 @@ class Album
     //
     static function rechercheAlbums($recherche)
     {
-        $char = '%';
-        $recherchesql = $char . $recherche . $char;
-
-        $db = Db::connectionDB();
-        $request = "SELECT * FROM album
-                    WHERE titre_album LIKE ':recherche'";
-        $query = $db->prepare($request);
-        $query->bindParam(':recherche', $recherchesql);
-        $query->execute();
-        $resultat = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $resultat;
+        try {
+            $db = Db::connectionDB();
+            $request = "
+            SELECT * FROM album
+            WHERE titre_album ILIKE CONCAT('%', :recherche::text, '%'); 
+            ";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':recherche', $recherche);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log($exception->getMessage());
+            return false;
+        }
     }
 }
