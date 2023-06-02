@@ -1,11 +1,17 @@
-window.addEventListener('load', () => {
+const setMusique = (musique) => {
     let audioTag = document.querySelector('#audioTag');
     let playButton = document.querySelector('.playButton');
     let pauseButton = document.querySelector('.pauseButton');
     pauseButton.hidden = true;
 
-    let sourceTag = document.createElement('source');
-    sourceTag.src = 'https://r2.ackimixs.xyz/music/Captain KronoMuzik.mp3';
+    let musiqueName = document.querySelector('#musicName');
+    musiqueName.innerText = musique.titre_musique + " - " + musique.nom_artiste;
+
+    let musiqueImage = document.querySelector('#imgMusic')
+    musiqueImage.src = musique.image_album;
+
+    let sourceTag = document.querySelector('#sourceTag');
+    sourceTag.src = musique.url_musique;
     sourceTag.type = 'audio/mpeg';
     audioTag.load();
 
@@ -13,24 +19,25 @@ window.addEventListener('load', () => {
 
     audioTag.onloadedmetadata = () => {
         let duration = audioTag.duration;
+        document.querySelector("#timeOfTheMusic").textContent = parseSeconds(audioTag.duration);
         let progressBar = document.querySelector("#musicProgressBar");
         let timestampMusic = document.querySelector("#timestampMusic");
-        let timeOfTheMusic = document.querySelector("#timeOfTheMusic");
         progressBar.max = duration;
         progressBar.value = 0;
         progressBar.addEventListener('change', () => {
             audioTag.currentTime = progressBar.value;
             timestampMusic.textContent = parseSeconds(audioTag.currentTime);
-            timeOfTheMusic.textContent = parseSeconds(audioTag.duration);
         })
 
         audioTag.addEventListener('timeupdate', () => {
             progressBar.value = audioTag.currentTime;
             timestampMusic.textContent = parseSeconds(audioTag.currentTime);
-            timeOfTheMusic.textContent = parseSeconds(audioTag.duration);
         })
     };
 
+    audioTag.addEventListener('ended', () => {
+        console.log('ended');
+    })
 
     playButton.addEventListener('click', () => {
         audioTag.play();
@@ -43,7 +50,7 @@ window.addEventListener('load', () => {
         playButton.hidden = false;
         pauseButton.hidden = true;
     })
-})
+}
 
 
 function parseSeconds(seconds) {
@@ -55,3 +62,9 @@ function parseSeconds(seconds) {
 
     return `${minutesFormatted}:${secondsFormatted}`;
 }
+
+function getMusique(id_musique) {
+    ajaxRequest("GET", "../php/request.php/musique/" + id_musique, setMusique);
+}
+
+getMusique(205);
