@@ -1,0 +1,122 @@
+.bodyone{
+    display: grid ;
+    grid-template-columns: 150px 450px;
+    grid-template-rows: 125px 727px 125px;
+    
+}
+
+.left{
+    grid-column: 1;
+    grid-row: 1 / 4;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background-color: #581896;
+    border-right : #F8EDEB solid 2px ;
+}
+
+.profil{
+    margin-bottom: 10px;
+    color:#F8EDEB;
+}
+
+.header{
+    grid-column: 2/4;
+    grid-row: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: flex-end;
+    background-color: #581896;
+    border-bottom : #F8EDEB solid 2px ;
+    
+}
+
+.inp{
+    margin-left: 50px;
+    margin-bottom: 30px;
+}
+ 
+
+.middle{
+    grid-column: 2/4;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 150px 300px 280px;
+    background-color: #2A0949;
+    
+}
+
+.one{
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 30px;
+    font-family: 'gadugi';
+    margin-top: 15px;
+    color: #F8EDEB;
+    text-decoration: underline;
+    
+}
+
+/* .one-one{
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-family: 'gadugi';
+} */
+
+.two{
+    grid-column: 1;
+    grid-row: 3;
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    font-family: 'gadugi';
+    color: #F8EDEB;
+    text-decoration: underline;
+    
+   
+}
+.three{
+    grid-column: 3;
+    grid-row: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.footer{
+    grid-column: 2/4;
+    grid-row: 3;
+    background-color: #581896;
+    border-top : #F8EDEB solid 2px ;
+}
+
+.footerBar {
+    height: 100%;
+    margin-left: 2rem;
+}
+
+.controlButton {
+    padding-left: 1rem;
+}
+
+#likeButton > div {
+    margin: 0 10px;
+}
+
+.timestampMusic {
+    margin: 0 !important;
+    height: 100%;
+    align-items: center;
+    padding: 0.2rem 1rem;
+}
+
+#attenteMusic {
+    margin-right: 3rem;
+}
