@@ -28,7 +28,7 @@ class Album
         try {
             $db = Db::connectionDB();
             $request = 'SELECT * FROM album
-                    INNER JOIN musique m on m.id_musique = album.id_musique
+                    INNER JOIN musique m on m.id_album = album.id_album
                     WHERE album.id_album = :id';
             $stmt = $db->prepare($request);
             $stmt->bindParam(':id', $id);

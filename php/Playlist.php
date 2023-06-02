@@ -12,10 +12,10 @@ class Playlist
             $request = 'SELECT * FROM playlist';
             $stmt = $db->prepare($request);
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception){
-            error_log($exception->getMessage());
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
             return false;
         }
     }
@@ -28,14 +28,14 @@ class Playlist
         try {
             $db = Db::connectionDB();
             $request = 'SELECT * FROM playlist
-                    WHERE id_playlist = :id';
+                        WHERE id_playlist = :id';
             $stmt = $db->prepare($request);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception){
-            error_log($exception->getMessage());
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
             return false;
         }
     }
@@ -54,10 +54,10 @@ class Playlist
             $stmt = $db->prepare($request);
             $stmt->bindParam(':recherche', $recherche);
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception){
-            error_log($exception->getMessage());
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
             return false;
         }
     }
@@ -70,9 +70,9 @@ class Playlist
         try {
             $db = Db::connectionDB();
             $request = 'SELECT * FROM playlist
-                    INNER JOIN playlist_musique pm on pm.id_playlist = playlist.id_playlist
-                    INNER JOIN musique m on m.id_musique = pm.id_musique
-                    WHERE playlist.id_playlist = :idplaylist';
+                        INNER JOIN playlist_musique pm on pm.id_playlist = playlist.id_playlist
+                        INNER JOIN musique m on m.id_musique = pm.id_musique
+                        WHERE playlist.id_playlist = :idplaylist';
             $stmt = $db->prepare($request);
             $stmt->bindParam(':idplaylist', $idplaylist);
             $stmt->execute();

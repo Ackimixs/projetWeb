@@ -5,13 +5,13 @@ class User
     static function authentification($email, $mdp)
     {
         try {
-            $db = $db = Db::connectionDB();
+            $db = Db::connectionDB();
             $request = 'SELECT "user".id_user FROM "user" WHERE "user".mail = :email AND "user".motdepasse = crypt(:mdp, motdepasse)';
             $stmt = $db->prepare($request);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':mdp', $mdp);
             $stmt->execute();
-            return $stmt->fetch();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception){
             error_log($exception->getMessage());
@@ -32,7 +32,7 @@ class User
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception){
-            error_log($exception->getMessage());
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
             return false;
         }
     }
@@ -45,14 +45,14 @@ class User
         try {
             $db = $db = Db::connectionDB();
             $request = 'SELECT * FROM "user"
-                    WHERE "user".id_user = :id';
+                        WHERE "user".id_user = :id';
             $stmt = $db->prepare($request);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception){
-            error_log($exception->getMessage());
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
             return false;
         }
     }
@@ -64,16 +64,16 @@ class User
         try {
             $db = Db::connectionDB();
             $request = 'SELECT * FROM "user"
-                    INNER JOIN user_playlist up on up.id_user = "user".id_user
-                    INNER JOIN playlist p on p.id_playlist = up.id_playlist
-                    WHERE "user".id_user = :id';
+                        INNER JOIN user_playlist up on up.id_user = "user".id_user
+                        INNER JOIN playlist p on p.id_playlist = up.id_playlist
+                        WHERE "user".id_user = :id';
             $stmt = $db->prepare($request);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception){
-            error_log($exception->getMessage());
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
             return false;
         }
     }
@@ -112,6 +112,7 @@ class User
                     INNER JOIN historique h on h.id_user = "user".id_user
                     INNER JOIN musique m on m.id_musique = h.id_musique
                     WHERE "user".id_user = 2
+                    ORDER BY h.date_ajout DESC
                     LIMIT 10';
             $stmt = $db->prepare($request);
             $stmt->bindParam(':id', $id);
@@ -119,7 +120,7 @@ class User
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception){
-            error_log($exception->getMessage());
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
             return false;
         }
     }
@@ -132,7 +133,7 @@ class User
         try {
             $db = Db::connectionDB();
             $request = "INSERT INTO historique (id_user, id_musique)
-                    VALUES(:iduser, :idmus)";
+                        VALUES(:iduser, :idmus)";
             $stmt = $db->prepare($request);
             $stmt->bindParam(':iduser', $iduser);
             $stmt->bindParam(':idmus', $idmusique);
@@ -140,7 +141,7 @@ class User
             $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception){
-            error_log($exception->getMessage());
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
             return false;
         }
     }

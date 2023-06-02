@@ -14,7 +14,7 @@ class Musique
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception){
-            error_log($exception->getMessage());
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
             return false;
         }
 
@@ -28,11 +28,11 @@ class Musique
         try {
             $db = Db::connectionDB();
             $request = 'SELECT * FROM musique
-                    WHERE id_musique = :id';
+                        WHERE id_musique = :id';
             $stmt = $db->prepare($request);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception){
             error_log($exception->getMessage());
@@ -47,17 +47,16 @@ class Musique
     {
         try {
             $db = Db::connectionDB();
-            $request = "
-            SELECT * FROM musique
-            WHERE titre_musique ILIKE CONCAT('%', :recherche::text, '%'); 
-            ";
+            $request = "SELECT * FROM musique
+                        WHERE titre_musique ILIKE CONCAT('%', :recherche::text, '%'); 
+                        ";
             $stmt = $db->prepare($request);
             $stmt->bindParam(':recherche', $recherche);
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception){
-            error_log($exception->getMessage());
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
             return false;
         }
     }
@@ -69,8 +68,8 @@ class Musique
     {
         try {
             $db = Db::connectionDB();
-            $request = "INSERT INTO user_playlist (id_playlist, id_musique)
-                    VALUES(:idplay, :idmus)";
+            $request = "INSERT INTO playlist_musique (id_playlist, id_musique)
+                        VALUES(:idplay, :idmus)";
             $stmt = $db->prepare($request);
             $stmt->bindParam(':idplay', $idplaylist);
             $stmt->bindParam(':idmus', $idmusique);
@@ -78,7 +77,7 @@ class Musique
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception){
-            error_log($exception->getMessage());
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
             return false;
         }
     }
@@ -91,7 +90,7 @@ class Musique
         try {
             $db = Db::connectionDB();
             $request = "DELETE FROM playlist_musique
-                    WHERE id_playlist = :idplay AND id_musique = :idmus";
+                        WHERE id_playlist = :idplay AND id_musique = :idmus";
             $stmt = $db->prepare($request);
             $stmt->bindParam(':idplay', $idplaylist);
             $stmt->bindParam(':idmus', $idmusique);
@@ -99,7 +98,7 @@ class Musique
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception){
-            error_log($exception->getMessage());
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
             return false;
         }
     }
