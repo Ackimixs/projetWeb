@@ -57,6 +57,7 @@ button{
 
 } */
 
+/*--------------------------------------------------------------------------*/
 
 body {
     align-items: center;
@@ -189,8 +190,8 @@ body {
   .log{
     color: #2A0949;
     position: relative;
-    top: 57%;
-    left: 43%;
+    top: 35%;
+    left: 42%;
     display: inline-block;
     background-color: #2A0949;
     color: #F8EDEB;
@@ -208,3 +209,60 @@ body {
     .log:hover {
     background-color: #450C7C;
     }
+
+
+  /* body {
+    background-color: purple;
+  }
+  
+  .form-container {
+    background-color: white;
+    padding: 20px;
+    width: 400px;
+    margin: 0 auto;
+  }
+  
+  .form-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #4CAF50;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .form-inline {
+    display: flex;
+    align-items: center;
+  }
+  
+  .form-inline .form-group {
+    flex-basis: 50%;
+    padding-right: 10px;
+  }
+  
+  .submit-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  } */
