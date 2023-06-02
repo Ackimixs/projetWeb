@@ -65,16 +65,25 @@ class Musique
     {
         try {
             $db = Db::connectionDB();
-            $request = "SELECT * FROM musique
-                        WHERE titre_musique ILIKE CONCAT('%', :recherche::text, '%'); 
-                        ";
+            $request = "
+            SELECT * FROM musique
+            INNER JOIN album a on a.id_album = musique.id_album
+            INNER JOIN artiste a2 on a2.id_artiste = a.id_artiste
+            WHERE titre_musique ILIKE CONCAT('%', :recherche::text, '%'); 
+            ";
             $stmt = $db->prepare($request);
             $stmt->bindParam(':recherche', $recherche);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ( $result[0]['id_musique'] == ''){
+                return 'Musique introuvable.';
+            }
+            else {
+                return $result;
+            }
         }
         catch (PDOException $exception){
-            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
+            error_log($exception->getMessage());
             return false;
         }
     }

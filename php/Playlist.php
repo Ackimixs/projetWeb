@@ -49,15 +49,23 @@ class Playlist
             $db = Db::connectionDB();
             $request = "
             SELECT * FROM playlist
+            INNER JOIN user_playlist up on playlist.id_playlist = up.id_playlist
+            INNER JOIN \"user\" u on u.id_user = up.id_user
             WHERE titre_playlist ILIKE CONCAT('%', :recherche::text, '%'); 
             ";
             $stmt = $db->prepare($request);
             $stmt->bindParam(':recherche', $recherche);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ( $result[0]['id_playlist'] == ''){
+                return 'Playlist introuvable.';
+            }
+            else {
+                return $result;
+            }
         }
         catch (PDOException $exception){
-            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
+            error_log($exception->getMessage());
             return false;
         }
     }
@@ -99,7 +107,7 @@ class Playlist
         $query->execute();
         $query->fetchAll(PDO::FETCH_ASSOC);
     }
-
+*/
     //
     // Création d'une playlist
     //
@@ -107,14 +115,26 @@ class Playlist
     {
         $db = Db::connectionDB();
         $request = "INSERT INTO playlist (titre_playlist, date_playlist)
-                    VALUES(:titre, :date)";
+                    VALUES(:titre, :date) RETURNING *";
         $query = $db->prepare($request);
         $query->bindParam(':titre', $titre);
         $query->bindParam(':date', $date);
         $query->execute();
-        $query->fetchAll(PDO::FETCH_ASSOC);
+        return $query->fetch(PDO::FETCH_ASSOC);
     }
 
+    static function createPlaylistUser($id_playlist, $id_user, $date_ajout) {
+        $db = Db::connectionDB();
+        $request = "INSERT INTO user_playlist (id_playlist, id_user, date_playlist)
+                    VALUES(:id_playlist, :id_user, :date_playlist) RETURNING *";
+        $query = $db->prepare($request);
+        $query->bindParam(':id_playlist', $id_playlist);
+        $query->bindParam(':id_user', $id_user);
+        $query->bindParam(':date_playlist', $date_ajout);
+        $query->execute();
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+/*
     //
     // Renvoie la dernière playlist (la plus récente)
     //

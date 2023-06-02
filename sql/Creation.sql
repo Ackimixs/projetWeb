@@ -9,13 +9,13 @@
 ------------------------------------------------------------
 DROP TABLE IF EXISTS public.User CASCADE;
 CREATE TABLE public.User(
-                            id_user       SERIAL NOT NULL ,
-                            mail          VARCHAR (50) NOT NULL ,
-                            age           INT  NOT NULL ,
-                            nom_user      VARCHAR (50) NOT NULL ,
-                            prenom_user   VARCHAR (50) NOT NULL ,
-                            motdepasse    VARCHAR (50) NOT NULL ,
-                            image_user    CHAR (100)  NOT NULL  ,
+                            id_user         SERIAL NOT NULL ,
+                            mail            VARCHAR (100) NOT NULL ,
+                            date_naissance  DATE NOT NULL ,
+                            nom_user        VARCHAR (50) NOT NULL ,
+                            prenom_user     VARCHAR (50) NOT NULL ,
+                            motdepasse      VARCHAR (300) NOT NULL ,
+                            image_user      CHAR (100)  NOT NULL  ,
                             CONSTRAINT User_PK PRIMARY KEY (id_user)
 )WITHOUT OIDS;
 
@@ -40,7 +40,7 @@ CREATE TABLE public.Album(
                              id_album      SERIAL NOT NULL ,
                              image_album   VARCHAR (150) NOT NULL ,
                              genre_album   VARCHAR (50) NOT NULL ,
-                             date_album    DATE  NOT NULL DEFAULT now() ,
+                             date_album    TIMESTAMP  NOT NULL DEFAULT now() ,
                              titre_album   VARCHAR (50)  NOT NULL ,
                              id_artiste    INT  NOT NULL  ,
                              CONSTRAINT Album_PK PRIMARY KEY (id_album)
@@ -74,7 +74,7 @@ DROP TABLE IF EXISTS public.Playlist CASCADE;
 CREATE TABLE public.Playlist(
                                 id_playlist      SERIAL NOT NULL ,
                                 titre_playlist   VARCHAR (50)  NOT NULL ,
-                                date_playlist    DATE  NOT NULL DEFAULT now()  ,
+                                date_playlist    TIMESTAMP  NOT NULL DEFAULT now()  ,
                                 CONSTRAINT Playlist_PK PRIMARY KEY (id_playlist)
 )WITHOUT OIDS;
 
@@ -86,7 +86,7 @@ DROP TABLE IF EXISTS public.user_playlist CASCADE;
 CREATE TABLE public.user_playlist(
                                      id_playlist   INT  NOT NULL ,
                                      id_user       INT  NOT NULL  ,
-                                     date_playlist DATE  NOT NULL DEFAULT now()  ,
+                                     date_playlist TIMESTAMP  NOT NULL DEFAULT now()  ,
                                      CONSTRAINT user_playlist_PK PRIMARY KEY (id_playlist,id_user)
 
     ,CONSTRAINT user_playlist_Playlist_FK FOREIGN KEY (id_playlist) REFERENCES public.Playlist(id_playlist)
@@ -101,7 +101,7 @@ DROP TABLE IF EXISTS public.artiste_musique CASCADE;
 CREATE TABLE public.artiste_musique(
                                        id_artiste   INT  NOT NULL ,
                                        id_musique   INT  NOT NULL  ,
-                                       date_ajout   DATE  NOT NULL DEFAULT now()  ,
+                                       date_ajout   TIMESTAMP  NOT NULL DEFAULT now()  ,
                                        CONSTRAINT artiste_musique_PK PRIMARY KEY (id_artiste,id_musique)
 
     ,CONSTRAINT artiste_musique_Artiste_FK FOREIGN KEY (id_artiste) REFERENCES public.Artiste(id_artiste)
@@ -131,7 +131,7 @@ DROP TABLE IF EXISTS public.historique CASCADE;
 CREATE TABLE public.historique(
                                   id_musique   INT  NOT NULL ,
                                   id_user      INT  NOT NULL  ,
-                                  date_ajout   DATE  NOT NULL DEFAULT now()  ,
+                                  date_ajout   TIMESTAMP  NOT NULL DEFAULT now()  ,
                                   CONSTRAINT historique_PK PRIMARY KEY (id_musique,id_user)
 
     ,CONSTRAINT historique_Musique_FK FOREIGN KEY (id_musique) REFERENCES public.Musique(id_musique)

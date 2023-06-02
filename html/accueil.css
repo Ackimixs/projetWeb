@@ -9,14 +9,23 @@
     grid-column: 1;
     grid-row: 1 / 4;
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: #581896;
-    border-right : #F8EDEB solid 2px ;
+    border-right : #F8EDEB solid 2px;
+}
+
+#homeText {
+    margin: 0;
+}
+
+.home {
+    margin-top: 1rem;
+    color:#F8EDEB;
 }
 
 .profil{
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
     color:#F8EDEB;
 }
 
@@ -29,7 +38,6 @@
     align-items: flex-end;
     background-color: #581896;
     border-bottom : #F8EDEB solid 2px ;
-    
 }
 
 .inp{
@@ -119,4 +127,34 @@
 
 #attenteMusic {
     margin-right: 3rem;
+}
+
+.fileAttente {
+    width: 100%;
+}
+
+
+
+
+
+.volume-button {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.volume-slider {
+  width: 120px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.volume-button:hover .volume-slider,
+.volume-button:focus-within .volume-slider {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.fileAttente {
+    width: 25%;
 }

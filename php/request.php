@@ -3,6 +3,10 @@
 require_once('database.php');
 require_once('Playlist.php');
 require_once('Musique.php');
+require_once('Artiste.php');
+require_once('Album.php');
+
+session_start();
 
 // Database connection.
 $db = Db::connectionDB();
@@ -53,7 +57,39 @@ switch($requestRessource)
                 header("HTTP/1.0 405 Method Not Allowed");
                 break;
         }
-    break;
+        break;
+
+    case 'user':
+        switch ($request_method) {
+            case 'GET':
+                if ($id != null) {
+                    if ($id == "session") {
+                        $data = $_SESSION['user'];
+                    }
+                }
+                break;
+           default:
+                // Requête invalide
+                header("HTTP/1.0 405 Method Not Allowed");
+                break;
+        }
+    case 'recherchemusique':
+        //print_r('get :'.$_GET['stringrecherche']);
+        $data = Musique::rechercheMusiques($_GET['stringrecherche']);
+        break;
+    case 'rechercheplaylist':
+        $data = Playlist::recherchePlaylists($_GET['stringrecherche']);
+        break;
+    case 'recherchealbum':
+        $data = Album::rechercheAlbums($_GET['stringrecherche']);
+        break;
+    case 'rechercheartiste':
+        $data = Artiste::rechercheArtistes($_GET['stringrecherche']);
+        break;
+    default:
+        // Requête invalide
+        header("HTTP/1.0 405 Method Not Allowed");
+        break;
 }
 
 

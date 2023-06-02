@@ -6,17 +6,17 @@ class User
     {
         try {
             $db = Db::connectionDB();
-            $request = 'SELECT "user".id_user FROM "user" WHERE "user".mail = :email AND "user".motdepasse = crypt(:mdp, motdepasse)';
+            $request = 'SELECT * FROM "user" WHERE "user".mail = :email';
             $stmt = $db->prepare($request);
             $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':mdp', $mdp);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception){
             error_log($exception->getMessage());
             return false;
         }
+        return (isset($data) && password_verify($mdp, $data['motdepasse']));
     }
     //
     // Renvoie toutes les user
@@ -56,6 +56,26 @@ class User
             return false;
         }
     }
+
+    //
+    // get un user avec son email
+    //
+    static function getUserByEmail($email) {
+        try {
+            $db = $db = Db::connectionDB();
+            $request = 'SELECT * FROM "user"
+                        WHERE "user".mail = :mail';
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':mail', $email);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
+            return false;
+        }
+    }
+
     //
     // Renvoie les playlist d'un user
     //
@@ -139,6 +159,28 @@ class User
             $stmt->bindParam(':idmus', $idmusique);
             $stmt->execute();
             $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
+            return false;
+        }
+    }
+
+    static function ajouterUnUser($email, $date_naissance, $nom, $prenom, $mdp) {
+        try {
+            $db = Db::connectionDB();
+            $request = "INSERT INTO \"user\" (mail, date_naissance, nom_user, prenom_user, motdepasse, image_user)
+                        VALUES(:email, :age, :nom, :prenom, :mdp, :image) RETURNING *";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':age', $date_naissance);
+            $stmt->bindParam(':nom', $nom);
+            $stmt->bindParam(':prenom', $prenom);
+            $stmt->bindParam(':mdp', $mdp);
+            $str = "profile/" . $nom . $prenom . ".jpg";
+            $stmt->bindParam(':image', $str);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception){
             error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());

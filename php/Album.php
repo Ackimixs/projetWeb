@@ -33,7 +33,7 @@ class Album
             $stmt = $db->prepare($request);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception){
             error_log($exception->getMessage());
@@ -50,12 +50,19 @@ class Album
             $db = Db::connectionDB();
             $request = "
             SELECT * FROM album
+            INNER JOIN artiste a2 on a2.id_artiste = album.id_artiste
             WHERE titre_album ILIKE CONCAT('%', :recherche::text, '%'); 
             ";
             $stmt = $db->prepare($request);
             $stmt->bindParam(':recherche', $recherche);
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ( $result[0]['id_album'] == ''){
+                return 'Album introuvable.';
+            }
+            else {
+                return $result;
+            }
         }
         catch (PDOException $exception){
             error_log($exception->getMessage());
