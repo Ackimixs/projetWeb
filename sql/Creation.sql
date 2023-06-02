@@ -9,13 +9,13 @@
 ------------------------------------------------------------
 DROP TABLE IF EXISTS public.User CASCADE;
 CREATE TABLE public.User(
-                            id_user       SERIAL NOT NULL ,
-                            mail          VARCHAR (50) NOT NULL ,
-                            age           INT  NOT NULL ,
-                            nom_user      VARCHAR (50) NOT NULL ,
-                            prenom_user   VARCHAR (50) NOT NULL ,
-                            motdepasse    VARCHAR (50) NOT NULL ,
-                            image_user    CHAR (100)  NOT NULL  ,
+                            id_user         SERIAL NOT NULL ,
+                            mail            VARCHAR (100) NOT NULL ,
+                            date_naissance  DATE NOT NULL ,
+                            nom_user        VARCHAR (50) NOT NULL ,
+                            prenom_user     VARCHAR (50) NOT NULL ,
+                            motdepasse      VARCHAR (300) NOT NULL ,
+                            image_user      CHAR (100)  NOT NULL  ,
                             CONSTRAINT User_PK PRIMARY KEY (id_user)
 )WITHOUT OIDS;
 
