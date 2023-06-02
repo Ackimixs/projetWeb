@@ -40,6 +40,24 @@ class Musique
         }
     }
 
+    static function getUneMusiqueAvecAlbumEtArtiste($id) {
+        try {
+            $db = Db::connectionDB();
+            $request = 'SELECT * FROM musique
+                        INNER JOIN album a on a.id_album = musique.id_album
+                        INNER JOIN artiste a2 on a2.id_artiste = id_artiste_principale
+                        WHERE id_musique = :id';
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log($exception->getMessage());
+            return false;
+        }
+    }
+
     //
     // Renvoie les musiques dont le titre contient les lettres de la recherche du user
     //
