@@ -16,7 +16,7 @@ class User
             error_log($exception->getMessage());
             return false;
         }
-        return (isset($data) && password_verify($mdp, $data['motdepasse']));
+        return ($data && password_verify($mdp, $data['motdepasse']));
     }
     //
     // Renvoie toutes les user
@@ -121,51 +121,6 @@ class User
         }
     }*/
 
-    //
-    // Renvoie l'hitorique d'un utilisateur
-    //
-    static function historiqueUser($id)
-    {
-        try {
-            $db = Db::connectionDB();
-            $request = 'SELECT * FROM "user"
-                    INNER JOIN historique h on h.id_user = "user".id_user
-                    INNER JOIN musique m on m.id_musique = h.id_musique
-                    WHERE "user".id_user = 2
-                    ORDER BY h.date_ajout DESC
-                    LIMIT 10';
-            $stmt = $db->prepare($request);
-            $stmt->bindParam(':id', $id);
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }
-        catch (PDOException $exception){
-            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
-            return false;
-        }
-    }
-
-    //
-    // Ajoute une musique a l'historique de l'utilisateur
-    //
-    static function ajoutHistorique($iduser, $idmusique)
-    {
-        try {
-            $db = Db::connectionDB();
-            $request = "INSERT INTO historique (id_user, id_musique)
-                        VALUES(:iduser, :idmus)";
-            $stmt = $db->prepare($request);
-            $stmt->bindParam(':iduser', $iduser);
-            $stmt->bindParam(':idmus', $idmusique);
-            $stmt->execute();
-            $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }
-        catch (PDOException $exception){
-            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
-            return false;
-        }
-    }
-
     static function ajouterUnUser($email, $date_naissance, $nom, $prenom, $mdp) {
         try {
             $db = Db::connectionDB();
@@ -181,6 +136,92 @@ class User
             $stmt->bindParam(':image', $str);
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
+            return false;
+        }
+    }
+
+
+
+
+    //
+    // Historique
+    //
+
+    //
+    // Ajoute une musique a l'historique de l'utilisateur
+    //
+    static function ajoutHistorique($iduser, $idmusique)
+    {
+        try {
+            $db = Db::connectionDB();
+            $request = "INSERT INTO historique (id_user, id_musique)
+                        VALUES(:iduser, :idmus) RETURNING *";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':iduser', $iduser);
+            $stmt->bindParam(':idmus', $idmusique);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
+            return false;
+        }
+    }
+
+    static function isInHistorique($id_user, $id_musique) {
+        try {
+            $db = Db::connectionDB();
+            $request = "SELECT * FROM historique WHERE id_musique = :id_musique AND id_user = :id_user";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':id_musique', $id_musique);
+            $stmt->bindParam(':id_user', $id_user);
+            $stmt->execute();
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
+            return false;
+        }
+        return $data;
+    }
+
+    static function changeInHistorique($id_user, $id_musique, $date) {
+        try {
+            $db = Db::connectionDB();
+            $request = "UPDATE historique SET date_ajout = :date WHERE id_user = :id_user AND $id_musique = :id_musique RETURNING *";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':id_musique', $id_musique);
+            $stmt->bindParam(':id_user', $id_user);
+            $stmt->bindParam(':date', $date);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
+            return false;
+        }
+    }
+
+    //
+    // Renvoie l'hitorique d'un utilisateur
+    //
+    static function historiqueUser($id)
+    {
+        try {
+            $db = Db::connectionDB();
+            $request = 'SELECT * FROM "user"
+                    INNER JOIN historique h on h.id_user = "user".id_user
+                    INNER JOIN musique m on m.id_musique = h.id_musique
+                    WHERE "user".id_user = :id
+                    ORDER BY h.date_ajout DESC
+                    LIMIT 10';
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception){
             error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
