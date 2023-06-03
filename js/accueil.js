@@ -22,3 +22,7 @@ function user(data) {
         document.querySelector('#profileSkeleton').hidden = false;
     }
 }
+
+ajaxRequest('GET', '../php/request.php/user/session', (data) => {
+    if (!data) window.location.href = 'login.php';
+})
