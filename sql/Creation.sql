@@ -41,7 +41,7 @@ CREATE TABLE public.Album(
                              image_album   VARCHAR (150) NOT NULL ,
                              genre_album   VARCHAR (50) NOT NULL ,
                              date_album    TIMESTAMP  NOT NULL DEFAULT now() ,
-                             titre_album   VARCHAR (50)  NOT NULL ,
+                             titre_album   VARCHAR (150)  NOT NULL ,
                              id_artiste    INT  NOT NULL  ,
                              CONSTRAINT Album_PK PRIMARY KEY (id_album)
 
@@ -55,9 +55,9 @@ CREATE TABLE public.Album(
 DROP TABLE IF EXISTS public.Musique CASCADE;
 CREATE TABLE public.Musique(
                                id_musique               SERIAL NOT NULL ,
-                               titre_musique            VARCHAR (100) NOT NULL ,
+                               titre_musique            VARCHAR (300) NOT NULL ,
                                temps_musique            FLOAT  NOT NULL ,
-                               url_musique              CHAR (150)  NOT NULL  ,
+                               url_musique              CHAR (500)  NOT NULL  ,
                                id_spotify               VARCHAR (50) NOT NULL  ,
                                id_artiste_principale    INT NOT NULL  ,
                                id_album                 INT  ,
