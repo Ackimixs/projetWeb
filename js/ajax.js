@@ -11,7 +11,7 @@ function ajaxRequest(type, url, callback = () => {}, data = null, sendImage = fa
 
     // Create XML HTTP request.
     xhr = new XMLHttpRequest();
-    if (type === 'GET' && data != null)
+    if ((type === 'GET' || type === "DELTE") && data != null)
         url += '?' + data;
     xhr.open(type, url);
 

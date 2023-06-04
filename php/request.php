@@ -37,6 +37,8 @@ switch($requestRessource)
             case 'GET':
                 if ($id == 'random') {
                     $data = Playlist::get9RandomPlaylist();
+                } else if ($id != null) {
+                    $data = Playlist::getUnePlaylist($id);
                 } else {
                     $data = Playlist::getPlaylists();
                 }
@@ -273,8 +275,8 @@ switch($requestRessource)
                 break;
             case 'POST':
                 if (isset($_SESSION["user"])) {
-                    User::addToFileAttente($_SESSION['user']['id_user'], $_POST['id']);
-                    $data = true;
+                    error_log($_POST['id']);
+                    $data = User::addToFileAttente($_SESSION['user']['id_user'], $_POST['id']);
                 } else {
                     $data = false;
                 }
@@ -289,6 +291,65 @@ switch($requestRessource)
                 } else {
                     $data = false;
                 }
+                break;
+            default:
+                // Requête invalide
+                header("HTTP/1.0 405 Method Not Allowed");
+                break;
+
+        }
+
+        break;
+
+    case 'user-playlist':
+        switch ($request_method) {
+            case 'GET':
+                if ($_SESSION["user"]) {
+                    if ($id == null) {
+                        $data = Playlist::getAllPlaylistUser($_SESSION['user']['id_user']);
+                    } else {
+                        $data = false;
+                    }
+                } else {
+                    $data = false;
+                }
+                break;
+            case 'POST':
+                if ($_POST['id_musique'] && $_POST['id_playlist']) {
+                    $data = Playlist::addMusiqueToPlaylist($_POST['id_playlist'], $_POST['id_musique']);
+                } else {
+                    $data = false;
+                }
+                break;
+            case 'DELETE':
+                if ($_POST['id_musique'] && $_POST['id_playlist']) {
+                    $data = Playlist::removeMusiqueFromPlaylist($_POST['id_playlist'], $_POST['id_musique']);
+                } else {
+                    $data = false;
+                }
+                break;
+            default:
+                // Requête invalide
+                header("HTTP/1.0 405 Method Not Allowed");
+                break;
+        }
+        break;
+    case 'musique-playlist':
+        switch ($request_method) {
+            case 'GET':
+                if ($_SESSION["user"]) {
+                    if ($id != null) {
+                        $data = Playlist::musiquePlaylist($id);
+                    } else {
+                        $data = false;
+                    }
+                } else {
+                    $data = false;
+                }
+                break;
+            default:
+                // Requête invalide
+                header("HTTP/1.0 405 Method Not Allowed");
                 break;
         }
 

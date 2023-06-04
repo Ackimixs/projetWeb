@@ -115,6 +115,7 @@ document.addEventListener("keydown", (event) => {
         }
     }
     else if (event.code === "ArrowRight") {
+        event.preventDefault();
         if (event.ctrlKey) {
             playNext();
         } else {
@@ -122,6 +123,7 @@ document.addEventListener("keydown", (event) => {
         }
     }
     else if (event.code === "ArrowLeft") {
+        event.preventDefault();
         if (event.ctrlKey) {
             playPrevious();
         } else {
@@ -129,12 +131,15 @@ document.addEventListener("keydown", (event) => {
         }
     }
     else if (event.code === "ArrowUp") {
+        event.preventDefault();
         handleVolume((audioTag.volume * 100 + 5) / 100);
     }
     else if (event.code === "ArrowDown") {
+        event.preventDefault();
         handleVolume((audioTag.volume * 100 - 5) / 100);
     }
     else if (event.code === "Semicolon") {
+        event.preventDefault();
         handleMuted();
     }
 })
@@ -288,12 +293,12 @@ function playPlaylist(id) {
     if (loadingMusic) return;
     ajaxRequest("DELETE", '../php/request.php/file-attente', () => {
         ajaxRequest("GET", '../php/request.php/playlist/' + id, (data) => {
-            if (data.length > 0) {
-                data.forEach((element) => {
-                    ajaxRequest("POST", '../php/request.php/file-attente', (d) => {}, `id=${element.id_musique}`);
+            ajaxRequest("GET", '../php/request.php/musique-playlist/' + data.id_playlist, (m) => {
+                m.forEach(musique => {
+                    ajaxRequest("POST", '../php/request.php/file-attente', (d) => {}, `id=${musique.id_musique}`);
                 })
                 playNext();
-            }
+            })
         })
     })
 }
@@ -311,6 +316,39 @@ function playLikedSong() {
         })
     })
 }
+
+function playSong(id_musique) {
+    if (loadingMusic) return;
+    ajaxRequest("DELETE", "../php/request.php/file-attente", () => {
+        getMusique(id_musique);
+    })
+}
+
+function addToQueueSong(id_musique) {
+    if (loadingMusic) return;
+    ajaxRequest("POST", "../php/request.php/file-attente", () => {}, `id=${id_musique}`);
+}
+
+function addToQueuePlaylist(id_playlist) {
+    if (loadingMusic) return;
+    ajaxRequest("GET", '../php/request.php/musique-playlist/' + id_playlist, (data) => {
+        data.forEach(musique => {
+            ajaxRequest("POST", '../php/request.php/file-attente', (d) => {}, `id=${musique.id_musique}`);
+        })
+    })
+}
+
+function addToQueueLikedSong() {
+    if (loadingMusic) return;
+    ajaxRequest("GET", '../php/request.php/like', (data) => {
+        if (data.length > 0) {
+            data.forEach((element) => {
+                ajaxRequest("POST", '../php/request.php/file-attente', (d) => {}, `id=${element.id_musique}`);
+            })
+        }
+    })
+}
+
 
 ajaxRequest('GET', '../php/request.php/historique', (data) => {
     if (data.length === 0) {
