@@ -38,7 +38,7 @@ CREATE TABLE public.Artiste(
 DROP TABLE IF EXISTS public.Album CASCADE;
 CREATE TABLE public.Album(
                              id_album      SERIAL NOT NULL ,
-                             image_album   VARCHAR (150) NOT NULL ,
+                             image_album   VARCHAR (200) NOT NULL ,
                              genre_album   VARCHAR (50) NOT NULL ,
                              date_album    TIMESTAMP  NOT NULL DEFAULT now() ,
                              titre_album   VARCHAR (150)  NOT NULL ,
@@ -57,10 +57,11 @@ CREATE TABLE public.Musique(
                                id_musique               SERIAL NOT NULL ,
                                titre_musique            VARCHAR (300) NOT NULL ,
                                temps_musique            FLOAT  NOT NULL ,
-                               url_musique              CHAR (500)  NOT NULL  ,
+                               url_musique              CHAR (500)  ,
                                id_spotify               VARCHAR (50) NOT NULL  ,
                                id_artiste_principale    INT NOT NULL  ,
                                id_album                 INT  ,
+                               nb_like                  INT NOT NULL DEFAULT 0  ,
                                CONSTRAINT Musique_PK PRIMARY KEY (id_musique),
                                CONSTRAINT artiste_principale_Musique_FK FOREIGN KEY (id_artiste_principale) REFERENCES public.Artiste(id_artiste),
                                CONSTRAINT album_Musique_FK FOREIGN KEY (id_album) REFERENCES public.Album(id_album)
@@ -75,6 +76,8 @@ CREATE TABLE public.Playlist(
                                 id_playlist      SERIAL NOT NULL ,
                                 titre_playlist   VARCHAR (50)  NOT NULL ,
                                 date_playlist    TIMESTAMP  NOT NULL DEFAULT now()  ,
+                                image_playlist   VARCHAR (200) DEFAULT NULL  ,
+                                public           BOOL NOT NULL DEFAULT TRUE  ,
                                 CONSTRAINT Playlist_PK PRIMARY KEY (id_playlist)
 )WITHOUT OIDS;
 
@@ -139,4 +142,31 @@ CREATE TABLE public.historique(
 )WITHOUT OIDS;
 
 
+------------------------------------------------------------
+-- Table: like_musique
+------------------------------------------------------------
+DROP TABLE IF EXISTS public.like_musique CASCADE;
+CREATE TABLE public.like_musique(
+                                  id_musique   INT  NOT NULL ,
+                                  id_user      INT  NOT NULL  ,
+                                  date_ajout   TIMESTAMP  NOT NULL DEFAULT now()  ,
+                                  CONSTRAINT like_musique_PK PRIMARY KEY (id_musique,id_user)
 
+    ,CONSTRAINT like_musique_Musique_FK FOREIGN KEY (id_musique) REFERENCES public.Musique(id_musique)
+    ,CONSTRAINT like_musique_User0_FK FOREIGN KEY (id_user) REFERENCES public.User(id_user)
+)WITHOUT OIDS;
+
+
+------------------------------------------------------------
+-- Table: file_attente
+------------------------------------------------------------
+DROP TABLE IF EXISTS public.file_attente CASCADE;
+CREATE TABLE public.file_attente(
+                                  id_musique   INT  NOT NULL ,
+                                  id_user      INT  NOT NULL  ,
+                                  date_ajout   TIMESTAMP  NOT NULL DEFAULT now()  ,
+                                  CONSTRAINT file_attente_PK PRIMARY KEY (id_musique,id_user)
+
+    ,CONSTRAINT file_attente_Musique_FK FOREIGN KEY (id_musique) REFERENCES public.Musique(id_musique)
+    ,CONSTRAINT file_attente_User0_FK FOREIGN KEY (id_user) REFERENCES public.User(id_user)
+)WITHOUT OIDS;
