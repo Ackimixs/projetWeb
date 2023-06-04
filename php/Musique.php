@@ -129,4 +129,18 @@ class Musique
             return false;
         }
     }
+
+    static function getImgMusic($id_musique) {
+        try {
+            $db = Db::connectionDB();
+            $request = "SELECT image_album FROM album JOIN musique m on album.id_album = m.id_album WHERE m.id_musique = :id_musique";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':id_musique', $id_musique);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $exception) {
+            error_log($exception->getMessage());
+            return false;
+        }
+    }
 }

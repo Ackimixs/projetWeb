@@ -149,4 +149,19 @@ class Playlist
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }*/
 
+    static function get9RandomPlaylist() {
+        try {
+            $db = Db::connectionDB();
+            $request = "SELECT * FROM playlist
+                        WHERE public = true
+                        ORDER BY RANDOM()
+                        LIMIT 9";
+            $stmt = $db->prepare($request);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $exception) {
+            error_log($exception->getMessage());
+            return false;
+        }
+    }
 }
