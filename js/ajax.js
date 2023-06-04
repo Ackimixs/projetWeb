@@ -5,16 +5,19 @@
 //--- ajaxRequest --------------------------------------------------------------
 //--------------------------------
 
-function ajaxRequest(type, url, callback, data = null)
+function ajaxRequest(type, url, callback = () => {}, data = null, sendImage = false)
 {
     let xhr;
 
     // Create XML HTTP request.
     xhr = new XMLHttpRequest();
-    if (type == 'GET' && data != null)
+    if (type === 'GET' && data != null)
         url += '?' + data;
     xhr.open(type, url);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    if (!sendImage) {
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    }
 
     // Add the onload function.
     xhr.onload = () =>
@@ -23,7 +26,7 @@ function ajaxRequest(type, url, callback, data = null)
         {
             case 200:
             case 201:
-                console.log(xhr.responseText);
+                //console.log(xhr.responseText);
                 callback(JSON.parse(xhr.responseText));
                 break;
             default:
