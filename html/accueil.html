@@ -25,146 +25,145 @@
 
 </head>
 <body>
-    <div class="bodyone">
-        <div class="left container text-center">
-            <div class="home d-flex flex-row align-item-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
-                  <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
-                  <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+    <div class="left container text-center">
+        <div class="home d-flex flex-row align-item-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+              <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
+              <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+            </svg>
+            <p id="homeText" class="align-middle d-flex flex-column">Home</p>
+        </div>
+        <div class="profil">
+            <div id="profileSkeleton" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" width="110" height="110" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
                 </svg>
-                <p id="homeText" class="align-middle d-flex flex-column">Home</p>
             </div>
-            <div class="profil">
-                <div id="profileSkeleton" hidden>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="110" height="110" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                    </svg>
-                </div>
+            <img src="" alt="profileImg" id="profileImg" width="110" height="110" style="border-radius: 50%" hidden>
+        </div>
+    </div>
+
+    <header>
+        <div class="inp">
+            <label>
+                <input type="text" placeholder="Rechercher">
+            </label>
+        </div>
+    </header>
+
+    <div class="middle">
+        <div id="recentMusique">
+            <p>Ecouté récemment</p>
+            <div id="recentMusiqueContainer" class="musiqueContainer">
+
             </div>
         </div>
+        <div id="otherMusique">
+            <p>Autres listes de lectures</p>
+            <div id="otherMusiqueContainer" class="musiqueContainer">
 
-        <div class="header">
-            <div class="inp">
-                <label>
-                    <input type="text" placeholder="Rechercher">
-                </label>
-            </div>
-        </div>
-
-        <div class="middle">
-            <div class="one">
-                <p>Ecouté récemment</p>
-            </div>
-            <div class="two">
-                <p>Autres listes de lectures</p>
-                <div id="embed-iframe">
-                    <div id="playlist"></div>
-                </div>
-            </div>
-            <div class="three">
-                <button type="button" class="btn btn-secondary">Tout voir...</button>
-            </div>
-        </div>
-
-        <div class="footer">
-            <div class="d-flex flex-row justify-content-between align-items-center footerBar">
-                <div class="buttonPlay d-flex flex-row gap-3 justify-content-between">
-                    <img src="../photo/agartha.jpg" alt="imgMusic" id="imgMusic" width="64" height="64">
-                    <div class="previousButton controlButton">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="white" class="bi bi-skip-backward-circle" viewBox="0 0 16 16">
-                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                          <path d="M11.729 5.055a.5.5 0 0 0-.52.038L8.5 7.028V5.5a.5.5 0 0 0-.79-.407L5 7.028V5.5a.5.5 0 0 0-1 0v5a.5.5 0 0 0 1 0V8.972l2.71 1.935a.5.5 0 0 0 .79-.407V8.972l2.71 1.935A.5.5 0 0 0 12 10.5v-5a.5.5 0 0 0-.271-.445z"/>
-                        </svg>
-                    </div>
-                    <div class="playButton controlButton">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="white" class="bi bi-play-circle" viewBox="0 0 16 16">
-                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                          <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
-                        </svg>
-                    </div>
-                    <div class="pauseButton controlButton" hidden>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="white" class="bi bi-pause-circle" viewBox="0 0 16 16">
-                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                          <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>
-                        </svg>
-                    </div>
-                    <div class="nextButton controlButton">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="white" class="bi bi-skip-forward-circle" viewBox="0 0 16 16">
-                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                          <path d="M4.271 5.055a.5.5 0 0 1 .52.038L7.5 7.028V5.5a.5.5 0 0 1 .79-.407L11 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935a.5.5 0 0 1-.79-.407V8.972l-2.71 1.935A.5.5 0 0 1 4 10.5v-5a.5.5 0 0 1 .271-.445z"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="middleFooter d-flex flex-column text-white">
-                    <div class="info d-flex flex-row justify-content-between">
-                        <div>
-                            <p id="musicName">Captain - Krono</p>
-                        </div>
-                        <div class="d-flex flex-row">
-                            <div id="likeButton">
-                                <div class="notLikedButton">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                                      <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-                                    </svg>
-                                </div>
-                                <div class="likedButton" hidden>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                                      <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <p id="addPlaylistButton">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                                </svg>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="scrollBar d-flex flex-row">
-                        <p id="timestampMusic" class="timestampMusic">00:00</p>
-                        <input type="range" id="musicProgressBar" name="volume" value="0" min="0" max="100" step="1">
-                        <label for="musicProgressBar"></label>
-                        <p id="timeOfTheMusic" class="timestampMusic">00:00</p>
-                    </div>
-
-                    <audio hidden id="audioTag"><source src="" id="sourceTag"></audio>
-                </div>
-                <div class="fileAttente d-flex flex-row justify-content-around">
-                    <div class="volume-button d-flex flex-row">
-                        <div class="volume-toggle d-flex flex-row">
-                            <div id="audioNotMuted1" class="audioNotMuted" title="audio not muted (m)" hidden>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" class="bi bi-volume-off" viewBox="0 0 16 16">
-                                  <path d="M10.717 3.55A.5.5 0 0 1 11 4v8a.5.5 0 0 1-.812.39L7.825 10.5H5.5A.5.5 0 0 1 5 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06zM10 5.04 8.312 6.39A.5.5 0 0 1 8 6.5H6v3h2a.5.5 0 0 1 .312.11L10 10.96V5.04z"/>
-                                </svg>
-                            </div>
-                            <div id="audioNotMuted2" class="audioNotMuted" title="audio not muted (m)">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" class="bi bi-volume-down" viewBox="0 0 16 16">
-                                    <path d="M9 4a.5.5 0 0 0-.812-.39L5.825 5.5H3.5A.5.5 0 0 0 3 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 9 12V4zM6.312 6.39 8 5.04v5.92L6.312 9.61A.5.5 0 0 0 6 9.5H4v-3h2a.5.5 0 0 0 .312-.11zM12.025 8a4.486 4.486 0 0 1-1.318 3.182L10 10.475A3.489 3.489 0 0 0 11.025 8 3.49 3.49 0 0 0 10 5.525l.707-.707A4.486 4.486 0 0 1 12.025 8z"/>
-                                </svg>
-                            </div>
-                            <div id="audioNotMuted3" class="audioNotMuted" title="audio not muted (m)" hidden>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" class="bi bi-volume-up" viewBox="0 0 16 16">
-                                  <path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/>
-                                  <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/>
-                                  <path d="M10.025 8a4.486 4.486 0 0 1-1.318 3.182L8 10.475A3.489 3.489 0 0 0 9.025 8c0-.966-.392-1.841-1.025-2.475l.707-.707A4.486 4.486 0 0 1 10.025 8zM7 4a.5.5 0 0 0-.812-.39L3.825 5.5H1.5A.5.5 0 0 0 1 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 7 12V4zM4.312 6.39 6 5.04v5.92L4.312 9.61A.5.5 0 0 0 4 9.5H2v-3h2a.5.5 0 0 0 .312-.11z"/>
-                                </svg>
-                            </div>
-                            <div id="audioMuted" hidden title="audio muted (m)">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" class="bi bi-volume-mute" viewBox="0 0 16 16">
-                                  <path d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06zM6 5.04 4.312 6.39A.5.5 0 0 1 4 6.5H2v3h2a.5.5 0 0 1 .312.11L6 10.96V5.04zm7.854.606a.5.5 0 0 1 0 .708L12.207 8l1.647 1.646a.5.5 0 0 1-.708.708L11.5 8.707l-1.646 1.647a.5.5 0 0 1-.708-.708L10.793 8 9.146 6.354a.5.5 0 1 1 .708-.708L11.5 7.293l1.646-1.647a.5.5 0 0 1 .708 0z"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <input type="range" class="volume-slider" max="100" min="0" step="1" width="20px" value="50">
-                    </div>
-
-                    <button type="submit" class="btn btn-secondary" id="attenteMusic">File d'attente</button>
-                </div>
             </div>
         </div>
     </div>
+
+    <footer class="footer">
+        <div class="d-flex flex-row justify-content-between align-items-center footerBar">
+            <div class="buttonPlay d-flex flex-row gap-3 justify-content-between">
+                <img src="../photo/agartha.jpg" alt="imgMusic" id="imgMusic" width="64" height="64">
+                <div class="previousButton controlButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="white" class="bi bi-skip-backward-circle" viewBox="0 0 16 16">
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                      <path d="M11.729 5.055a.5.5 0 0 0-.52.038L8.5 7.028V5.5a.5.5 0 0 0-.79-.407L5 7.028V5.5a.5.5 0 0 0-1 0v5a.5.5 0 0 0 1 0V8.972l2.71 1.935a.5.5 0 0 0 .79-.407V8.972l2.71 1.935A.5.5 0 0 0 12 10.5v-5a.5.5 0 0 0-.271-.445z"/>
+                    </svg>
+                </div>
+                <div class="playButton controlButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="white" class="bi bi-play-circle" viewBox="0 0 16 16">
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                      <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+                    </svg>
+                </div>
+                <div class="pauseButton controlButton" hidden>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="white" class="bi bi-pause-circle" viewBox="0 0 16 16">
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                      <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>
+                    </svg>
+                </div>
+                <div class="nextButton controlButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="white" class="bi bi-skip-forward-circle" viewBox="0 0 16 16">
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                      <path d="M4.271 5.055a.5.5 0 0 1 .52.038L7.5 7.028V5.5a.5.5 0 0 1 .79-.407L11 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935a.5.5 0 0 1-.79-.407V8.972l-2.71 1.935A.5.5 0 0 1 4 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="middleFooter d-flex flex-column text-white">
+                <div class="info d-flex flex-row justify-content-between">
+                    <div>
+                        <p id="musicName">Captain - Krono</p>
+                    </div>
+                    <div class="d-flex flex-row">
+                        <div id="likeButton">
+                            <div class="notLikedButton">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                  <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                </svg>
+                            </div>
+                            <div class="likedButton" hidden>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <p id="addPlaylistButton">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                        </p>
+                    </div>
+                </div>
+                <div class="scrollBar d-flex flex-row">
+                    <p id="timestampMusic" class="timestampMusic">00:00</p>
+                    <input type="range" id="musicProgressBar" name="volume" value="0" min="0" max="100" step="1">
+                    <label for="musicProgressBar"></label>
+                    <p id="timeOfTheMusic" class="timestampMusic">00:00</p>
+                </div>
+
+                <audio hidden id="audioTag"><source src="" id="sourceTag"></audio>
+            </div>
+            <div class="fileAttente d-flex flex-row justify-content-around">
+                <div class="volume-button d-flex flex-row">
+                    <div class="volume-toggle d-flex flex-row">
+                        <div id="audioNotMuted1" class="audioNotMuted" title="audio not muted (m)" hidden>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" class="bi bi-volume-off" viewBox="0 0 16 16">
+                              <path d="M10.717 3.55A.5.5 0 0 1 11 4v8a.5.5 0 0 1-.812.39L7.825 10.5H5.5A.5.5 0 0 1 5 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06zM10 5.04 8.312 6.39A.5.5 0 0 1 8 6.5H6v3h2a.5.5 0 0 1 .312.11L10 10.96V5.04z"/>
+                            </svg>
+                        </div>
+                        <div id="audioNotMuted2" class="audioNotMuted" title="audio not muted (m)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" class="bi bi-volume-down" viewBox="0 0 16 16">
+                                <path d="M9 4a.5.5 0 0 0-.812-.39L5.825 5.5H3.5A.5.5 0 0 0 3 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 9 12V4zM6.312 6.39 8 5.04v5.92L6.312 9.61A.5.5 0 0 0 6 9.5H4v-3h2a.5.5 0 0 0 .312-.11zM12.025 8a4.486 4.486 0 0 1-1.318 3.182L10 10.475A3.489 3.489 0 0 0 11.025 8 3.49 3.49 0 0 0 10 5.525l.707-.707A4.486 4.486 0 0 1 12.025 8z"/>
+                            </svg>
+                        </div>
+                        <div id="audioNotMuted3" class="audioNotMuted" title="audio not muted (m)" hidden>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" class="bi bi-volume-up" viewBox="0 0 16 16">
+                              <path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/>
+                              <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/>
+                              <path d="M10.025 8a4.486 4.486 0 0 1-1.318 3.182L8 10.475A3.489 3.489 0 0 0 9.025 8c0-.966-.392-1.841-1.025-2.475l.707-.707A4.486 4.486 0 0 1 10.025 8zM7 4a.5.5 0 0 0-.812-.39L3.825 5.5H1.5A.5.5 0 0 0 1 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 7 12V4zM4.312 6.39 6 5.04v5.92L4.312 9.61A.5.5 0 0 0 4 9.5H2v-3h2a.5.5 0 0 0 .312-.11z"/>
+                            </svg>
+                        </div>
+                        <div id="audioMuted" hidden title="audio muted (m)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" class="bi bi-volume-mute" viewBox="0 0 16 16">
+                              <path d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06zM6 5.04 4.312 6.39A.5.5 0 0 1 4 6.5H2v3h2a.5.5 0 0 1 .312.11L6 10.96V5.04zm7.854.606a.5.5 0 0 1 0 .708L12.207 8l1.647 1.646a.5.5 0 0 1-.708.708L11.5 8.707l-1.646 1.647a.5.5 0 0 1-.708-.708L10.793 8 9.146 6.354a.5.5 0 1 1 .708-.708L11.5 7.293l1.646-1.647a.5.5 0 0 1 .708 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <input type="range" class="volume-slider" max="100" min="0" step="1" width="20px" value="50">
+                </div>
+
+                <button type="submit" class="btn btn-secondary" id="attenteMusic">File d'attente</button>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
 

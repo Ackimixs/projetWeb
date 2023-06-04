@@ -1,8 +1,25 @@
-.bodyone{
+html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
     display: grid ;
     grid-template-columns: 150px 450px;
     grid-template-rows: 125px 727px 125px;
-    
+    scroll-behavior: smooth;
+    min-height: 100%;
+    position: relative;
 }
 
 .left{
@@ -29,7 +46,7 @@
     color:#F8EDEB;
 }
 
-.header{
+header{
     grid-column: 2/4;
     grid-row: 1;
     display: flex;
@@ -49,60 +66,68 @@
 .middle{
     grid-column: 2/4;
     grid-row: 2;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 150px 300px 280px;
+    display: flex;
+    flex-direction: column;
     background-color: #2A0949;
-    
+    color: white;
+    overflow: auto;
+    padding: 2rem 0 0 1rem;
 }
 
-.one{
-    grid-column: 1;
-    grid-row: 1;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    font-size: 30px;
-    font-family: 'gadugi';
-    margin-top: 15px;
-    color: #F8EDEB;
+.middle > div > p {
+    padding-left: 6rem;
     text-decoration: underline;
-    
 }
 
-/* .one-one{
-    margin-top: 15px;
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-bottom: 15px;
-    font-size: 20px;
-    font-family: 'gadugi';
-} */
-
-.two{
-    grid-column: 1;
-    grid-row: 3;
+.musiqueContainer {
     display: flex;
-    justify-content: center;
-    font-size: 30px;
-    font-family: 'gadugi';
-    color: #F8EDEB;
-    text-decoration: underline;
-    
-   
+    flex-direction: row;
+    overflow: auto;
 }
-.three{
-    grid-column: 3;
-    grid-row: 3;
+
+.musiqueContainer > div {
+    margin: 2rem 3rem;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
 }
+
+.musiqueContainer > div > p {
+    margin: 0;
+    padding-top: 1rem;
+}
+
+.musiqueImg {
+    width: 256px;
+    height: 256px;
+    background: white;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 10%;
+}
+
+.imgContainer:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+}
+
+.imgContainer:active {
+    transform: scale(1.05);
+    transition: 0.1s;
+    opacity: 0.5;
+}
+
+.imgContainer {
+    cursor: pointer;
+}
+
+
 .footer{
     grid-column: 2/4;
     grid-row: 3;
     background-color: #581896;
-    border-top : #F8EDEB solid 2px ;
+    border-top : #F8EDEB solid 2px;
 }
 
 .footerBar {
@@ -132,8 +157,6 @@
 .fileAttente {
     width: 100%;
 }
-
-
 
 
 
