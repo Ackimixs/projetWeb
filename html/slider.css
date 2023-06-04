@@ -48,3 +48,21 @@
   height: 1rem;
   width: 1rem;
 }
+
+@media screen and (max-width: 600px) {
+  #musicProgressBar {
+    width: 20rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #musicProgressBar {
+    width: 15rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #musicProgressBar {
+    width: 10rem;
+  }
+}
