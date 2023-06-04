@@ -57,7 +57,7 @@ class Playlist
             $stmt->bindParam(':recherche', $recherche);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if ( $result[0]['id_playlist'] == ''){
+            if (!$result && $result[0]['id_playlist'] == ''){
                 return 'Playlist introuvable.';
             }
             else {

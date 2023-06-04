@@ -80,7 +80,7 @@
           </div>
         <button type="submit" class="submit">Créer son compte</button>
         <div class="button">
-          <a href="login.html" class="log">Login</a>
+          <a href="login.php" class="log">Login</a>
         </div>
       </form>
 </body>

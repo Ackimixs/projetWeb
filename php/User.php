@@ -121,6 +121,27 @@ class User
         }
     }*/
 
+    static function modificationGeneralUser($id_user, $nom, $prenom, $email, $password, $date) {
+        try {
+            $db = Db::connectionDB();
+            $request = 'UPDATE "user"
+                    SET nom_user = :nom, prenom_user = :prenom, mail = :email, motdepasse = :password, date_naissance = :date
+                    WHERE id_user = :iduser RETURNING *';
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':iduser', $id_user);
+            $stmt->bindParam(':nom', $nom);
+            $stmt->bindParam(':prenom', $prenom);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':password', $password);
+            $stmt->bindParam(':date', $date);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $exception) {
+            error_log($exception->getMessage());
+            return false;
+        }
+    }
+
     static function ajouterUnUser($email, $date_naissance, $nom, $prenom, $mdp) {
         try {
             $db = Db::connectionDB();

@@ -77,7 +77,23 @@ switch($requestRessource)
                         } else {
                             $data = false;
                         }
+                    } else {
+                        $data = User::getUnUser($id);
                     }
+                }
+                break;
+
+            case 'POST':
+                if (isset($_SESSION["user"])) {
+                    if (isset($_POST['password'])) {
+                        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                    } else {
+                        $password = $_SESSION['user']['password'];
+                    }
+                    $data = User::modificationGeneralUser($_SESSION["user"]['id_user'], $_POST['nom'] ?? $_SESSION['user']['nom'], $_POST['prenom'] ?? $_SESSION['user']['prenom'], $_POST['email'] ?? $_SESSION['user']['mail'], $password, $_POST['date'] ?? $_SESSION['user']['date_naissance']);
+                    $_SESSION['user'] = $data;
+                } else {
+                    $data = false;
                 }
                 break;
            default:
@@ -275,7 +291,6 @@ switch($requestRessource)
                 break;
             case 'POST':
                 if (isset($_SESSION["user"])) {
-                    error_log($_POST['id']);
                     $data = User::addToFileAttente($_SESSION['user']['id_user'], $_POST['id']);
                 } else {
                     $data = false;
