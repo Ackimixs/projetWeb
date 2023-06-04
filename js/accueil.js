@@ -1,33 +1,6 @@
 'use strict';
 
-ajaxRequest('GET', '../php/request.php/playlist/', displayPlaylist);
-
-function displayPlaylist(playlists){
-
-    /*console.log(playlists)
-    $('#playlist').html("")
-    $('#playlist').append('<table> <tr>');
-    $('#playlist').append('<td id = "'+playlists['id_playlist']+'">'+playlists['titre_playlist']+'</td>');
-    $('#playlist').append('</tr> </table>');*/
-}
-
 window.addEventListener('load', () => {
-    ajaxRequest('GET', '../php/request.php/user/session', (data) => {
-        if (!data) window.location.href = 'login.php';
-    })
-
-    ajaxRequest("GET", '../php/request.php/profile-picture', (data) => {
-        let profileImg = document.querySelector('#profileImg');
-        let profileSkeleton = document.querySelector('#profileSkeleton');
-        if (data) {
-            profileImg.src = '../' + data;
-            profileImg.hidden = false;
-            profileSkeleton.hidden = true;
-        } else {
-            profileImg.hidden = true;
-            profileSkeleton.hidden = false;
-        }
-    })
 
 
     // Premiere partie de l'accueil => ecouté recement
@@ -236,7 +209,7 @@ window.addEventListener('load', () => {
 })
 
 function createDropdownItem(playlist) {
-let dropdownContent = document.querySelector('.dropdown-content');
+    let dropdownContent = document.querySelector('.dropdown-content');
     let dropdownItem = document.createElement('div');
     dropdownItem.classList.add('addToPlaylist');
     dropdownItem.dataset.id = playlist.id_playlist;

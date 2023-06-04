@@ -15,6 +15,18 @@ window.addEventListener('load', () => {
             profileSvg.hidden = false;
         }
     })
+
+    //FIll the form
+    ajaxRequest("GET", '../php/request.php/user/session', (data) => {
+        if (data) {
+            // console.log(data);
+            document.querySelector('#email').value = data.mail;
+            document.querySelector('#nom').value = data.nom_user;
+            document.querySelector('#prenom').value = data.prenom_user;
+            document.querySelector('#age').value = (new Date().getFullYear() - new Date(data.date_naissance).getFullYear()).toString() + ' ans';
+            document.querySelector('#birthday').value = data.date_naissance;
+        }
+    })
 })
 
 logout.addEventListener('click', () => {
@@ -41,4 +53,33 @@ profile.addEventListener('click', () => {
             })
         }, formData, true);
     });
+})
+
+
+let birthdayInput = document.querySelector('#birthday')
+birthdayInput.addEventListener('change', () => {
+    document.querySelector('#age').value = (new Date().getFullYear() - new Date(birthdayInput.value).getFullYear()).toString() + ' ans';
+})
+
+document.querySelector('.modif2').addEventListener('click', () => {
+    let email = document.querySelector('#email').value;
+    let nom = document.querySelector('#nom').value;
+    let prenom = document.querySelector('#prenom').value;
+    let password = document.querySelector('#password').value;
+    let birthday = document.querySelector('#birthday').value;
+
+    console.log(email, nom, prenom, password, birthday);
+
+    ajaxRequest('POST', '../php/request.php/user/update', (d) => {
+        ajaxRequest("GET", '../php/request.php/user/session', (data) => {
+            if (data) {
+                // console.log(data);
+                document.querySelector('#email').value = data.mail;
+                document.querySelector('#nom').value = data.nom_user;
+                document.querySelector('#prenom').value = data.prenom_user;
+                document.querySelector('#age').value = (new Date().getFullYear() - new Date(data.date_naissance).getFullYear()).toString() + ' ans';
+                document.querySelector('#birthday').value = data.date_naissance;
+            }
+        })
+    }, `email=${email}&nom=${nom}&prenom=${prenom}&password=${password}&date=${birthday}`);
 })
