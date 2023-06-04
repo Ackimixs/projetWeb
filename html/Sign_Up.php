@@ -30,9 +30,6 @@
             } else {
                 $user = User::ajouterUnUser($email, $naissance, $name, $prenom, password_hash($password, PASSWORD_DEFAULT));
                 $_SESSION['user'] = $user;
-                // Crée la playlsit like
-                $playlist = Playlist::creationPlaylist("like", date('Y-m-d H:i:s'));
-                $userPlaylist = Playlist::createPlaylistUser($playlist['id_playlist'], $user['id_user'], date('Y-m-d H:i:s'));
                 header('Location: login.php');
             }
         }
