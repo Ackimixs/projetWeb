@@ -75,7 +75,7 @@ class Musique
             $stmt->bindParam(':recherche', $recherche);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if ( $result[0]['id_musique'] == ''){
+            if ($result && $result[0]['id_musique'] == ''){
                 return 'Musique introuvable.';
             }
             else {
@@ -126,6 +126,20 @@ class Musique
         }
         catch (PDOException $exception){
             error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
+            return false;
+        }
+    }
+
+    static function getImgMusic($id_musique) {
+        try {
+            $db = Db::connectionDB();
+            $request = "SELECT image_album FROM album JOIN musique m on album.id_album = m.id_album WHERE m.id_musique = :id_musique";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':id_musique', $id_musique);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $exception) {
+            error_log($exception->getMessage());
             return false;
         }
     }

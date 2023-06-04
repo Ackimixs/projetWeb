@@ -16,7 +16,7 @@ class User
             error_log($exception->getMessage());
             return false;
         }
-        return (isset($data) && password_verify($mdp, $data['motdepasse']));
+        return ($data && password_verify($mdp, $data['motdepasse']));
     }
     //
     // Renvoie toutes les user
@@ -121,17 +121,99 @@ class User
         }
     }*/
 
+    static function ajouterUnUser($email, $date_naissance, $nom, $prenom, $mdp) {
+        try {
+            $db = Db::connectionDB();
+            $request = "INSERT INTO \"user\" (mail, date_naissance, nom_user, prenom_user, motdepasse, image_user)
+                        VALUES(:email, :age, :nom, :prenom, :mdp, :image) RETURNING *";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':age', $date_naissance);
+            $stmt->bindParam(':nom', $nom);
+            $stmt->bindParam(':prenom', $prenom);
+            $stmt->bindParam(':mdp', $mdp);
+            $str = str_replace(' ', '', "photo/profile/" . $nom . $prenom . ".png");
+            $stmt->bindParam(':image', $str);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
+            return false;
+        }
+    }
+
+
+
+
+    //
+    // Historique
+    //
+
+    //
+    // Ajoute une musique a l'historique de l'utilisateur
+    //
+    static function ajoutHistorique($iduser, $idmusique) {
+        try {
+            $db = Db::connectionDB();
+            $request = "INSERT INTO historique (id_user, id_musique)
+                        VALUES(:iduser, :idmus) RETURNING *";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':iduser', $iduser);
+            $stmt->bindParam(':idmus', $idmusique);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
+            return false;
+        }
+    }
+
+    static function isInHistorique($id_user, $id_musique) {
+        try {
+            $db = Db::connectionDB();
+            $request = "SELECT * FROM historique WHERE id_musique = :id_musique AND id_user = :id_user";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':id_musique', $id_musique);
+            $stmt->bindParam(':id_user', $id_user);
+            $stmt->execute();
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
+            return false;
+        }
+        return $data;
+    }
+
+    static function changeInHistorique($id_user, $id_musique, $date) {
+        try {
+            $db = Db::connectionDB();
+            $request = "UPDATE historique SET date_ajout = :date WHERE id_user = :id_user AND id_musique = :id_musique RETURNING *";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':id_musique', $id_musique);
+            $stmt->bindParam(':id_user', $id_user);
+            $stmt->bindParam(':date', $date);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception){
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
+            return false;
+        }
+    }
+
     //
     // Renvoie l'hitorique d'un utilisateur
     //
-    static function historiqueUser($id)
-    {
+    static function historiqueUser($id) {
         try {
             $db = Db::connectionDB();
             $request = 'SELECT * FROM "user"
                     INNER JOIN historique h on h.id_user = "user".id_user
                     INNER JOIN musique m on m.id_musique = h.id_musique
-                    WHERE "user".id_user = 2
+                    WHERE "user".id_user = :id
                     ORDER BY h.date_ajout DESC
                     LIMIT 10';
             $stmt = $db->prepare($request);
@@ -146,45 +228,174 @@ class User
     }
 
     //
-    // Ajoute une musique a l'historique de l'utilisateur
     //
-    static function ajoutHistorique($iduser, $idmusique)
-    {
+    //
+    static function getLastHistorique($id_user) {
         try {
             $db = Db::connectionDB();
-            $request = "INSERT INTO historique (id_user, id_musique)
-                        VALUES(:iduser, :idmus)";
+            $request = "SELECT * FROM historique WHERE id_user = :id_user ORDER BY date_ajout DESC LIMIT 1";
             $stmt = $db->prepare($request);
-            $stmt->bindParam(':iduser', $iduser);
-            $stmt->bindParam(':idmus', $idmusique);
+            $stmt->bindParam(':id_user', $id_user);
             $stmt->execute();
-            $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception){
             error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
+            return false;
+        }
+        return $data;
+    }
+
+    static function removeFromHistorique($id_user, $id_musique) {
+        try {
+            $db = Db::connectionDB();
+            $request = "DELETE FROM historique WHERE id_user = :id_user AND id_musique = :id_musique";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':id_user', $id_user);
+            $stmt->bindParam(':id_musique', $id_musique);
+            $stmt->execute();
+        }
+        catch (PDOException $exception){
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
+        }
+    }
+
+
+    //
+    // File d'attente
+    //
+    static function addToFileAttente($id_user, $id_musique) {
+        try {
+            $db = Db::connectionDB();
+            $request = "INSERT INTO file_attente (id_user, id_musique)
+                        VALUES(:iduser, :idmus) RETURNING *";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':iduser', $id_user);
+            $stmt->bindParam(':idmus', $id_musique);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $exception) {
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] " . 'Request error: ' . $exception->getMessage());
             return false;
         }
     }
 
-    static function ajouterUnUser($email, $date_naissance, $nom, $prenom, $mdp) {
+    static function isInFileAttente($id_user, $id_musique) {
         try {
             $db = Db::connectionDB();
-            $request = "INSERT INTO \"user\" (mail, date_naissance, nom_user, prenom_user, motdepasse, image_user)
-                        VALUES(:email, :age, :nom, :prenom, :mdp, :image) RETURNING *";
+            $request = "SELECT * FROM file_attente WHERE id_musique = :id_musique AND id_user = :id_user";
             $stmt = $db->prepare($request);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':age', $date_naissance);
-            $stmt->bindParam(':nom', $nom);
-            $stmt->bindParam(':prenom', $prenom);
-            $stmt->bindParam(':mdp', $mdp);
-            $str = "profile/" . $nom . $prenom . ".jpg";
-            $stmt->bindParam(':image', $str);
+            $stmt->bindParam(':id_musique', $id_musique);
+            $stmt->bindParam(':id_user', $id_user);
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        }
-        catch (PDOException $exception){
-            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $exception) {
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] " . 'Request error: ' . $exception->getMessage());
             return false;
         }
+        return $data;
+    }
+
+    static function getFileAttente($id_user) {
+        try {
+            $db = Db::connectionDB();
+            $request = "SELECT * FROM file_attente WHERE id_user = :id_user ORDER BY date_ajout ASC";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':id_user', $id_user);
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $exception) {
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] " . 'Request error: ' . $exception->getMessage());
+            return false;
+        }
+        return $data;
+    }
+
+    static function removeFromFileAttente($id_user, $id_musique) {
+        try {
+            $db = Db::connectionDB();
+            $request = "DELETE FROM file_attente WHERE id_user = :id_user AND id_musique = :id_musique";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':id_user', $id_user);
+            $stmt->bindParam(':id_musique', $id_musique);
+            $stmt->execute();
+        } catch (PDOException $exception) {
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] " . 'Request error: ' . $exception->getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    static function removeAllFileAttente($id_user) {
+        try {
+            $db= Db::connectionDB();
+            $request = "DELETE FROM file_attente WHERE id_user = :id_user";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':id_user', $id_user);
+            $stmt->execute();
+        } catch (PDOException $exception) {
+            error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] " . 'Request error: ' . $exception->getMessage());
+            return false;
+        }
+        return true;
+    }
+
+
+    //
+    // Like
+    //
+    static function addToLike($id_user, $id_musique) {
+        $db = Db::connectionDB();
+        $request = "INSERT INTO like_musique (id_musique, id_user) VALUES (:id_musique, :id_user) RETURNING *";
+        $query = $db->prepare($request);
+        $query->bindParam(':id_user', $id_user);
+        $query->bindParam(':id_musique', $id_musique);
+        $query->execute();
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
+    static function getAllLike($id_user) {
+        try {
+            $db = Db::connectionDB();
+            $request = "SELECT * FROM like_musique WHERE id_user = :id_user";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':id_user', $id_user);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $exception) {
+            error_log($exception->getMessage());
+            return false;
+        }
+    }
+
+    static function isLike($id_user, $id_musique) {
+        try {
+            $db = Db::connectionDB();
+            $request = "SELECT * FROM like_musique WHERE id_user = :id_user AND id_musique = :id_musique";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':id_user', $id_user);
+            $stmt->bindParam(':id_musique', $id_musique);
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $exception) {
+            error_log($exception->getMessage());
+            return false;
+        }
+        return !empty($data);
+    }
+
+    static function removeFromLike($id_user, $id_musique) {
+        try {
+            $db = Db::connectionDB();
+            $request = "DELETE FROM like_musique WHERE id_musique = :id_musique AND id_user = :id_user";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':id_user', $id_user);
+            $stmt->bindParam(':id_musique', $id_musique);
+            $stmt->execute();
+        } catch (PDOException $exception) {
+            error_log($exception->getMessage());
+            return false;
+        }
+        return true;
     }
 }
