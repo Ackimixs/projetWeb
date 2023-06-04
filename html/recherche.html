@@ -10,6 +10,7 @@
 
     <script src="../js/ajax.js" defer></script>
     <script src="../js/recherche.js" defer></script>
+    <script src="../js/musiquePlayer.js" defer></script>
 
     <link href="slider.css" rel="stylesheet">
 
@@ -25,7 +26,7 @@
 </head>
 <body>
 <form>
-<div class="bodyone">
+<!--<div class="bodyone">
     <div class="left">
         <div class="profil">
             <svg xmlns="http://www.w3.org/2000/svg" width="110" height="110" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -33,7 +34,7 @@
                 <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
             </svg>
         </div>
-    </div>
+    </div>-->
 
     <div class="header">
         <div class="inp">
@@ -42,6 +43,12 @@
             <button type="text" id="artiste">Artiste</button>
             <button type="text" id="album">Album</button>
             <button type="text" id="playlist">Playlist</button>
+        </div>
+        <div class="profil">
+            <svg xmlns="http://www.w3.org/2000/svg" width="110" height="110" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+            </svg>
         </div>
     </div>
 
@@ -123,7 +130,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    <!--</div>-->
 </form>
 </body>
 </html>
