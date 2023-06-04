@@ -95,24 +95,27 @@ class Playlist
     //
     // Delete une playlist d'un user
     //
-    /*
-    static function deletePlaylist($idplaylist, $iduser)
-    {
-        $db = Db::connectionDB();
-        $request = "DELETE FROM user_playlist
-                    WHERE id_playlist = :idplay AND id_user = :iduser";
-        $query = $db->prepare($request);
-        $query->bindParam(':idplay', $idplaylist);
-        $query->bindParam(':iduser', $iduser);
-        $query->execute();
-        $query->fetchAll(PDO::FETCH_ASSOC);
+
+    static function deletePlaylist($idplaylist, $iduser) {
+        try {
+            $db = Db::connectionDB();
+            $request = "DELETE FROM user_playlist
+                        WHERE id_playlist = :idplay AND id_user = :iduser";
+            $query = $db->prepare($request);
+            $query->bindParam(':idplay', $idplaylist);
+            $query->bindParam(':iduser', $iduser);
+            $query->execute();
+        } catch (PDOException $exception) {
+            error_log($exception->getMessage());
+            return false;
+        }
+        return true;
     }
-*/
+
     //
     // Création d'une playlist
     //
-    static function creationPlaylist($titre, $date)
-    {
+    static function creationPlaylist($titre, $date) {
         $db = Db::connectionDB();
         $request = "INSERT INTO playlist (titre_playlist, date_playlist)
                     VALUES(:titre, :date) RETURNING *";
@@ -133,6 +136,20 @@ class Playlist
         $query->bindParam(':date_playlist', $date_ajout);
         $query->execute();
         return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
+    static function getAllPlaylistUser($id_user) {
+        try {
+            $db = Db::connectionDB();
+            $request = 'SELECT * FROM user_playlist JOIN playlist p on p.id_playlist = user_playlist.id_playlist WHERE id_user = :id_user';
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':id_user', $id_user);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $exception) {
+            error_log($exception->getMessage());
+            return false;
+        }
     }
 /*
     //
@@ -163,5 +180,37 @@ class Playlist
             error_log($exception->getMessage());
             return false;
         }
+    }
+
+    static function addMusiqueToPlaylist($id_playlist, $id_musique) {
+        try {
+            $db = Db::connectionDB();
+            $request = "INSERT INTO playlist_musique (id_playlist, id_musique)
+                        VALUES(:id_playlist, :id_musique) RETURNING *";
+            $query = $db->prepare($request);
+            $query->bindParam(':id_playlist', $id_playlist);
+            $query->bindParam(':id_musique', $id_musique);
+            $query->execute();
+            return $query->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $exception) {
+            error_log($exception->getMessage());
+            return false;
+        }
+    }
+
+    static function removeMusiqueFromPlaylist($id_playlist, $id_musique) {
+        try {
+            $db = Db::connectionDB();
+            $request = "DELETE FROM playlist_musique
+                        WHERE id_playlist = :id_playlist AND id_musique = :id_musique";
+            $query = $db->prepare($request);
+            $query->bindParam(':id_playlist', $id_playlist);
+            $query->bindParam(':id_musique', $id_musique);
+            $query->execute();
+        } catch (PDOException $exception) {
+            error_log($exception->getMessage());
+            return false;
+        }
+        return true;
     }
 }

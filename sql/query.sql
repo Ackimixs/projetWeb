@@ -1,0 +1,1 @@
+INSERT INTO user_playlist (id_playlist, id_user) VALUES (7, 1)
