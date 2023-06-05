@@ -43,6 +43,12 @@ body{
     gap: 10px;
 }
 
+#stringrecherche{
+    background-color: #F8EDEB;
+    border: 0;
+    padding: 0.5rem;
+    width: 35rem;
+}
 .middle {
     padding: 2rem 0 7rem 0;
 }

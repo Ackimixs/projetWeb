@@ -1,10 +1,11 @@
 #display {
-     color: white;
- }
+    color: white;
+}
 
 #accueil > div > p {
     padding-left: 6rem;
-    text-decoration: underline;
+    /* text-decoration: underline; */
+    font-size: 2rem;
 }
 
 .musiqueContainer {
