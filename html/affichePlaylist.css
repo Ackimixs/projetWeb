@@ -1,0 +1,129 @@
+#affichagePlaylist{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 250px 80px 80px 80px 80px ;
+
+}
+
+#one{
+    grid-row: 1;
+    grid-column: 1;
+    margin-left: 5%;
+    display: flex;
+    /* flex-direction: row; */
+     
+}
+
+#txt1{
+    margin-left: 10%;
+    font-size: 40px;
+    text-decoration: underline;
+}
+
+#bttn_ecouter{
+    grid-row: 1;
+    grid-column: 1;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    margin-left: 35%;
+    margin-bottom: 10%;    
+}
+
+.ecouter{
+    background-color: #581896;
+    border-radius: 20px;
+    width: 200px;
+    height: 50px;
+    color: #F8EDEB;
+    font-size: 27px;
+}
+
+#two{
+    grid-row: 1;
+    grid-column: 3;
+    margin-left: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.suppr{
+    background-color: #581896;
+    color: #F8EDEB;
+    border-radius: 20px;
+    width: 300px;
+    height: 50px;
+    margin-bottom: 6%;    
+
+}
+
+#line{
+    grid-row: 1;
+    grid-column: 1/4;
+    border-bottom: 2px solid #F8EDEB;
+}
+
+.txt2{
+    grid-row: 1;
+    grid-column: 1;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+
+#Morceau1{
+    grid-column: 1/4;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    font-size: 30px;
+    color: #F8EDEB;
+}
+
+#Morceau2{
+    grid-column: 1/4;
+    grid-row: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    font-size: 30px;
+    color: #F8EDEB;
+}
+#Morceau3{
+    grid-column: 1/4;
+    grid-row: 4;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    font-size: 30px;
+    color: #F8EDEB;
+}
+
+#name{
+    display: flex;
+    justify-content: left;
+    margin-top: 5%;
+    margin-left: 10%;
+    
+}
+
+#title{
+    margin-left: 8%;
+    margin-top: 2%;
+}
+
+#infos{
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+    /* justify-content: space-around; */
+    margin-top: 6%;
+}
+
+#delete{
+    display: flex;
+    justify-content: right;
+    margin-top: 6%;
+    gap: 5%;
+    margin-right: 10%;
+}
