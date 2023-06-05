@@ -1,9 +1,100 @@
+
+html{
+    border: 0;
+    padding: 0;
+    background-color: #2A0949;
+}
+body{
+    border: 0;
+    padding: 0;
+}
+
+.left{
+    grid-column: 1;
+    grid-row: 1 / 4;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background-color: #581896;
+    border-right : #F8EDEB solid 2px ;
+}
+
+.profil{
+    margin-bottom: 10px;
+    color:#F8EDEB;
+    padding-left: 520px;
+}
+
+.header{
+    padding: 1rem;
+    grid-column: 2/4;
+    grid-row: 1;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: left;
+    align-items: flex-end;
+    background-color: #581896;
+    border-bottom : #F8EDEB solid 2px ;
+
+}
+
+.inp{
+    margin-left: 50px;
+    margin-bottom: 30px;
+}
+
+input{
+    margin-left: 15%;
+    padding:15px;
+    border-radius: 10px;
+}
+
+
+.footer{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    grid-column: 2/4;
+    grid-row: 3;
+    background-color: #581896;
+    border-top : #F8EDEB solid 2px ;
+}
+
+.footerBar {
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    margin-left: 2rem;
+}
+
+.controlButton {
+    padding-left: 1rem;
+}
+
+#likeButton > div {
+    margin: 0 10px;
+}
+
+.timestampMusic {
+    margin: 0 !important;
+    height: 100%;
+    align-items: center;
+    padding: 0.2rem 1rem;
+}
+
+#attenteMusic {
+    margin-right: 3rem;
+}
+
 #tabrecherche{
     width: 500px;
     padding: 20px 20px;
 }
 
 #tabrecherche li {
+    height: 110px;
     position: relative;
     list-style-type: none;
     padding: 1px 1px 1px 1px;
@@ -52,15 +143,18 @@
     height: 40px;
 }
 
-#tabrecherche li h5 #infos{
+#tabrecherche li h5 .infosmusique{
     position: absolute;
     left: 950px;
     top: 40px;
-    width: 40px;
-    height: 40px;
+}
+#tabrecherche li h5 .infosalbum{
+    position: absolute;
+    left: 950px;
+    top: 40px;
 }
 
-button {
+.inp button{
     appearance: none;
     background-color: #2A0949;
     border: 2px solid #1A1A1A;
@@ -78,9 +172,9 @@ button {
     text-decoration: none;
 }
 
+#display{
+    background-color: #2A0949;
+}
 #display ul{
     margin-bottom: 250px;
-}
-#display ul li {
-    height: 110px;
 }

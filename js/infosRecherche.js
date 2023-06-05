@@ -25,10 +25,10 @@ $('#tabrecherche').on('click', '.infosmusique', () =>
 
 function musiqueModal(infos) {
     console.warn(infos);
-    let temps = Math.round((infos[0]['temps_musique']/60000) * 100) / 100
-    $('#modalMusiqueTitle').html(infos[0]['titre_musique']);
-    $('#modalMusiqueInner').html('<p class="info"> Nom Artiste : '+ infos[0]['nom_artiste'] +' </p>' +
-                                        '<p class="info"> Nom Album : '+ infos[0]['titre_album'] +' </p>' +
+    let temps = Math.round((infos['temps_musique']/60000) * 100) / 100
+    $('#modalMusiqueTitle').html(infos['titre_musique']);
+    $('#modalMusiqueInner').html('<p class="info"> Nom Artiste : '+ infos['nom_artiste'] +' </p>' +
+                                        '<p class="info"> Nom Album : '+ infos['titre_album'] +' </p>' +
                                         '<p class="info"> Temps Musique : '+ temps +' min </p>');
 
 }
@@ -53,9 +53,9 @@ $('#tabrecherche').on('click', '.infosalbum', () =>
 
 function albumModal(infos) {
 
-    $('#modalMusiqueTitle').html(infos[0]['titre_album']);
-    $('#modalMusiqueInner').html('<p class="info"> Nom Artiste : '+ infos[0]['nom_artiste'] +' </p>' +
-        '<p class="info"> Date : '+ infos[0]['date_album'] +' </p>' +
-        '<p class="info"> Genre : '+ infos[0]['genre_album'] +' </p>');
+    $('#modalMusiqueTitle').html(infos['titre_album']);
+    $('#modalMusiqueInner').html('<p class="info"> Nom Artiste : '+ infos['nom_artiste'] +' </p>' +
+        '<p class="info"> Date : '+ infos['date_album'] +' </p>' +
+        '<p class="info"> Genre : '+ infos['genre_album'] +' </p>');
 
 }
