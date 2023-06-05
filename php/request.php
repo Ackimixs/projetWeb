@@ -130,6 +130,12 @@ switch($requestRessource)
     case 'rechercheartiste':
         $data = Artiste::rechercheArtistes($_GET['stringrecherche']);
         break;
+    case 'infosMusique':
+        $data = Musique::getUneMusiqueAvecAlbumEtArtiste($_GET['idmusique']);
+        break;
+    case 'infosAlbum':
+        $data = Album::getUnAlbum($_GET['idalbum']);
+        break;
 
     case 'historique':
         switch ($request_method) {
