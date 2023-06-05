@@ -7,6 +7,7 @@ html{
 body{
     border: 0;
     padding: 0;
+    background-color: #2A0949;
 }
 
 .left{
@@ -88,11 +89,13 @@ input{
     margin-right: 3rem;
 }
 
+#tabAlbum,
 #tabrecherche{
     width: 500px;
     padding: 20px 20px;
 }
 
+#tabAlbum li,
 #tabrecherche li {
     height: 110px;
     position: relative;
@@ -105,28 +108,34 @@ input{
     background-color: #2A0949;
 }
 
+#tabAlbum li span,
 #tabrecherche li span {
     font-size: 30px;
     font-weight: 600;
     color: grey;
 }
+
+#tabAlbum li img,
 #tabrecherche li img {
     width: 100px;
     height: 100px;
     margin-left: 25px;
 }
 
+#tabAlbum li h5,
 #tabrecherche li h5{
     font-size: 30px;
     margin-left: 15px;
     color: #F8EDEB;
 }
 
+#tabAlbum li h5 .subtitle,
 #tabrecherche li h5 .subtitle{
     font-size: 22px;
     color: grey;
 }
 
+#tabAlbum li h5 #heart,
 #tabrecherche li h5 #heart{
     position: absolute;
     left: 800px;
@@ -135,6 +144,7 @@ input{
     height: 40px;
 }
 
+#tabAlbum li h5 #addPlaylistButton,
 #tabrecherche li h5 #addPlaylistButton{
     position: absolute;
     left: 870px;
@@ -143,11 +153,14 @@ input{
     height: 40px;
 }
 
+#tabAlbum li h5 .infosmusique,
 #tabrecherche li h5 .infosmusique{
     position: absolute;
     left: 950px;
     top: 40px;
 }
+
+#tabAlbum li h5 .infosalbum,
 #tabrecherche li h5 .infosalbum{
     position: absolute;
     left: 950px;
@@ -177,4 +190,37 @@ input{
 }
 #display ul{
     margin-bottom: 250px;
+}
+
+#display #displayAlbum{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 250px;
+}
+
+#display #displayAlbum .card-img-top{
+    padding: 5px;
+}
+
+#display #displayAlbum {
+    padding: 20px 20px;
+}
+
+#display #displayAlbum .cardAlbum {
+    background-color: #581896;
+}
+
+#display .clicAlbum,
+#display .clicArtiste{
+    appearance: none;
+    background-color: #2A0949;
+    border: 2px solid white;
+    border-radius: 15px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+}
+
+#display #display2 .enTeteAlbum{
+    position: center;
+    margin-left: 10rem;
 }

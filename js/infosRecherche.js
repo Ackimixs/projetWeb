@@ -18,7 +18,16 @@ $('#tabrecherche').on('click', '.infosmusique', () =>
     {
 
         let idmusique = $(event.target).closest('.infosmusique').attr('value');
-        console.error(idmusique);
+        //console.error(idmusique);
+        ajaxRequest('GET', '../php/request.php/infosMusique', musiqueModal, 'idmusique='+idmusique);
+    }
+);
+
+$('#tabAlbum').on('click', '.infosmusique', () =>
+    {
+
+        let idmusique = $(event.target).closest('.infosmusique').attr('value');
+        //console.error(idmusique);
         ajaxRequest('GET', '../php/request.php/infosMusique', musiqueModal, 'idmusique='+idmusique);
     }
 );

@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="fr">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -11,6 +12,8 @@
     <script src="../js/ajax.js" defer></script>
     <script src="../js/recherche.js" defer></script>
     <script src="../js/infosRecherche.js" defer></script>
+    <script src="../js/artiste.js" defer></script>
+    <script src="../js/album.js" defer></script>
 
     <link href="slider.css" rel="stylesheet">
 
@@ -26,15 +29,6 @@
 </head>
 <body>
 <form>
-<!--<div class="bodyone">
-    <div class="left">
-        <div class="profil">
-            <svg xmlns="http://www.w3.org/2000/svg" width="110" height="110" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-            </svg>
-        </div>
-    </div>-->
 
     <div class="header">
         <div class="inp">
@@ -54,105 +48,107 @@
 
     <div class="middle">
         <div id="display">
+            <div id="display2">
+
+
+            </div>
             <ul id="tabrecherche">
 
 
-            </ul>
-            <div class="modal fade" id="modalMusique" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalMusiqueTitle"> </h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body" id="modalMusiqueInner">
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary buttonClose" data-dismiss="modal">Close</button>
-                        </div>
+            </ul>
+        </div>
+        <div class="modal fade" id="modalMusique" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalMusiqueTitle"> </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="modalMusiqueInner">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary buttonClose" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
+        </div>
 
+    </div>
+
+    <div class="footer">
+        <div class="d-flex flex-row justify-content-between align-items-center footerBar">
+            <div class="buttonPlay d-flex flex-row gap-3 justify-content-between">
+                <img src="../photo/agartha.jpg" alt="imgMusic" width="64" height="64">
+                <div class="backButton controlButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="white" class="bi bi-skip-backward-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M11.729 5.055a.5.5 0 0 0-.52.038L8.5 7.028V5.5a.5.5 0 0 0-.79-.407L5 7.028V5.5a.5.5 0 0 0-1 0v5a.5.5 0 0 0 1 0V8.972l2.71 1.935a.5.5 0 0 0 .79-.407V8.972l2.71 1.935A.5.5 0 0 0 12 10.5v-5a.5.5 0 0 0-.271-.445z"/>
+                    </svg>
+                </div>
+                <div class="playButton controlButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="white" class="bi bi-play-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+                    </svg>
+                </div>
+                <div class="pauseButton controlButton" hidden>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="white" class="bi bi-pause-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>
+                    </svg>
+                </div>
+                <div class="nextButton controlButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="white" class="bi bi-skip-forward-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M4.271 5.055a.5.5 0 0 1 .52.038L7.5 7.028V5.5a.5.5 0 0 1 .79-.407L11 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935a.5.5 0 0 1-.79-.407V8.972l-2.71 1.935A.5.5 0 0 1 4 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="middleFooter d-flex flex-column text-white">
+                <div class="info d-flex flex-row justify-content-between">
+                    <div>
+                        <p id="musicName">Captain - Krono</p>
+                    </div>
+                    <div class="d-flex flex-row">
+                        <div id="likeButton">
+                            <div class="notLikedButton">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                </svg>
+                            </div>
+                            <div class="likedButton" hidden>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <p id="addPlaylistButton">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                        </p>
+                    </div>
+                </div>
+                <div class="scrollBar d-flex flex-row">
+                    <p id="timestampMusic" class="timestampMusic">00:00</p>
+                    <input type="range" id="musicProgressBar" name="volume" value="0" min="0" max="100" step="1">
+                    <label for="musicProgressBar"></label>
+                    <p id="timeOfTheMusic" class="timestampMusic">00:00</p>
+                </div>
+
+                <audio hidden id="audioTag"></audio>
+            </div>
+            <div class="fileAttente">
+                <button type="submit" class="btn btn-secondary" id="attenteMusic">File d'attente</button>
+            </div>
         </div>
     </div>
 
-        <div class="footer">
-            <div class="d-flex flex-row justify-content-between align-items-center footerBar">
-                <div class="buttonPlay d-flex flex-row gap-3 justify-content-between">
-                    <img src="../photo/agartha.jpg" alt="imgMusic" width="64" height="64">
-                    <div class="backButton controlButton">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="white" class="bi bi-skip-backward-circle" viewBox="0 0 16 16">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                            <path d="M11.729 5.055a.5.5 0 0 0-.52.038L8.5 7.028V5.5a.5.5 0 0 0-.79-.407L5 7.028V5.5a.5.5 0 0 0-1 0v5a.5.5 0 0 0 1 0V8.972l2.71 1.935a.5.5 0 0 0 .79-.407V8.972l2.71 1.935A.5.5 0 0 0 12 10.5v-5a.5.5 0 0 0-.271-.445z"/>
-                        </svg>
-                    </div>
-                    <div class="playButton controlButton">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="white" class="bi bi-play-circle" viewBox="0 0 16 16">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                            <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
-                        </svg>
-                    </div>
-                    <div class="pauseButton controlButton" hidden>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="white" class="bi bi-pause-circle" viewBox="0 0 16 16">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                            <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>
-                        </svg>
-                    </div>
-                    <div class="nextButton controlButton">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="white" class="bi bi-skip-forward-circle" viewBox="0 0 16 16">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                            <path d="M4.271 5.055a.5.5 0 0 1 .52.038L7.5 7.028V5.5a.5.5 0 0 1 .79-.407L11 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935a.5.5 0 0 1-.79-.407V8.972l-2.71 1.935A.5.5 0 0 1 4 10.5v-5a.5.5 0 0 1 .271-.445z"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="middleFooter d-flex flex-column text-white">
-                    <div class="info d-flex flex-row justify-content-between">
-                        <div>
-                            <p id="musicName">Captain - Krono</p>
-                        </div>
-                        <div class="d-flex flex-row">
-                            <div id="likeButton">
-                                <div class="notLikedButton">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-                                    </svg>
-                                </div>
-                                <div class="likedButton" hidden>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <p id="addPlaylistButton">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                                </svg>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="scrollBar d-flex flex-row">
-                        <p id="timestampMusic" class="timestampMusic">00:00</p>
-                        <input type="range" id="musicProgressBar" name="volume" value="0" min="0" max="100" step="1">
-                        <label for="musicProgressBar"></label>
-                        <p id="timeOfTheMusic" class="timestampMusic">00:00</p>
-                    </div>
-
-                    <audio hidden id="audioTag"></audio>
-                </div>
-                <div class="fileAttente">
-                    <button type="submit" class="btn btn-secondary" id="attenteMusic">File d'attente</button>
-                </div>
-            </div>
-        </div>
-    <!--</div>-->
 </form>
 </body>
 </html>
-
-
-<!-- <img src="../photo/agartha.jpg" alt="cover"/> -->

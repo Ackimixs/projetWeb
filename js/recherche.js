@@ -73,6 +73,8 @@ $('#artiste').click((e) =>
 
 function rechercheMusique(musiques){
 
+    $('#display2').html("");
+
     if(musiques === 'Musique introuvable.') {
         $('#tabrecherche').html("");
         $('#tabrecherche').append('<div class="alert alert-danger" role="danger" style="width: 140%">\n' +
@@ -84,7 +86,7 @@ function rechercheMusique(musiques){
         for (let i=0 ; i < musiques.length ; i++) {
             $('#tabrecherche').append('<li class="songItem">'
                                         + '<span>'+ (i+1) +'</span>'
-                                        + '<img src="../photo/agartha.jpg"/>'
+                                        + '<img src="'+ musiques[i]['image_album']+'"/>'
                                         + '<h5>' + musiques[i]['titre_musique']
                                             + '<div class="subtitle"> '+ musiques[i]['nom_artiste'] +'</div>'
                                             + '<div id = "heart">'
@@ -107,6 +109,8 @@ function rechercheMusique(musiques){
 }
 
 function recherchePlaylist(playlists){
+
+    $('#display2').html("");
 
     if(playlists === 'Playlist introuvable.') {
         $('#tabrecherche').html("");
@@ -143,6 +147,8 @@ function recherchePlaylist(playlists){
 
 function rechercheAlbum(albums){
 
+    $('#display2').html("");
+
     if(albums === 'Album introuvable.') {
         $('#tabrecherche').html("");
         $('#tabrecherche').append('<div class="alert alert-danger" role="danger" style="width: 140%">\n' +
@@ -154,9 +160,9 @@ function rechercheAlbum(albums){
         for (let i=0 ; i < albums.length ; i++) {
             $('#tabrecherche').append('<li class="songItem">'
                                         + '<span>'+ (i+1) +'</span>'
-                                        + '<img src="../photo/agartha.jpg"/>'
-                                        + '<h5>' + albums[i]['titre_album']
-                                            + '<div class="subtitle"> '+ albums[i]['nom_artiste'] +' </div>'
+                                        + '<img src="'+ albums[i]['image_album']+'"/>'
+                                        + '<h5> <button  class="clicAlbum" value="'+ albums[i]['id_album'] +'" >' + albums[i]['titre_album']
+                                            + ' </button> <div class="subtitle"> '+ albums[i]['nom_artiste'] +' </div>'
                                             + '<div id = "heart">'
                                                 + '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">\n'
                                                 + '<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>\n'
@@ -178,6 +184,8 @@ function rechercheAlbum(albums){
 
 function rechercheArtiste(artistes){
 
+    $('#display2').html("");
+
     if(artistes === 'Artiste introuvable.') {
         $('#tabrecherche').html("");
         $('#tabrecherche').append('<div class="alert alert-danger" role="danger" style="width: 140%">\n' +
@@ -190,8 +198,8 @@ function rechercheArtiste(artistes){
             $('#tabrecherche').append('<li class="songItem">'
                                             + '<span>'+ (i+1) +'</span>'
                                             + '<img src="../photo/agartha.jpg"/>'
-                                            + '<h5>' + artistes[i]['nom_artiste']
-                                            + '<div class="subtitle"> ' + artistes[i]['type_artiste'] + ' </div>'
+                                            + '<h5> <button  class="clicArtiste" value="'+ artistes[i]['id_artiste'] +'" >' + artistes[i]['nom_artiste']
+                                            + '</button> <div class="subtitle"> ' + artistes[i]['type_artiste'] + ' </div>'
                                             + '<div id = "heart">'
                                                 + '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">\n'
                                                 + '<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>\n'
