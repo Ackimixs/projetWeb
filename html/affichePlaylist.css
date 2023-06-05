@@ -9,9 +9,7 @@
     grid-row: 1;
     grid-column: 1;
     margin-left: 5%;
-    display: flex;
-    /* flex-direction: row; */
-     
+    display: flex;     
 }
 
 #txt1{
@@ -26,8 +24,8 @@
     display: flex;
     justify-content: center;
     align-items: end;
-    margin-left: 35%;
-    margin-bottom: 10%;    
+    margin-left: 26%;
+    margin-bottom: 12%;    
 }
 
 .ecouter{
@@ -73,57 +71,62 @@
 }
 
 
-#Morceau1{
+#listeMorceaux{
     grid-column: 1/4;
-    grid-row: 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    font-size: 30px;
-    color: #F8EDEB;
+    margin: 2%;
+    display: flex;
+    flex-direction: column;
+    /* width: 300%; */
+
 }
 
-#Morceau2{
-    grid-column: 1/4;
-    grid-row: 3;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    font-size: 30px;
-    color: #F8EDEB;
-}
-#Morceau3{
-    grid-column: 1/4;
-    grid-row: 4;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+#Morceau{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex:1;
+
     font-size: 30px;
     color: #F8EDEB;
 }
 
 #name{
     display: flex;
-    justify-content: left;
-    margin-top: 5%;
-    margin-left: 10%;
+    /* flex-direction: row; */
+    flex: 1;
     
 }
 
-#title{
-    margin-left: 8%;
-    margin-top: 2%;
+
+#test{
+    display: flex;
+    flex-direction: column;
+    
+    padding-left: 5%;
 }
 
+#artiste{
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    color: #b6b4b4;
+}
 #infos{
     display: flex;
     justify-content: center;
     gap: 5%;
-    /* justify-content: space-around; */
-    margin-top: 6%;
+    flex:1;
 }
 
 #delete{
     display: flex;
     justify-content: right;
-    margin-top: 6%;
     gap: 5%;
-    margin-right: 10%;
+    flex: 1;
 }
+
+
+p{
+    margin : 0;
+}
+
