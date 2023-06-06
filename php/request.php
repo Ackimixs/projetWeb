@@ -140,7 +140,12 @@ switch($requestRessource)
     case 'recherchemusique':
         switch ($request_method) {
             case 'GET':
-                $data = Musique::rechercheMusiques($_GET['stringrecherche']);
+                if (isset($_GET['stringrecherche'])) {
+                    $data = Musique::rechercheMusiques($_GET['stringrecherche']);
+                }
+                else {
+                    $data = false;
+                }
                 break;
             default:
                 // Requête invalide
@@ -151,7 +156,12 @@ switch($requestRessource)
     case 'rechercheplaylist':
         switch ($request_method) {
             case 'GET':
-                $data = Playlist::recherchePlaylists($_GET['stringrecherche']);
+                if (isset($_GET['stringrecherche'])) {
+                    $data = Playlist::recherchePlaylists($_GET['stringrecherche']);
+                }
+                else {
+                    $data = false;
+                }
                 break;
             default:
                 // Requête invalide
@@ -162,7 +172,12 @@ switch($requestRessource)
     case 'recherchealbum':
         switch ($request_method) {
             case 'GET':
-                $data = Album::rechercheAlbums($_GET['stringrecherche']);
+                if (isset($_GET['stringrecherche'])) {
+                    $data = Album::rechercheAlbums($_GET['stringrecherche']);
+                }
+                else {
+                    $data = false;
+                }
                 break;
             default:
                 // Requête invalide
@@ -173,7 +188,12 @@ switch($requestRessource)
     case 'rechercheartiste':
         switch ($request_method) {
             case 'GET':
-                $data = Artiste::rechercheArtistes($_GET['stringrecherche']);
+                if (isset($_GET['stringrecherche'])) {
+                    $data = Artiste::rechercheArtistes($_GET['stringrecherche']);
+                }
+                else {
+                    $data = false;
+                }
                 break;
             default:
                 // Requête invalide
