@@ -371,6 +371,7 @@ function showPlaylistInfo() {
     document.querySelector('#tabrecherche').hidden = true;
     document.querySelector('#accueil').hidden = true;
     document.querySelector('#profile').hidden = true;
+    document.querySelector('#display2').hidden = true;
     document.querySelector('#affichagePlaylist').hidden = false;
     document.querySelector('#listeMorceaux').innerHTML = "";
 }

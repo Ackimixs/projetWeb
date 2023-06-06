@@ -304,8 +304,23 @@ function playPlaylist(id) {
     })
 }
 
+function playAlbum(id) {
+    if (loadingMusic) return;
+    autoPlay = true;
+    ajaxRequest("DELETE", '../php/request.php/file-attente', () => {
+        ajaxRequest("GET", '../php/request.php/album/' + id, (data) => {
+            data.forEach(musique => {
+                ajaxRequest("POST", '../php/request.php/file-attente', () => {}, `id=${musique.id_musique}`);
+            })
+            playNext();
+        })
+    })
+}
+
+
 function playLikedSong() {
     if (loadingMusic) return;
+    autoPlay = true;
     ajaxRequest("DELETE", '../php/request.php/file-attente', () => {
         ajaxRequest("GET", '../php/request.php/like', (data) => {
             if (data.length > 0) {
@@ -320,6 +335,7 @@ function playLikedSong() {
 
 function playSong(id_musique) {
     if (loadingMusic) return;
+    autoPlay = true;
     ajaxRequest("DELETE", "../php/request.php/file-attente/" + id_musique, () => {
         getMusique(id_musique);
     })

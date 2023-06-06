@@ -194,7 +194,7 @@ function rechercheAlbum(albums){
             $('#tabrecherche').append('<li class="songItem">'
                                         + '<span>'+ (i+1) +'</span>'
                                         + '<img src="'+ albums[i]['image_album']+'"/>'
-                                        + '<h5> <button  class="clicAlbum" value="'+ albums[i]['id_album'] +'" >' + albums[i]['titre_album']
+                                        + '<h5> <button  class="clicAlbum" value="'+ albums[i]['id_album'] +'" >' + (albums[i]['titre_album'].length > 18 ? albums[i]['titre_album'].slice(0, 15) + '...' : albums[i]['titre_album'])
                                             + ' </button> <div class="subtitle"> '+ albums[i]['nom_artiste'] +' </div>'
                                             + '<button type="button" class="btn btn-primary infosalbum btn-light mb-2" data-toggle="modal" data-target="#modalMusique" value="'+ albums[i]['id_album'] +'" > INFOS'
                                             + '</button> '

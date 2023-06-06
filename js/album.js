@@ -38,6 +38,7 @@ function displayAlbum(album) {
         '        <p class="card-text"> Nom Artiste : '+ album[0]['nom_artiste'] +' </p>\n' +
         '        <p class="card-text"> Genre : </p>\n' +
         '        <p class="card-text"> Création : '+ crea +'</p>\n' +
+        '        <br><button class="ecouter" data-id="' + album[0]['id_album'] + '">Play Album</button>\n' +
         '      </div>\n' +
         '    </div>\n' +
         '  </div>\n' +
@@ -104,5 +105,10 @@ function addFunctionnalites() {
                 })
             }
         })
+    })
+
+    let button = document.querySelector('.ecouter');
+    button.addEventListener('click', () => {
+        playAlbum(button.dataset.id);
     })
 }

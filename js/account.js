@@ -52,6 +52,7 @@ profile.addEventListener('click', () => {  //event on click
 
     fileInput.addEventListener('change', (event) => { //Détecte le nouveau fichier sélectionné
         const selectedFile = fileInput.files[0]; //récupère le fichier sélectionné en prenant le premier élément de la liste (files[0]).
+        console.log(selectedFile);
         const formData = new FormData();
         formData.append('image', selectedFile); //ajoute le fichier sélectionné aux données
 

@@ -128,7 +128,7 @@ switch($requestRessource)
                 if ($id != null) {
                     $data = Album::getUnAlbum($id);
                 } else {
-                    $data = false;
+                    $data = Album::getAlbums();
                 }
                 break;
             default:
