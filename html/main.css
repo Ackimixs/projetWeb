@@ -1,28 +1,33 @@
+/* cette page s'occupe du style du header et du footer du site */
+
+
+/* On met à 0 les bordures car il y en à parfois par défaut */
 html{
     border: 0;
     padding: 0;
 }
-
 body{
     border: 0;
     padding: 0;
     background-color: #2A0949;
 }
-
 ::-webkit-scrollbar {
     display: none;
 }
 
+
+/* style du profil dans le header */
 .profilHeader{
     margin-bottom: 10px;
     color:#F8EDEB;
     cursor: pointer;
 }
-
 .home {
-    cursor: pointer;
+    cursor: pointer; /*permet de changer l'apparence du curseur lorsque celui-ci est sur l'objet */
 }
 
+
+/* place et stylise le header */
 .header{
     position: sticky;
     top: 0;
@@ -36,23 +41,27 @@ body{
     border-bottom : #F8EDEB solid 2px;
     z-index: 100;
 }
-
 .inp {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 10px;  /*permet de mettre un espace entre les éléments */
 }
 
+
+/* style de la bar de recherche */
 #stringrecherche{
     background-color: #F8EDEB;
     border: 0;
     padding: 0.5rem;
     width: 35rem;
 }
+
 .middle {
     padding: 2rem 0 7rem 0;
 }
 
+
+/* style du footer */
 .footer{
     width: 100%;
     position: fixed;
@@ -60,34 +69,25 @@ body{
     background-color: #581896;
     border-top : #F8EDEB solid 2px ;
 }
-
 .footerBar {
     padding: 1rem;
-    display: flex;
-    flex-wrap: wrap;
     height: 100%;
     margin-left: 2rem;
 }
-
 .controlButton {
     padding-left: 1rem;
 }
-
 #likeButton > div {
     margin: 0 10px;
 }
-
 .timestampMusic {
-    margin: 0 !important;
+    margin: 0 !important; /* !important permet de forcer le style par rapport à bootstrap*/
     height: 100%;
-    align-items: center;
     padding: 0.2rem 1rem;
 }
-
 #attenteMusic {
     margin-right: 3rem;
 }
-
 .scrollBar {
     display: flex;
     flex-direction: row;
@@ -95,39 +95,33 @@ body{
 }
 
 
+/* style du bouton de son */
 .volume-button {
     position: relative;
     display: flex;
     flex-direction: row;
     cursor: pointer;
 }
-
 .volume-slider {
   width: 120px;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
 }
-
 .volume-button:hover .volume-slider,
 .volume-button:focus-within .volume-slider {
   opacity: 1;
   pointer-events: auto;
 }
 
-.fileAttente {
-    width: 25%;
-}
 
-
+/* ajout à une playlist */
 .dropdown {
     position: relative;
     display: inline-block;
 }
-
 .dropdown-icon {
     cursor: pointer;
 }
-
 .dropdown-content {
     display: none;
     position: absolute;
@@ -140,7 +134,9 @@ body{
     animation: dropdown-animation 0.3s ease;
     border: white solid 2px;
 }
-
+.fileAttente {
+    width: 25%;
+}
 .addToPlaylist {
     display: flex;
     flex-direction: row;
@@ -148,12 +144,10 @@ body{
     justify-content: space-between;
     margin: 0.5rem;
 }
-
 .addToPlaylist > p {
     margin: 0;
     padding: 0;
 }
-
 .addToPlaylist > div > svg {
     cursor: pointer;
     background: white;
@@ -161,13 +155,12 @@ body{
     color: #581896;
     padding: 2px;
 }
-
 .dropdown.open .dropdown-content {
     display: block;
 }
 
-
-@media screen and (max-width: 500px) {
+/* permet de garder la responsivité selon l'écran */
+@media screen and (max-width: 500px) { 
     .profil {
         display: none;
     }
@@ -182,12 +175,11 @@ body{
 }
 
 
-
+/* style des information, images en résultat de recherche */
 #tabrecherche{
     width: 500px;
     padding: 20px 20px;
 }
-
 #tabrecherche li {
     position: relative;
     list-style-type: none;
@@ -198,7 +190,6 @@ body{
     cursor: pointer;
     background-color: #2A0949;
 }
-
 #tabrecherche li span {
     font-size: 30px;
     font-weight: 600;
@@ -209,18 +200,15 @@ body{
     height: 100px;
     margin-left: 25px;
 }
-
 #tabrecherche li h5{
     font-size: 30px;
     margin-left: 15px;
     color: #F8EDEB;
 }
-
 #tabrecherche li h5 .subtitle{
     font-size: 22px;
     color: grey;
 }
-
 #tabrecherche li h5 #heart{
     position: absolute;
     left: 800px;
@@ -228,7 +216,6 @@ body{
     width: 40px;
     height: 40px;
 }
-
 #tabrecherche li h5 #addPlaylistButton{
     position: absolute;
     left: 870px;
@@ -236,7 +223,6 @@ body{
     width: 40px;
     height: 40px;
 }
-
 #tabrecherche li h5 #infos{
     position: absolute;
     left: 950px;
@@ -245,6 +231,8 @@ body{
     height: 40px;
 }
 
+
+/* style des bouton de recherche */
 .searchButton {
     appearance: none;
     background-color: #2A0949;
@@ -262,7 +250,6 @@ body{
     text-align: center;
     text-decoration: none;
 }
-
 #display ul{
     margin-bottom: 250px;
 }
