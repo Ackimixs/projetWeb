@@ -27,7 +27,13 @@ window.addEventListener('load', () => {//event au chargement
             document.querySelector('#email').value = data.mail;
             document.querySelector('#nom').value = data.nom_user;
             document.querySelector('#prenom').value = data.prenom_user;
-            document.querySelector('#age').value = (new Date().getFullYear() - new Date(data.date_naissance).getFullYear()).toString() + ' ans'; //Calcul de l'âge en fonction de la date de naissance
+            const date1 = new Date();
+            const date2 = new Date(birthdayInput.value);
+            let differenceYears = date1.getFullYear() - date2.getFullYear();
+            if (date1.getMonth() < date2.getMonth() || (date1.getMonth() === date2.getMonth() && date1.getDate() < date2.getDate())) {
+              differenceYears--;
+            }
+            document.querySelector('#age').value = differenceYears.toString() + ' ans'; //Calcul de l'âge en fonction de la date de naissance
             document.querySelector('#birthday').value = data.date_naissance;
         }
     })

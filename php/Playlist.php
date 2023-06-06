@@ -80,10 +80,10 @@ class Playlist
         try {
             $db = Db::connectionDB();
             $request = "
-            SELECT * FROM playlist
-            INNER JOIN user_playlist up on playlist.id_playlist = up.id_playlist
-            INNER JOIN \"user\" u on u.id_user = up.id_user
-            WHERE titre_playlist ILIKE CONCAT('%', :recherche::text, '%'); 
+            SELECT p.id_playlist, p.titre_playlist, p.date_playlist, p.image_playlist, p.public, up.id_user, u.id_user, mail, date_naissance, nom_user, prenom_user, motdepasse, image_user FROM playlist p
+            LEFT JOIN user_playlist up on p.id_playlist = up.id_playlist
+            LEFT JOIN \"user\" u on u.id_user = up.id_user
+            WHERE p.titre_playlist ILIKE CONCAT('%', :recherche::text, '%');
             ";
             $stmt = $db->prepare($request);
             $stmt->bindParam(':recherche', $recherche);

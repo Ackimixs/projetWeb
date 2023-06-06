@@ -155,17 +155,25 @@ function recherchePlaylist(playlists){
     else {
         $('#tabrecherche').html("");
         for(let i=0; i < playlists.length; i++) {
-            $('#tabrecherche').append('<li class="songItem">'
+            console.log(playlists[i]);
+            $('#tabrecherche').append('<li class="songItem" data-id="' + playlists[i]['id_playlist'] + '">'
                                         + '<span>'+ (i+1) +'</span>'
-                                        + '<img src="../photo/profil.png"/>'
+                                        + '<img src="'+ (playlists[i]['image_playlist'] ? playlists[i]['image_playlist'] : '../photo/img.png') + '"/>'
                                         + '<h5>' + playlists[i]['titre_playlist']
-                                            + '<div class="subtitle"> '+ playlists[i]['nom_user']+' </div>'
-                                            + '<button type="button" class="btn btn-primary infos btn-light mb-2" data-toggle="modal" data-target="#modalMusique" value="'+ playlists[i]['id_musique'] +'"> Infos'
+                                            + '<div class="subtitle"> '+ (playlists[i]['nom_user'] ?? '') +' </div>'
                                             + '</button> '
                                         + '</h5>'
                                     + '</li>');
         }
     }
+
+    document.querySelectorAll('.songItem').forEach(e => {
+        e.addEventListener('click', () => {
+            console.log(e.dataset.id);
+            afficherInfoPlaylist('playlist', parseInt(e.dataset.id, 10))
+            showPlaylistInfo();
+        })
+    })
 }
 
 function rechercheAlbum(albums){
