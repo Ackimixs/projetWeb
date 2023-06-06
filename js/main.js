@@ -24,6 +24,7 @@ document.querySelector('.home').addEventListener("click", () => { //Affiche la p
     document.querySelector('#accueil').hidden = false;
     document.querySelector('#profile').hidden = true;
     document.querySelector('#affichagePlaylist').hidden = true;
+    document.querySelector('#display2').hidden = true;
     refreshAccueil();
 })
 
@@ -32,6 +33,7 @@ document.querySelector('.profilHeader').addEventListener('click', () => { //Affi
     document.querySelector('#accueil').hidden = true;
     document.querySelector('#profile').hidden = false;
     document.querySelector('#affichagePlaylist').hidden = true;
+    document.querySelector('#display2').hidden = true;
 })
 
 document.querySelectorAll(".searchButton").forEach(e => { //Affiche la page de recherche
@@ -40,5 +42,6 @@ document.querySelectorAll(".searchButton").forEach(e => { //Affiche la page de r
         document.querySelector('#accueil').hidden = true;
         document.querySelector('#profile').hidden = true;
         document.querySelector('#affichagePlaylist').hidden = true;
+        document.querySelector('#display2').hidden = true;
     })
 })

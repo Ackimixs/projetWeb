@@ -28,6 +28,7 @@ CREATE TABLE public.Artiste(
                                id_artiste     SERIAL NOT NULL ,
                                nom_artiste    VARCHAR (50) NOT NULL ,
                                type_artiste   VARCHAR (50)  NOT NULL  ,
+                               image_artiste  VARCHAR (200) ,
                                CONSTRAINT Artiste_PK PRIMARY KEY (id_artiste)
 )WITHOUT OIDS;
 

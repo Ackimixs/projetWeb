@@ -1,34 +1,67 @@
-#affichagePlaylist{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 250px 80px 80px 80px 80px ;
-
+.mainAffichagePlaylist {
+    display: flex;
+    flex-direction: row;
+    margin: 40px;
 }
 
-#one{
-    grid-row: 1;
-    grid-column: 1;
-    margin-left: 5%;
-    display: flex;     
+#playlistInfoImage {
+    width: 256px;
+    height: 256px;
+    background: rgb(64,142,187);
+    background: linear-gradient(140deg, rgba(64,142,187,1) 0%, rgba(145,105,217,1) 59%, rgba(255,255,255,1) 100%);
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 10%;
+}
+
+.musiqueInfoImage {
+    background: rgb(64,142,187);
+    background: linear-gradient(140deg, rgba(64,142,187,1) 0%, rgba(145,105,217,1) 59%, rgba(255,255,255,1) 100%);
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 10%;
+}
+
+.name:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.3s;
+}
+
+.bi-trash3:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.3s;
+}
+
+.mainInfoPlaylist {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+}
+
+#bttn_ecouter {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
 }
 
 #txt1{
-    margin-left: 10%;
     font-size: 40px;
     text-decoration: underline;
 }
 
-#bttn_ecouter{
-    grid-row: 1;
-    grid-column: 1;
-    display: flex;
-    justify-content: center;
-    align-items: end;
-    margin-left: 26%;
-    margin-bottom: 12%;    
-}
-
 .ecouter{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
     background-color: #581896;
     border-radius: 20px;
     width: 200px;
@@ -37,12 +70,10 @@
     font-size: 27px;
 }
 
-#two{
-    grid-row: 1;
-    grid-column: 3;
-    margin-left: 10%;
+.supprContainer {
+    flex: 1;
     display: flex;
-    justify-content: center;
+    flex-direction: column-reverse;
     align-items: end;
 }
 
@@ -50,21 +81,17 @@
     background-color: #581896;
     color: #F8EDEB;
     border-radius: 20px;
-    width: 300px;
+    width: 15rem;
     height: 50px;
-    margin-bottom: 6%;    
-
 }
 
 #line{
-    grid-row: 1;
-    grid-column: 1/4;
+    margin: 0 2rem;
     border-bottom: 2px solid #F8EDEB;
 }
 
 .txt2{
-    grid-row: 1;
-    grid-column: 1;
+    margin: 10px;
     display: flex;
     justify-content: center;
     align-items: end;
@@ -72,15 +99,13 @@
 
 
 #listeMorceaux{
-    grid-column: 1/4;
-    margin: 2%;
+    margin: 2rem 5rem 2rem 5rem;
     display: flex;
     flex-direction: column;
-    /* width: 300%; */
-
+    gap: 1rem;
 }
 
-#Morceau{
+.Morceau{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -90,43 +115,44 @@
     color: #F8EDEB;
 }
 
-#name{
+.name{
     display: flex;
     /* flex-direction: row; */
     flex: 1;
-    
 }
 
-
-#test{
+.test{
     display: flex;
     flex-direction: column;
-    
+    justify-content: left;
     padding-left: 5%;
 }
 
-#artiste{
-    display: flex;
-    justify-content: center;
+.artiste{
     font-size: 20px;
     color: #b6b4b4;
 }
-#infos{
+
+.infos{
     display: flex;
     justify-content: center;
     gap: 5%;
     flex:1;
 }
 
-#delete{
+.delete{
     display: flex;
     justify-content: right;
     gap: 5%;
     flex: 1;
 }
 
-
 p{
     margin : 0;
 }
 
+.bi-heart:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.3s;
+}

@@ -28,13 +28,13 @@ class Album
         try {
             $db = Db::connectionDB();
             $request = 'SELECT * FROM album
-                    INNER JOIN artiste a on a.id_artiste = album.id_artiste
-                    INNER JOIN musique m on m.id_album = album.id_album
-                    WHERE album.id_album = :id';
+                        INNER JOIN artiste a on a.id_artiste = album.id_artiste
+                        INNER JOIN musique m on m.id_album = album.id_album
+                        WHERE album.id_album = :id';
             $stmt = $db->prepare($request);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         catch (PDOException $exception){
             error_log($exception->getMessage());
@@ -58,7 +58,7 @@ class Album
             $stmt->bindParam(':recherche', $recherche);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if ( $result[0]['id_album'] == ''){
+            if (empty($result) || $result[0]['id_album'] == ''){
                 return 'Album introuvable.';
             }
             else {

@@ -43,6 +43,26 @@ switch($requestRessource)
                     $data = Playlist::getPlaylists();
                 }
                 break;
+
+            case 'POST':
+                if (isset($_POST['playlistName']) && !Playlist::exist($_POST['playlistName'])) {
+                    $data = Playlist::creationPlaylist($_POST['playlistName'], date('Y-m-d H:i:s'), $_POST['public']);
+                } else {
+                    $data = false;
+                }
+                break;
+
+            case 'DELETE':
+                if (isset($_SESSION["user"])) {
+                    if ($id !== null && Playlist::isUserPlaylist($_SESSION['user']['id_user'], $id)) {
+                        $data = Playlist::deletePlaylist($id, $_SESSION['user']['id_user']);
+                    } else {
+                        $data = false;
+                    }
+                } else {
+                    $data = false;
+                }
+                break;
             default:
                 // Requête invalide
                 header("HTTP/1.0 405 Method Not Allowed");
@@ -356,7 +376,9 @@ switch($requestRessource)
         switch ($request_method) {
             case 'GET':
                 if (isset($_SESSION["user"])) {
-                    if ($id != null) {
+                    if ($id == 'random') {
+                        $data = User::getRandomFileAttente($_SESSION['user']['id_user']);
+                    } else if ($id != null) {
                         $data = User::isInFileAttente($_SESSION['user']['id_user'], $id);
                     } else {
                         $data = User::getFileAttente($_SESSION['user']['id_user']);
@@ -387,9 +409,44 @@ switch($requestRessource)
                 // Requête invalide
                 header("HTTP/1.0 405 Method Not Allowed");
                 break;
+        }
+        break;
+    case 'musique-playlist':
+        switch ($request_method) {
+            case 'GET':
+                if ($_SESSION["user"]) {
+                    if ($id == 'isIn') {
+                        $data = Playlist::musiqueInPlaylist($_GET['id_playlist'], $_GET['id_musique']);
+                    }
+                    else if ($id != null) {
+                        $data = Playlist::musiquePlaylist($id);
+                    } else {
+                        $data = false;
+                    }
+                } else {
+                    $data = false;
+                }
+                break;
+            case 'POST':
+                if (isset($_POST['id_playlist']) && isset($_POST['id_musique']) && !Playlist::musiqueInPlaylist($_POST['id_playlist'], $_POST['id_musique'])) {
+                    $data = Playlist::addMusiqueToPlaylist($_POST['id_playlist'], $_POST['id_musique']);
+                } else {
+                    $data = false;
+                }
+                break;
+           case 'DELETE':
+                if (isset($_SESSION["user"])) {
+                    $data = Playlist::musiqueInPlaylist($_GET['id_playlist'], $_GET['id_musique']);
+                } else {
+                    $data = false;
+                }
+                break;
+            default:
+                // Requête invalide
+                header("HTTP/1.0 405 Method Not Allowed");
+                break;
 
         }
-
         break;
 
     case 'user-playlist':
@@ -399,22 +456,22 @@ switch($requestRessource)
                     if ($id == null) {
                         $data = Playlist::getAllPlaylistUser($_SESSION['user']['id_user']);
                     } else {
-                        $data = false;
+                        $data = Playlist::isUserPlaylist($_SESSION['user']['id_user'], $id);
                     }
                 } else {
                     $data = false;
                 }
                 break;
             case 'POST':
-                if ($_POST['id_musique'] && $_POST['id_playlist']) {
-                    $data = Playlist::addMusiqueToPlaylist($_POST['id_playlist'], $_POST['id_musique']);
+                if ($_POST['id_user'] && $_POST['id_playlist']) {
+                    $data = Playlist::createPlaylistUser($_POST['id_playlist'], $_POST['id_user'], date("Y-m-d H:i:s"));
                 } else {
                     $data = false;
                 }
                 break;
             case 'DELETE':
-                if ($_POST['id_musique'] && $_POST['id_playlist']) {
-                    $data = Playlist::removeMusiqueFromPlaylist($_POST['id_playlist'], $_POST['id_musique']);
+                if ($_GET['id_musique'] && $_GET['id_playlist']) {
+                    $data = Playlist::removeMusiqueFromPlaylist($_GET['id_playlist'], $_GET['id_musique']);
                 } else {
                     $data = false;
                 }
@@ -424,16 +481,14 @@ switch($requestRessource)
                 header("HTTP/1.0 405 Method Not Allowed");
                 break;
         }
+
         break;
-    case 'musique-playlist':
+
+    case 'private-playlist':
         switch ($request_method) {
             case 'GET':
-                if ($_SESSION["user"]) {
-                    if ($id != null) {
-                        $data = Playlist::musiquePlaylist($id);
-                    } else {
-                        $data = false;
-                    }
+                if (isset($_SESSION['user'])) {
+                    $data = Playlist::getPrivatePlaylist($_SESSION['user']['id_user']);
                 } else {
                     $data = false;
                 }
