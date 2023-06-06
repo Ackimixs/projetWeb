@@ -1,0 +1,3 @@
+[submodule "php_projet_database_writter"]
+	path = php_projet_database_writter
+	url = https://github.com/ackimixs/php_projet_database_writter.git
