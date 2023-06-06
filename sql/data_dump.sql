@@ -21,7 +21,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: album; Type: TABLE; Schema: public; Owner: spotifaie
+-- Name: album; Type: TABLE; Schema: public; Owner: spotifaie_user
 --
 
 CREATE TABLE public.album (
@@ -34,10 +34,10 @@ CREATE TABLE public.album (
 );
 
 
-ALTER TABLE public.album OWNER TO spotifaie;
+ALTER TABLE public.album OWNER TO spotifaie_user;
 
 --
--- Name: album_id_album_seq; Type: SEQUENCE; Schema: public; Owner: spotifaie
+-- Name: album_id_album_seq; Type: SEQUENCE; Schema: public; Owner: spotifaie_user
 --
 
 CREATE SEQUENCE public.album_id_album_seq
@@ -49,17 +49,17 @@ CREATE SEQUENCE public.album_id_album_seq
     CACHE 1;
 
 
-ALTER TABLE public.album_id_album_seq OWNER TO spotifaie;
+ALTER TABLE public.album_id_album_seq OWNER TO spotifaie_user;
 
 --
--- Name: album_id_album_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: spotifaie
+-- Name: album_id_album_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: spotifaie_user
 --
 
 ALTER SEQUENCE public.album_id_album_seq OWNED BY public.album.id_album;
 
 
 --
--- Name: artiste; Type: TABLE; Schema: public; Owner: spotifaie
+-- Name: artiste; Type: TABLE; Schema: public; Owner: spotifaie_user
 --
 
 CREATE TABLE public.artiste (
@@ -70,10 +70,10 @@ CREATE TABLE public.artiste (
 );
 
 
-ALTER TABLE public.artiste OWNER TO spotifaie;
+ALTER TABLE public.artiste OWNER TO spotifaie_user;
 
 --
--- Name: artiste_id_artiste_seq; Type: SEQUENCE; Schema: public; Owner: spotifaie
+-- Name: artiste_id_artiste_seq; Type: SEQUENCE; Schema: public; Owner: spotifaie_user
 --
 
 CREATE SEQUENCE public.artiste_id_artiste_seq
@@ -85,17 +85,17 @@ CREATE SEQUENCE public.artiste_id_artiste_seq
     CACHE 1;
 
 
-ALTER TABLE public.artiste_id_artiste_seq OWNER TO spotifaie;
+ALTER TABLE public.artiste_id_artiste_seq OWNER TO spotifaie_user;
 
 --
--- Name: artiste_id_artiste_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: spotifaie
+-- Name: artiste_id_artiste_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: spotifaie_user
 --
 
 ALTER SEQUENCE public.artiste_id_artiste_seq OWNED BY public.artiste.id_artiste;
 
 
 --
--- Name: artiste_musique; Type: TABLE; Schema: public; Owner: spotifaie
+-- Name: artiste_musique; Type: TABLE; Schema: public; Owner: spotifaie_user
 --
 
 CREATE TABLE public.artiste_musique (
@@ -105,10 +105,10 @@ CREATE TABLE public.artiste_musique (
 );
 
 
-ALTER TABLE public.artiste_musique OWNER TO spotifaie;
+ALTER TABLE public.artiste_musique OWNER TO spotifaie_user;
 
 --
--- Name: file_attente; Type: TABLE; Schema: public; Owner: spotifaie
+-- Name: file_attente; Type: TABLE; Schema: public; Owner: spotifaie_user
 --
 
 CREATE TABLE public.file_attente (
@@ -118,10 +118,10 @@ CREATE TABLE public.file_attente (
 );
 
 
-ALTER TABLE public.file_attente OWNER TO spotifaie;
+ALTER TABLE public.file_attente OWNER TO spotifaie_user;
 
 --
--- Name: historique; Type: TABLE; Schema: public; Owner: spotifaie
+-- Name: historique; Type: TABLE; Schema: public; Owner: spotifaie_user
 --
 
 CREATE TABLE public.historique (
@@ -131,10 +131,10 @@ CREATE TABLE public.historique (
 );
 
 
-ALTER TABLE public.historique OWNER TO spotifaie;
+ALTER TABLE public.historique OWNER TO spotifaie_user;
 
 --
--- Name: like_musique; Type: TABLE; Schema: public; Owner: spotifaie
+-- Name: like_musique; Type: TABLE; Schema: public; Owner: spotifaie_user
 --
 
 CREATE TABLE public.like_musique (
@@ -144,10 +144,10 @@ CREATE TABLE public.like_musique (
 );
 
 
-ALTER TABLE public.like_musique OWNER TO spotifaie;
+ALTER TABLE public.like_musique OWNER TO spotifaie_user;
 
 --
--- Name: musique; Type: TABLE; Schema: public; Owner: spotifaie
+-- Name: musique; Type: TABLE; Schema: public; Owner: spotifaie_user
 --
 
 CREATE TABLE public.musique (
@@ -162,10 +162,10 @@ CREATE TABLE public.musique (
 );
 
 
-ALTER TABLE public.musique OWNER TO spotifaie;
+ALTER TABLE public.musique OWNER TO spotifaie_user;
 
 --
--- Name: musique_id_musique_seq; Type: SEQUENCE; Schema: public; Owner: spotifaie
+-- Name: musique_id_musique_seq; Type: SEQUENCE; Schema: public; Owner: spotifaie_user
 --
 
 CREATE SEQUENCE public.musique_id_musique_seq
@@ -177,17 +177,17 @@ CREATE SEQUENCE public.musique_id_musique_seq
     CACHE 1;
 
 
-ALTER TABLE public.musique_id_musique_seq OWNER TO spotifaie;
+ALTER TABLE public.musique_id_musique_seq OWNER TO spotifaie_user;
 
 --
--- Name: musique_id_musique_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: spotifaie
+-- Name: musique_id_musique_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: spotifaie_user
 --
 
 ALTER SEQUENCE public.musique_id_musique_seq OWNED BY public.musique.id_musique;
 
 
 --
--- Name: playlist; Type: TABLE; Schema: public; Owner: spotifaie
+-- Name: playlist; Type: TABLE; Schema: public; Owner: spotifaie_user
 --
 
 CREATE TABLE public.playlist (
@@ -199,10 +199,10 @@ CREATE TABLE public.playlist (
 );
 
 
-ALTER TABLE public.playlist OWNER TO spotifaie;
+ALTER TABLE public.playlist OWNER TO spotifaie_user;
 
 --
--- Name: playlist_id_playlist_seq; Type: SEQUENCE; Schema: public; Owner: spotifaie
+-- Name: playlist_id_playlist_seq; Type: SEQUENCE; Schema: public; Owner: spotifaie_user
 --
 
 CREATE SEQUENCE public.playlist_id_playlist_seq
@@ -214,17 +214,17 @@ CREATE SEQUENCE public.playlist_id_playlist_seq
     CACHE 1;
 
 
-ALTER TABLE public.playlist_id_playlist_seq OWNER TO spotifaie;
+ALTER TABLE public.playlist_id_playlist_seq OWNER TO spotifaie_user;
 
 --
--- Name: playlist_id_playlist_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: spotifaie
+-- Name: playlist_id_playlist_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: spotifaie_user
 --
 
 ALTER SEQUENCE public.playlist_id_playlist_seq OWNED BY public.playlist.id_playlist;
 
 
 --
--- Name: playlist_musique; Type: TABLE; Schema: public; Owner: spotifaie
+-- Name: playlist_musique; Type: TABLE; Schema: public; Owner: spotifaie_user
 --
 
 CREATE TABLE public.playlist_musique (
@@ -234,10 +234,10 @@ CREATE TABLE public.playlist_musique (
 );
 
 
-ALTER TABLE public.playlist_musique OWNER TO spotifaie;
+ALTER TABLE public.playlist_musique OWNER TO spotifaie_user;
 
 --
--- Name: user; Type: TABLE; Schema: public; Owner: spotifaie
+-- Name: user; Type: TABLE; Schema: public; Owner: spotifaie_user
 --
 
 CREATE TABLE public."user" (
@@ -251,10 +251,10 @@ CREATE TABLE public."user" (
 );
 
 
-ALTER TABLE public."user" OWNER TO spotifaie;
+ALTER TABLE public."user" OWNER TO spotifaie_user;
 
 --
--- Name: user_id_user_seq; Type: SEQUENCE; Schema: public; Owner: spotifaie
+-- Name: user_id_user_seq; Type: SEQUENCE; Schema: public; Owner: spotifaie_user
 --
 
 CREATE SEQUENCE public.user_id_user_seq
@@ -266,17 +266,17 @@ CREATE SEQUENCE public.user_id_user_seq
     CACHE 1;
 
 
-ALTER TABLE public.user_id_user_seq OWNER TO spotifaie;
+ALTER TABLE public.user_id_user_seq OWNER TO spotifaie_user;
 
 --
--- Name: user_id_user_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: spotifaie
+-- Name: user_id_user_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: spotifaie_user
 --
 
 ALTER SEQUENCE public.user_id_user_seq OWNED BY public."user".id_user;
 
 
 --
--- Name: user_playlist; Type: TABLE; Schema: public; Owner: spotifaie
+-- Name: user_playlist; Type: TABLE; Schema: public; Owner: spotifaie_user
 --
 
 CREATE TABLE public.user_playlist (
@@ -286,45 +286,45 @@ CREATE TABLE public.user_playlist (
 );
 
 
-ALTER TABLE public.user_playlist OWNER TO spotifaie;
+ALTER TABLE public.user_playlist OWNER TO spotifaie_user;
 
 --
--- Name: album id_album; Type: DEFAULT; Schema: public; Owner: spotifaie
+-- Name: album id_album; Type: DEFAULT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.album ALTER COLUMN id_album SET DEFAULT nextval('public.album_id_album_seq'::regclass);
 
 
 --
--- Name: artiste id_artiste; Type: DEFAULT; Schema: public; Owner: spotifaie
+-- Name: artiste id_artiste; Type: DEFAULT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.artiste ALTER COLUMN id_artiste SET DEFAULT nextval('public.artiste_id_artiste_seq'::regclass);
 
 
 --
--- Name: musique id_musique; Type: DEFAULT; Schema: public; Owner: spotifaie
+-- Name: musique id_musique; Type: DEFAULT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.musique ALTER COLUMN id_musique SET DEFAULT nextval('public.musique_id_musique_seq'::regclass);
 
 
 --
--- Name: playlist id_playlist; Type: DEFAULT; Schema: public; Owner: spotifaie
+-- Name: playlist id_playlist; Type: DEFAULT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.playlist ALTER COLUMN id_playlist SET DEFAULT nextval('public.playlist_id_playlist_seq'::regclass);
 
 
 --
--- Name: user id_user; Type: DEFAULT; Schema: public; Owner: spotifaie
+-- Name: user id_user; Type: DEFAULT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public."user" ALTER COLUMN id_user SET DEFAULT nextval('public.user_id_user_seq'::regclass);
 
 
 --
--- Data for Name: album; Type: TABLE DATA; Schema: public; Owner: spotifaie
+-- Data for Name: album; Type: TABLE DATA; Schema: public; Owner: spotifaie_user
 --
 
 COPY public.album (id_album, image_album, genre_album, date_album, titre_album, id_artiste) FROM stdin;
@@ -397,7 +397,7 @@ COPY public.album (id_album, image_album, genre_album, date_album, titre_album, 
 
 
 --
--- Data for Name: artiste; Type: TABLE DATA; Schema: public; Owner: spotifaie
+-- Data for Name: artiste; Type: TABLE DATA; Schema: public; Owner: spotifaie_user
 --
 
 COPY public.artiste (id_artiste, nom_artiste, type_artiste, image_artiste) FROM stdin;
@@ -547,7 +547,7 @@ COPY public.artiste (id_artiste, nom_artiste, type_artiste, image_artiste) FROM 
 
 
 --
--- Data for Name: artiste_musique; Type: TABLE DATA; Schema: public; Owner: spotifaie
+-- Data for Name: artiste_musique; Type: TABLE DATA; Schema: public; Owner: spotifaie_user
 --
 
 COPY public.artiste_musique (id_artiste, id_musique, date_ajout) FROM stdin;
@@ -1441,7 +1441,7 @@ COPY public.artiste_musique (id_artiste, id_musique, date_ajout) FROM stdin;
 
 
 --
--- Data for Name: file_attente; Type: TABLE DATA; Schema: public; Owner: spotifaie
+-- Data for Name: file_attente; Type: TABLE DATA; Schema: public; Owner: spotifaie_user
 --
 
 COPY public.file_attente (id_musique, id_user, date_ajout) FROM stdin;
@@ -1468,7 +1468,7 @@ COPY public.file_attente (id_musique, id_user, date_ajout) FROM stdin;
 
 
 --
--- Data for Name: historique; Type: TABLE DATA; Schema: public; Owner: spotifaie
+-- Data for Name: historique; Type: TABLE DATA; Schema: public; Owner: spotifaie_user
 --
 
 COPY public.historique (id_musique, id_user, date_ajout) FROM stdin;
@@ -1489,7 +1489,7 @@ COPY public.historique (id_musique, id_user, date_ajout) FROM stdin;
 
 
 --
--- Data for Name: like_musique; Type: TABLE DATA; Schema: public; Owner: spotifaie
+-- Data for Name: like_musique; Type: TABLE DATA; Schema: public; Owner: spotifaie_user
 --
 
 COPY public.like_musique (id_musique, id_user, date_ajout) FROM stdin;
@@ -1497,7 +1497,7 @@ COPY public.like_musique (id_musique, id_user, date_ajout) FROM stdin;
 
 
 --
--- Data for Name: musique; Type: TABLE DATA; Schema: public; Owner: spotifaie
+-- Data for Name: musique; Type: TABLE DATA; Schema: public; Owner: spotifaie_user
 --
 
 COPY public.musique (id_musique, titre_musique, temps_musique, url_musique, id_spotify, id_artiste_principale, id_album, nb_like) FROM stdin;
@@ -2203,7 +2203,7 @@ COPY public.musique (id_musique, titre_musique, temps_musique, url_musique, id_s
 
 
 --
--- Data for Name: playlist; Type: TABLE DATA; Schema: public; Owner: spotifaie
+-- Data for Name: playlist; Type: TABLE DATA; Schema: public; Owner: spotifaie_user
 --
 
 COPY public.playlist (id_playlist, titre_playlist, date_playlist, image_playlist, public) FROM stdin;
@@ -2217,7 +2217,7 @@ COPY public.playlist (id_playlist, titre_playlist, date_playlist, image_playlist
 
 
 --
--- Data for Name: playlist_musique; Type: TABLE DATA; Schema: public; Owner: spotifaie
+-- Data for Name: playlist_musique; Type: TABLE DATA; Schema: public; Owner: spotifaie_user
 --
 
 COPY public.playlist_musique (id_musique, id_playlist, date_ajout) FROM stdin;
@@ -2317,7 +2317,7 @@ COPY public.playlist_musique (id_musique, id_playlist, date_ajout) FROM stdin;
 
 
 --
--- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: spotifaie
+-- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: spotifaie_user
 --
 
 COPY public."user" (id_user, mail, date_naissance, nom_user, prenom_user, motdepasse, image_user) FROM stdin;
@@ -2326,7 +2326,7 @@ COPY public."user" (id_user, mail, date_naissance, nom_user, prenom_user, motdep
 
 
 --
--- Data for Name: user_playlist; Type: TABLE DATA; Schema: public; Owner: spotifaie
+-- Data for Name: user_playlist; Type: TABLE DATA; Schema: public; Owner: spotifaie_user
 --
 
 COPY public.user_playlist (id_playlist, id_user, date_playlist) FROM stdin;
@@ -2335,42 +2335,42 @@ COPY public.user_playlist (id_playlist, id_user, date_playlist) FROM stdin;
 
 
 --
--- Name: album_id_album_seq; Type: SEQUENCE SET; Schema: public; Owner: spotifaie
+-- Name: album_id_album_seq; Type: SEQUENCE SET; Schema: public; Owner: spotifaie_user
 --
 
 SELECT pg_catalog.setval('public.album_id_album_seq', 65, true);
 
 
 --
--- Name: artiste_id_artiste_seq; Type: SEQUENCE SET; Schema: public; Owner: spotifaie
+-- Name: artiste_id_artiste_seq; Type: SEQUENCE SET; Schema: public; Owner: spotifaie_user
 --
 
 SELECT pg_catalog.setval('public.artiste_id_artiste_seq', 142, true);
 
 
 --
--- Name: musique_id_musique_seq; Type: SEQUENCE SET; Schema: public; Owner: spotifaie
+-- Name: musique_id_musique_seq; Type: SEQUENCE SET; Schema: public; Owner: spotifaie_user
 --
 
 SELECT pg_catalog.setval('public.musique_id_musique_seq', 698, true);
 
 
 --
--- Name: playlist_id_playlist_seq; Type: SEQUENCE SET; Schema: public; Owner: spotifaie
+-- Name: playlist_id_playlist_seq; Type: SEQUENCE SET; Schema: public; Owner: spotifaie_user
 --
 
 SELECT pg_catalog.setval('public.playlist_id_playlist_seq', 6, true);
 
 
 --
--- Name: user_id_user_seq; Type: SEQUENCE SET; Schema: public; Owner: spotifaie
+-- Name: user_id_user_seq; Type: SEQUENCE SET; Schema: public; Owner: spotifaie_user
 --
 
 SELECT pg_catalog.setval('public.user_id_user_seq', 1, true);
 
 
 --
--- Name: album album_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: album album_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.album
@@ -2378,7 +2378,7 @@ ALTER TABLE ONLY public.album
 
 
 --
--- Name: artiste_musique artiste_musique_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: artiste_musique artiste_musique_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.artiste_musique
@@ -2386,7 +2386,7 @@ ALTER TABLE ONLY public.artiste_musique
 
 
 --
--- Name: artiste artiste_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: artiste artiste_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.artiste
@@ -2394,7 +2394,7 @@ ALTER TABLE ONLY public.artiste
 
 
 --
--- Name: file_attente file_attente_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: file_attente file_attente_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.file_attente
@@ -2402,7 +2402,7 @@ ALTER TABLE ONLY public.file_attente
 
 
 --
--- Name: historique historique_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: historique historique_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.historique
@@ -2410,7 +2410,7 @@ ALTER TABLE ONLY public.historique
 
 
 --
--- Name: like_musique like_musique_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: like_musique like_musique_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.like_musique
@@ -2418,7 +2418,7 @@ ALTER TABLE ONLY public.like_musique
 
 
 --
--- Name: musique musique_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: musique musique_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.musique
@@ -2426,7 +2426,7 @@ ALTER TABLE ONLY public.musique
 
 
 --
--- Name: playlist_musique playlist_musique_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: playlist_musique playlist_musique_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.playlist_musique
@@ -2434,7 +2434,7 @@ ALTER TABLE ONLY public.playlist_musique
 
 
 --
--- Name: playlist playlist_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: playlist playlist_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.playlist
@@ -2442,7 +2442,7 @@ ALTER TABLE ONLY public.playlist
 
 
 --
--- Name: user user_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: user user_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public."user"
@@ -2450,7 +2450,7 @@ ALTER TABLE ONLY public."user"
 
 
 --
--- Name: user_playlist user_playlist_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: user_playlist user_playlist_pk; Type: CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.user_playlist
@@ -2458,7 +2458,7 @@ ALTER TABLE ONLY public.user_playlist
 
 
 --
--- Name: album album_artiste0_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: album album_artiste0_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.album
@@ -2466,7 +2466,7 @@ ALTER TABLE ONLY public.album
 
 
 --
--- Name: musique album_musique_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: musique album_musique_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.musique
@@ -2474,7 +2474,7 @@ ALTER TABLE ONLY public.musique
 
 
 --
--- Name: artiste_musique artiste_musique_artiste_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: artiste_musique artiste_musique_artiste_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.artiste_musique
@@ -2482,7 +2482,7 @@ ALTER TABLE ONLY public.artiste_musique
 
 
 --
--- Name: artiste_musique artiste_musique_musique0_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: artiste_musique artiste_musique_musique0_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.artiste_musique
@@ -2490,7 +2490,7 @@ ALTER TABLE ONLY public.artiste_musique
 
 
 --
--- Name: musique artiste_principale_musique_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: musique artiste_principale_musique_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.musique
@@ -2498,7 +2498,7 @@ ALTER TABLE ONLY public.musique
 
 
 --
--- Name: file_attente file_attente_musique_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: file_attente file_attente_musique_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.file_attente
@@ -2506,7 +2506,7 @@ ALTER TABLE ONLY public.file_attente
 
 
 --
--- Name: file_attente file_attente_user0_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: file_attente file_attente_user0_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.file_attente
@@ -2514,7 +2514,7 @@ ALTER TABLE ONLY public.file_attente
 
 
 --
--- Name: historique historique_musique_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: historique historique_musique_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.historique
@@ -2522,7 +2522,7 @@ ALTER TABLE ONLY public.historique
 
 
 --
--- Name: historique historique_user0_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: historique historique_user0_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.historique
@@ -2530,7 +2530,7 @@ ALTER TABLE ONLY public.historique
 
 
 --
--- Name: like_musique like_musique_musique_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: like_musique like_musique_musique_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.like_musique
@@ -2538,7 +2538,7 @@ ALTER TABLE ONLY public.like_musique
 
 
 --
--- Name: like_musique like_musique_user0_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: like_musique like_musique_user0_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.like_musique
@@ -2546,7 +2546,7 @@ ALTER TABLE ONLY public.like_musique
 
 
 --
--- Name: playlist_musique playlist_musique_musique_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: playlist_musique playlist_musique_musique_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.playlist_musique
@@ -2554,7 +2554,7 @@ ALTER TABLE ONLY public.playlist_musique
 
 
 --
--- Name: playlist_musique playlist_musique_playlist0_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: playlist_musique playlist_musique_playlist0_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.playlist_musique
@@ -2562,7 +2562,7 @@ ALTER TABLE ONLY public.playlist_musique
 
 
 --
--- Name: user_playlist user_playlist_playlist_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: user_playlist user_playlist_playlist_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.user_playlist
@@ -2570,7 +2570,7 @@ ALTER TABLE ONLY public.user_playlist
 
 
 --
--- Name: user_playlist user_playlist_user0_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie
+-- Name: user_playlist user_playlist_user0_fk; Type: FK CONSTRAINT; Schema: public; Owner: spotifaie_user
 --
 
 ALTER TABLE ONLY public.user_playlist
@@ -2578,6 +2578,6 @@ ALTER TABLE ONLY public.user_playlist
 
 
 --
--- spotifaieQL database dump complete
+-- spotifaie_userQL database dump complete
 --
 
