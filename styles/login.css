@@ -170,6 +170,18 @@ body {
     transition: background-color 0.3s ease;
 }
 
-    .sign:hover {
-    background-color: #450C7C;
-    }
+.sign:hover {
+  background-color: #450C7C;
+}
+
+.error {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color: red;
+    grid-column: 2;
+    grid-row: 6;
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 5px;
+}

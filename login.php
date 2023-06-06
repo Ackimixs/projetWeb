@@ -1,15 +1,16 @@
 <?php
     session_start();
-    require_once '../php/User.php';
+    require_once 'php/User.php';
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	  <title>Slide Navbar</title>
-	  <link rel="stylesheet" type="text/css" href="login.css">
+	  <title>Spotifaie | login</title>
+	  <link rel="stylesheet" type="text/css" href="styles/login.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <form class="form" action="login.php" method="post">
     <?php
 
         if (isset($_POST['email']) && isset($_POST['password'])) {
@@ -19,15 +20,13 @@
             if (User::authentification($email, $password)) {
                 $user = User::getUserByEmail($email);
                 $_SESSION['user'] = $user;
-                header('Location: accueil.html');
+                header('Location: index.html');
             } else {
-                echo 'Mauvais identifiants';
+                echo '<p class="error">Mauvais identifiants</p>';
             }
         }
 
     ?>
-
-    <form class="form" action="login.php" method="post">
         <div class="title">Spotifaïe</div>
         <div class="subtitle">BIENVENUE</div>
         <div class="input-container ic1">

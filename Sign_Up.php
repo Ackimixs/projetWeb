@@ -1,13 +1,13 @@
 <?php
     session_start();
-    require_once '../php/User.php';
-    require_once '../php/Playlist.php';
+    require_once 'php/User.php';
+    require_once 'php/Playlist.php';
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Sign Up</title>
-	<link rel="stylesheet" type="text/css" href="Sign_Up.css">
+	  <title>Spotifaie | Sign Up</title>
+	<link rel="stylesheet" type="text/css" href="styles/Sign_Up.css">
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -35,7 +35,7 @@
         }
 
         foreach ($errors as $error) {
-            echo $error;
+            echo '<p class="error">' . $error . '</p>';
         }
     ?>
         <div class="title">Spotifaïe</div>

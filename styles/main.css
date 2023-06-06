@@ -6,7 +6,9 @@ body{
     border: 0;
     padding: 0;
     background-color: #2A0949;
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
+
 ::-webkit-scrollbar {
     display: none;
 }
