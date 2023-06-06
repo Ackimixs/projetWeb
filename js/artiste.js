@@ -21,11 +21,11 @@ function displayArtiste(artiste) {
         '                        <div class="card" style="border-radius: 15px;">\n' +
         '                            <div class="card-body text-center">\n' +
         '                                <div class="mt-3 mb-4">\n' +
-        '                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"\n' +
+        '                                    <img src="../photo/profil.png"\n' +
         '                                         class="rounded-circle img-fluid" style="width: 100px;" />\n' +
         '                                </div>\n' +
         '                                <h4 class="mb-2">'+ artiste[0]['nom_artiste'] +'</h4>\n' +
-        '                                <p class="text-muted mb-4"> Type Artiste : <span class="mx-2">|</span> <a href="#!">mdbootstrap.com</a></p>\n' +
+        '                                <p class="text-muted mb-4"> Type Artiste : <span class="mx-2">|</span> '+ artiste[0]['type_artiste'] +'</p>\n' +
         '                            </div>\n' +
         '                        </div>\n' +
         '                    </div>\n' +

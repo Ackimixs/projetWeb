@@ -118,23 +118,93 @@ switch($requestRessource)
         }
         break;
     case 'recherchemusique':
-        //print_r('get :'.$_GET['stringrecherche']);
-        $data = array(); //Musique::rechercheMusiques($_GET['stringrecherche']);
+        switch ($request_method) {
+            case 'GET':
+                $data = Musique::rechercheMusiques($_GET['stringrecherche']);
+                break;
+            default:
+                // Requête invalide
+                header("HTTP/1.0 405 Method Not Allowed");
+                break;
+        }
         break;
     case 'rechercheplaylist':
-        $data = Playlist::recherchePlaylists($_GET['stringrecherche']);
+        switch ($request_method) {
+            case 'GET':
+                $data = Playlist::recherchePlaylists($_GET['stringrecherche']);
+                break;
+            default:
+                // Requête invalide
+                header("HTTP/1.0 405 Method Not Allowed");
+                break;
+        }
         break;
     case 'recherchealbum':
-        $data = Album::rechercheAlbums($_GET['stringrecherche']);
+        switch ($request_method) {
+            case 'GET':
+                $data = Album::rechercheAlbums($_GET['stringrecherche']);
+                break;
+            default:
+                // Requête invalide
+                header("HTTP/1.0 405 Method Not Allowed");
+                break;
+        }
         break;
     case 'rechercheartiste':
-        $data = Artiste::rechercheArtistes($_GET['stringrecherche']);
+        switch ($request_method) {
+            case 'GET':
+                $data = Artiste::rechercheArtistes($_GET['stringrecherche']);
+                break;
+            default:
+                // Requête invalide
+                header("HTTP/1.0 405 Method Not Allowed");
+                break;
+        }
         break;
     case 'infosMusique':
-        $data = Musique::getUneMusiqueAvecAlbumEtArtiste($_GET['idmusique']);
+        switch ($request_method) {
+            case 'GET':
+                if ($_GET['idmusique'] != null) {
+                    $data = Musique::getUneMusiqueAvecAlbumEtArtiste($_GET['idmusique']);
+                } else {
+                    $data = false;
+                }
+                break;
+            default:
+                // Requête invalide
+                header("HTTP/1.0 405 Method Not Allowed");
+                break;
+        }
         break;
     case 'infosAlbum':
-        $data = Album::getUnAlbum($_GET['idalbum']);
+        switch ($request_method) {
+            case 'GET':
+                if ($_GET['idalbum'] != null) {
+                    $data = Album::getUnAlbum($_GET['idalbum']);
+                } else {
+                    $data = false;
+                }
+                break;
+            default:
+                // Requête invalide
+                header("HTTP/1.0 405 Method Not Allowed");
+                break;
+        }
+        break;
+    case 'getArtiste':
+        switch ($request_method) {
+            case 'GET':
+                if ($_GET['idartiste'] != null) {
+                    $data = Artiste::getUnArtiste($_GET['idartiste']);
+                } else {
+                    $data = false;
+                }
+                break;
+            default:
+                // Requête invalide
+                header("HTTP/1.0 405 Method Not Allowed");
+                break;
+        }
         break;
 
     case 'historique':

@@ -123,7 +123,7 @@ function recherchePlaylist(playlists){
         for(let i=0; i < playlists.length; i++) {
             $('#tabrecherche').append('<li class="songItem">'
                                         + '<span>'+ (i+1) +'</span>'
-                                        + '<img src="../photo/agartha.jpg"/>'
+                                        + '<img src="../photo/profil.png"/>'
                                         + '<h5>' + playlists[i]['titre_playlist']
                                             + '<div class="subtitle"> '+ playlists[i]['nom_user']+' </div>'
                                             + '<div id = "heart">'
