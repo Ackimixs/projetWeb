@@ -75,8 +75,7 @@ class Playlist
     //
     // Renvoie les playlists dont le titre contient les lettres de la recherche du user
     //
-    static function recherchePlaylists($recherche)
-    {
+    static function recherchePlaylists($recherche) {
         try {
             $db = Db::connectionDB();
             $request = "

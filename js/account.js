@@ -28,7 +28,7 @@ window.addEventListener('load', () => {//event au chargement
             document.querySelector('#nom').value = data.nom_user;
             document.querySelector('#prenom').value = data.prenom_user;
             const date1 = new Date();
-            const date2 = new Date(birthdayInput.value);
+            const date2 = new Date(data.date_naissance);
             let differenceYears = date1.getFullYear() - date2.getFullYear();
             if (date1.getMonth() < date2.getMonth() || (date1.getMonth() === date2.getMonth() && date1.getDate() < date2.getDate())) {
               differenceYears--;
