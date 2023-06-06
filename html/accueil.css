@@ -8,24 +8,22 @@
     font-size: 2rem;
 }
 
+/* placement des éléments dans la page d'accueil */
 .musiqueContainer {
     display: flex;
     flex-direction: row;
     overflow: auto;
 }
-
 .musiqueContainer > div {
     margin: 2rem 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 .musiqueContainer > div > p {
     margin: 0;
     padding-top: 1rem;
 }
-
 .musiqueImg {
     width: 256px;
     height: 256px;
@@ -36,7 +34,6 @@
     display: flex;
     border-radius: 10%;
 }
-
 .imgContainer:hover {
     transform: scale(1.1);
     transition: 0.3s;
