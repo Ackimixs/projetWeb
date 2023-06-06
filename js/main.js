@@ -19,12 +19,15 @@ document.querySelector('.home').addEventListener("click", () => {
     document.querySelector('#tabrecherche').hidden = true;
     document.querySelector('#accueil').hidden = false;
     document.querySelector('#profile').hidden = true;
+    document.querySelector('#affichagePlaylist').hidden = true;
+    refreshAccueil();
 })
 
 document.querySelector('.profilHeader').addEventListener('click', () => {
     document.querySelector('#tabrecherche').hidden = true;
     document.querySelector('#accueil').hidden = true;
     document.querySelector('#profile').hidden = false;
+    document.querySelector('#affichagePlaylist').hidden = true;
 })
 
 document.querySelectorAll(".searchButton").forEach(e => {
@@ -32,5 +35,6 @@ document.querySelectorAll(".searchButton").forEach(e => {
         document.querySelector('#tabrecherche').hidden = false;
         document.querySelector('#accueil').hidden = true;
         document.querySelector('#profile').hidden = true;
+        document.querySelector('#affichagePlaylist').hidden = true;
     })
 })

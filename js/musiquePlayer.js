@@ -101,7 +101,6 @@ pauseButton.addEventListener('click', () => {
 document.addEventListener("keydown", (event) => {
     if (loadingMusic) return;
     if (event.code === "Space") {
-        event.preventDefault();
         if (audioTag.paused) {
             audioTag.play();
             playButton.hidden = true;
@@ -115,7 +114,6 @@ document.addEventListener("keydown", (event) => {
         }
     }
     else if (event.code === "ArrowRight") {
-        event.preventDefault();
         if (event.ctrlKey) {
             playNext();
         } else {
@@ -123,7 +121,6 @@ document.addEventListener("keydown", (event) => {
         }
     }
     else if (event.code === "ArrowLeft") {
-        event.preventDefault();
         if (event.ctrlKey) {
             playPrevious();
         } else {
@@ -131,15 +128,12 @@ document.addEventListener("keydown", (event) => {
         }
     }
     else if (event.code === "ArrowUp") {
-        event.preventDefault();
         handleVolume((audioTag.volume * 100 + 5) / 100);
     }
     else if (event.code === "ArrowDown") {
-        event.preventDefault();
         handleVolume((audioTag.volume * 100 - 5) / 100);
     }
     else if (event.code === "Semicolon") {
-        event.preventDefault();
         handleMuted();
     }
 })
@@ -169,7 +163,7 @@ audioNotMuted.forEach((element) => {
     });
 })
 
-volumeSlider.addEventListener('change', () => {
+volumeSlider.addEventListener('input', () => {
     if (loadingMusic) return;
     handleVolume(volumeSlider.value / 100);
 });
@@ -183,7 +177,7 @@ likedSvg.addEventListener('click', () => {
 
 notLikedSvg.addEventListener('click', () => {
     if (loadingMusic) return;
-    ajaxRequest("POST", "../php/request.php/like", (d) => {}, `id=${currentMusique.id_musique}`);
+    ajaxRequest("POST", "../php/request.php/like", () => {}, `id=${currentMusique.id_musique}`);
     likedSvg.hidden = false;
     notLikedSvg.hidden = true;
 })
@@ -295,7 +289,7 @@ function playPlaylist(id) {
         ajaxRequest("GET", '../php/request.php/playlist/' + id, (data) => {
             ajaxRequest("GET", '../php/request.php/musique-playlist/' + data.id_playlist, (m) => {
                 m.forEach(musique => {
-                    ajaxRequest("POST", '../php/request.php/file-attente', (d) => {}, `id=${musique.id_musique}`);
+                    ajaxRequest("POST", '../php/request.php/file-attente', () => {}, `id=${musique.id_musique}`);
                 })
                 playNext();
             })
@@ -309,7 +303,7 @@ function playLikedSong() {
         ajaxRequest("GET", '../php/request.php/like', (data) => {
             if (data.length > 0) {
                 data.forEach((element) => {
-                    ajaxRequest("POST", '../php/request.php/file-attente', (d) => {}, `id=${element.id_musique}`);
+                    ajaxRequest("POST", '../php/request.php/file-attente', () => {}, `id=${element.id_musique}`);
                 })
                 playNext();
             }
@@ -319,7 +313,7 @@ function playLikedSong() {
 
 function playSong(id_musique) {
     if (loadingMusic) return;
-    ajaxRequest("DELETE", "../php/request.php/file-attente", () => {
+    ajaxRequest("DELETE", "../php/request.php/file-attente/" + id_musique, () => {
         getMusique(id_musique);
     })
 }
@@ -333,7 +327,7 @@ function addToQueuePlaylist(id_playlist) {
     if (loadingMusic) return;
     ajaxRequest("GET", '../php/request.php/musique-playlist/' + id_playlist, (data) => {
         data.forEach(musique => {
-            ajaxRequest("POST", '../php/request.php/file-attente', (d) => {}, `id=${musique.id_musique}`);
+            ajaxRequest("POST", '../php/request.php/file-attente', () => {}, `id=${musique.id_musique}`);
         })
     })
 }
@@ -343,17 +337,137 @@ function addToQueueLikedSong() {
     ajaxRequest("GET", '../php/request.php/like', (data) => {
         if (data.length > 0) {
             data.forEach((element) => {
-                ajaxRequest("POST", '../php/request.php/file-attente', (d) => {}, `id=${element.id_musique}`);
+                ajaxRequest("POST", '../php/request.php/file-attente', () => {}, `id=${element.id_musique}`);
             })
         }
     })
 }
 
+function createDropdownItem(playlist) {
+    let dropdownContent = document.querySelectorAll('.dropdown-content');
+    dropdownContent.forEach(e => {
+        let musicId = e.dataset.musicId ?? currentMusique.id_musique;
+        let dropdownItem = document.createElement('div');
+        dropdownItem.classList.add('addToPlaylist');
+        dropdownItem.dataset.id = playlist.id_playlist;
+        dropdownItem.dataset.id = musicId;
+
+        let text = document.createElement('p');
+        text.innerText = playlist.titre_playlist;
+
+        let addSvg = document.createElement('div');
+        addSvg.classList.add('addSvg');
+        addSvg.dataset.id = playlist.id_playlist;
+        addSvg.dataset.musicId = musicId;
+        addSvg.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">\n' +
+            '          <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>\n' +
+            '        </svg>';
+
+        let trashSvg = document.createElement('div');
+        trashSvg.classList.add('trashSvg');
+        trashSvg.dataset.id = playlist.id_playlist;
+        trashSvg.dataset.musicId = musicId;
+        trashSvg.hidden = true;
+        trashSvg.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">\n' +
+            '          <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>\n' +
+            '        </svg>';
+
+        dropdownItem.appendChild(text);
+        dropdownItem.appendChild(addSvg);
+        dropdownItem.appendChild(trashSvg);
+
+        e.appendChild(dropdownItem);
+    })
+}
+
+
 
 ajaxRequest('GET', '../php/request.php/historique', (data) => {
     if (data.length === 0) {
-        getMusique(getRandomInteger(1, 800));
+        getMusique(getRandomInteger(1, 300));
     } else {
         getMusique(data[0].id_musique)
     }
 });
+
+setTimeout(() => {
+    // Add or delete a song from the user playlist
+    ajaxRequest("GET", '../php/request.php/user-playlist', (playlists) => {
+        // Add a song to a playlist
+        playlists.forEach((playlist) => {
+            createDropdownItem(playlist);
+            if (currentMusique) {
+                ajaxRequest("GET", "../php/request.php/musique-playlist/isIn", (d) => {
+                    if (d.length > 0) {
+                        let div = document.querySelectorAll(`.addToPlaylist`);
+                        div.forEach((element) => {
+                            if (parseInt(element.dataset?.id, 10) === playlist.id_playlist) {
+                                element.children[1].hidden = true;
+                                element.children[2].hidden = false;
+                            }
+                        })
+                    }
+                }, `id_musique=${currentMusique.id_musique}&id_playlist=${playlist.id_playlist}`);
+            }
+
+
+            let addSvgs = document.querySelectorAll('.addSvg');
+            addSvgs.forEach((svg) => {
+                if (svg.dataset.id !== 'new') {
+                    svg.addEventListener('click', () => {
+                        let playlist_id = svg.dataset.id;
+                        let musique_id = svg.dataset.musicId;
+                        svg.hidden = true;
+                        svg.nextSibling.hidden = false;
+                        ajaxRequest("POST", '../php/request.php/musique-playlist', (response) => {
+                            console.log(response);
+                        }, "id_playlist=" + playlist_id + "&id_musique=" + musique_id);
+                    })
+                }
+            })
+
+            let trashSvgs = document.querySelectorAll('.trashSvg');
+            trashSvgs.forEach((svg) => {
+                if (svg.dataset.id !== 'new') {
+                    svg.addEventListener('click', () => {
+                        let playlist_id = svg.dataset.id;
+                        let musique_id = svg.dataset.musicId;
+                        ajaxRequest("DELETE", '../php/request.php/musique-playlist?' + "id_playlist=" + playlist_id + "&id_musique=" + musique_id, (response) => {
+                            console.log(response);
+                            svg.hidden = true;
+                            svg.previousSibling.hidden = false;
+                        });
+                    })
+                } else {
+
+                }
+            })
+        })
+    })
+}, 1000)
+
+document.querySelector('.newPlaylist').addEventListener('click', () => {
+    const myModalAlternative = new bootstrap.Modal(document.querySelector('#exampleModal'), {focus: true});
+    myModalAlternative.show();
+})
+
+document.querySelector(".addPlaylistButton").addEventListener('click', () => {
+    if (currentMusique) {
+        let playlistName = document.querySelector('#playlistName').value;
+        let isPublic = document.querySelector('#checkboxPublic').checked;
+        if (playlistName) {
+            ajaxRequest('POST', '../php/request.php/playlist', (postPlaylist) => {
+                ajaxRequest("POST", '../php/request.php/musique-playlist', () => {
+                    ajaxRequest("GET", '../php/request.php/user/session', (data) => {
+                        ajaxRequest("POST", '../php/request.php/user-playlist', () => {
+                        }, `id_user=${data.id_user}&id_playlist=${postPlaylist.id_playlist}`);
+                    })
+                    document.querySelector('#playlistName').value = '';
+                    document.querySelector('#checkboxPublic').checked = false;
+                    createDropdownItem(postPlaylist);
+                    refreshAccueil();
+                }, `id_playlist=${postPlaylist.id_playlist}&id_musique=${currentMusique.id_musique}`);
+            }, `playlistName=${playlistName}&public=${isPublic}`);
+        }
+    }
+})
