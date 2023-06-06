@@ -62,9 +62,9 @@ $('#tabrecherche').on('click', '.infosalbum', () =>
 
 function albumModal(infos) {
 
-    $('#modalMusiqueTitle').html(infos['titre_album']);
-    $('#modalMusiqueInner').html('<p class="info"> Nom Artiste : '+ infos['nom_artiste'] +' </p>' +
-        '<p class="info"> Date : '+ infos['date_album'] +' </p>' +
-        '<p class="info"> Genre : '+ infos['genre_album'] +' </p>');
+    $('#modalMusiqueTitle').html(infos[0]['titre_album']);
+    $('#modalMusiqueInner').html('<p class="info"> Nom Artiste : '+ infos[0]['nom_artiste'] +' </p>' +
+        '<p class="info"> Date : '+ infos[0]['date_album'] +' </p>' +
+        '<p class="info"> Genre : '+ infos[0]['genre_album'] +' </p>');
 
 }
