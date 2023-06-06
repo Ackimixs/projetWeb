@@ -68,7 +68,7 @@ class Musique
             $request = "
             SELECT * FROM musique
             INNER JOIN album a on a.id_album = musique.id_album
-            INNER JOIN artiste a2 on a2.id_artiste = a.id_artiste
+            INNER JOIN artiste a2 on musique.id_artiste_principale = a2.id_artiste
             WHERE titre_musique ILIKE CONCAT('%', :recherche::text, '%'); 
             ";
             $stmt = $db->prepare($request);

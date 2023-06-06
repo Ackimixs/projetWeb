@@ -21,8 +21,11 @@ $('#tabrecherche').on('click', '.clicAlbum', (e) =>
 
 
 function displayAlbum(album) {
-    console.log(album)
+    //console.log(album)
     $('#tabrecherche').html("");
+
+    let crea = album[0]['date_album'].substr(0,10);
+
     $('#display2').html("");
     $('#display2').append('<div class="card mb-3 enTeteAlbum" style="max-width: 800px;">\n' +
         '  <div class="row g-0">\n' +
@@ -34,6 +37,7 @@ function displayAlbum(album) {
         '        <h5 class="card-title">'+ album[0]['titre_album'] +'</h5>\n' +
         '        <p class="card-text"> Nom Artiste : '+ album[0]['nom_artiste'] +' </p>\n' +
         '        <p class="card-text"> Genre : </p>\n' +
+        '        <p class="card-text"> Création : '+ crea +'</p>\n' +
         '      </div>\n' +
         '    </div>\n' +
         '  </div>\n' +
