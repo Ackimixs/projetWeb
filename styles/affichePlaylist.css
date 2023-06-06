@@ -7,8 +7,8 @@
 #playlistInfoImage {
     width: 256px;
     height: 256px;
-    background: rgb(64,142,187);
-    background: linear-gradient(140deg, rgba(64,142,187,1) 0%, rgba(145,105,217,1) 59%, rgba(255,255,255,1) 100%);
+    background: rgb(64, 142, 187);
+    background: linear-gradient(140deg, rgba(64, 142, 187, 1) 0%, rgba(145, 105, 217, 1) 59%, rgba(255, 255, 255, 1) 100%);
     align-items: center;
     justify-content: center;
     display: flex;
@@ -16,8 +16,8 @@
 }
 
 .musiqueInfoImage {
-    background: rgb(64,142,187);
-    background: linear-gradient(140deg, rgba(64,142,187,1) 0%, rgba(145,105,217,1) 59%, rgba(255,255,255,1) 100%);
+    background: rgb(64, 142, 187);
+    background: linear-gradient(140deg, rgba(64, 142, 187, 1) 0%, rgba(145, 105, 217, 1) 59%, rgba(255, 255, 255, 1) 100%);
     align-items: center;
     justify-content: center;
     display: flex;
@@ -44,11 +44,11 @@
     gap: 2rem;
 }
 
-#one{
+#one {
     grid-row: 1;
     grid-column: 1;
     margin-left: 5%;
-    display: flex;     
+    display: flex;
 }
 
 #bttn_ecouter {
@@ -58,12 +58,12 @@
     flex: 1;
 }
 
-#txt1{
+#txt1 {
     font-size: 40px;
     text-decoration: underline;
 }
 
-.ecouter{
+.ecouter {
     display: flex;
     flex-direction: row;
     gap: 5px;
@@ -84,7 +84,7 @@
     align-items: end;
 }
 
-.suppr{
+.suppr {
     background-color: #581896;
     color: #F8EDEB;
     border-radius: 20px;
@@ -92,12 +92,12 @@
     height: 50px;
 }
 
-#line{
+#line {
     margin: 0 2rem;
     border-bottom: 2px solid #F8EDEB;
 }
 
-.txt2{
+.txt2 {
     margin: 10px;
     display: flex;
     justify-content: center;
@@ -105,57 +105,57 @@
 }
 
 
-#listeMorceaux{
+#listeMorceaux {
     margin: 2rem 5rem 2rem 5rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.Morceau{
+.Morceau {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    flex:1;
+    flex: 1;
 
     font-size: 30px;
     color: #F8EDEB;
 }
 
-.name{
+.name {
     display: flex;
     /* flex-direction: row; */
     flex: 1;
 }
 
-.test{
+.test {
     display: flex;
     flex-direction: column;
     justify-content: left;
     padding-left: 5%;
 }
 
-.artiste{
+.artiste {
     font-size: 20px;
     color: #b6b4b4;
 }
 
-.infos{
+.infos {
     display: flex;
     justify-content: center;
     gap: 5%;
-    flex:1;
+    flex: 1;
 }
 
-.delete{
+.delete {
     display: flex;
     justify-content: right;
     gap: 5%;
     flex: 1;
 }
 
-p{
-    margin : 0;
+p {
+    margin: 0;
 }
 
 .bi-heart:hover {

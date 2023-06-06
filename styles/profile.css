@@ -1,7 +1,7 @@
 /* placement de la grid sur la page */
 #profile {
     display: grid;
-    grid-template-columns: 1fr 3fr 3fr 3fr 3fr ;
+    grid-template-columns: 1fr 3fr 3fr 3fr 3fr;
     grid-template-rows: repeat(7, 1fr);
 }
 
@@ -10,9 +10,10 @@
     height: 50px;
     position: relative;
     width: 60%;
-    
+
 }
-.titre{
+
+.titre {
     grid-row: 1;
     grid-column: 2;
     display: flex; /* permet de centrer le texte au sein de sa case grid*/
@@ -22,13 +23,14 @@
     text-decoration: underline;
     color: #F8EDEB;
 }
+
 #age {
     height: 50px;
     width: 8rem;
 }
 
 /* style des inputs */
-.input { 
+.input {
     background-color: #8125C9;
     color: #F8EDEB;
     border: 2px solid #2A0949;
@@ -39,7 +41,7 @@
 }
 
 /* placement des inputs et redimension précise de certain input  */
-.one{
+.one {
     color: #F8EDEB;
     grid-row: 2;
     grid-column: 2/4;
@@ -47,14 +49,16 @@
     display: flex;
     align-items: end;
 }
-.two{
+
+.two {
     color: #F8EDEB;
     grid-row: 4;
     grid-column: 2/4;
     width: 73%;
     /* display: flex; */
 }
-.three{
+
+.three {
     color: #F8EDEB;
     grid-row: 4;
     grid-column: 3/5;
@@ -63,7 +67,8 @@
     margin-left: 10%;
     width: 53%;
 }
-.four{
+
+.four {
     color: #F8EDEB;
     grid-row: 5;
     grid-column: 2/4;
@@ -72,7 +77,8 @@
     align-items: center;
     width: 57%;
 }
-.five{
+
+.five {
     color: #F8EDEB;
     grid-row: 5;
     grid-column: 3/5;
@@ -85,15 +91,16 @@
 }
 
 /* style bouton confirmer */
-.confirmer{
+.confirmer {
     grid-column: 1/6;
     grid-row: 7;
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
 }
-.modif2{
+
+.modif2 {
     height: 50px;
     width: 35%;
     background-color: #F8EDEB;
@@ -109,6 +116,7 @@
     flex-direction: row;
     align-items: center;
 }
+
 .changeProfil {
     color: #F8EDEB;
     display: flex;
@@ -117,10 +125,6 @@
     padding-right: 3rem;
     cursor: pointer;
 }
-
-
-
-
 
 
 /* style de l'intérieur des inputs */
@@ -141,9 +145,11 @@
 .input:not(:placeholder-shown) ~ .placeholder {
     transform: translateY(-35px) translateX(10px) scale(0.75);
 }
+
 .input:not(:placeholder-shown) ~ .placeholder {
     color: #F8EDEB;
 }
+
 .input:focus ~ .placeholder {
     color: #F8EDEB;
 }

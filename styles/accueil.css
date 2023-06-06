@@ -14,26 +14,30 @@
     flex-direction: row;
     overflow: auto;
 }
+
 .musiqueContainer > div {
     margin: 2rem 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .musiqueContainer > div > p {
     margin: 0;
     padding-top: 1rem;
 }
+
 .musiqueImg {
     width: 256px;
     height: 256px;
-    background: rgb(64,142,187);
-    background: linear-gradient(140deg, rgba(64,142,187,1) 0%, rgba(145,105,217,1) 59%, rgba(255,255,255,1) 100%);
+    background: rgb(64, 142, 187);
+    background: linear-gradient(140deg, rgba(64, 142, 187, 1) 0%, rgba(145, 105, 217, 1) 59%, rgba(255, 255, 255, 1) 100%);
     align-items: center;
     justify-content: center;
     display: flex;
     border-radius: 10%;
 }
+
 .imgContainer:hover {
     transform: scale(1.1);
     transition: 0.3s;
@@ -59,8 +63,8 @@
 
 
 .dropdownMusique {
-  position: relative;
-  display: inline-block;
+    position: relative;
+    display: inline-block;
 }
 
 .dropdownMusique-icon {
@@ -107,19 +111,19 @@
 }
 
 .dropdownMusique.open .dropdownMusique-content {
-  display: block;
+    display: block;
 }
 
 
 @keyframes dropdown-animation {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .newPlaylist {
