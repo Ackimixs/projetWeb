@@ -55,7 +55,7 @@ class Artiste
             $stmt->bindParam(':recherche', $recherche);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if ( $result[0]['id_artiste'] == ''){
+            if (empty($result) || $result[0]['id_artiste'] == ''){
                 return 'Artiste introuvable.';
             }
             else {

@@ -73,6 +73,8 @@ $('#artiste').click((e) =>
 
 function rechercheMusique(musiques){
 
+    document.querySelector('#display2').hidden = false;
+
     $('#display2').html("");
 
     if(musiques === 'Musique introuvable.') {
@@ -84,21 +86,15 @@ function rechercheMusique(musiques){
     else {
         $('#tabrecherche').html("");
         for (let i=0 ; i < musiques.length ; i++) {
-            $('#tabrecherche').append('<li class="songItem">'
+            $('#tabrecherche').append('<li class="songItem" data-id="' + musiques[i]['id_musique'] + '">'
                                         + '<span>'+ (i+1) +'</span>'
                                         + '<img src="'+ musiques[i]['image_album']+'"/>'
                                         + '<h5>' + musiques[i]['titre_musique']
                                             + '<div class="subtitle"> '+ musiques[i]['nom_artiste'] +'</div>'
-                                            + '<div id = "heart">'
+                                            + '<div id = "heart" class="rechercheMusqiueHeart" data-id="' + musiques[i]['id_musique'] + '" data-liked="0">'
                                                 + '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">\n'
                                                 + '<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>\n'
                                                 + '</svg>'
-                                            + '</div>'
-                                            + '<div id = "addPlaylistButton" >'
-                                                + '<svg xmlns = "http://www.w3.org/2000/svg" fill = "currentColor" className = "bi bi-plus-circle" viewBox = "0 0 16 16" >'
-                                                + '<path d = "M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" / >'
-                                                + '<path d = "M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />'
-                                                + '</svg> '
                                             + '</div>'
                                             + '<button type="button" class="btn btn-primary infosmusique btn-light mb-2" data-toggle="modal" data-target="#modalMusique" value="'+ musiques[i]['id_musique'] +'"> INFOS'
                                             + '</button> '
@@ -106,9 +102,47 @@ function rechercheMusique(musiques){
                                     + '</li>');
         }
     }
+
+    let songItem = document.querySelectorAll(".songItem");
+    songItem.forEach(e => {
+        e.addEventListener('click', () => {
+            playSong(e.dataset.id);
+        })
+    })
+
+    let heart = document.querySelectorAll('.rechercheMusqiueHeart')
+    heart.forEach(e => {
+        ajaxRequest("GET", '../php/request.php/like/' + e.dataset.id, (d) => {
+            if (d) {
+                e.children[0].children[0].setAttribute('d', 'M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z');
+                e.dataset.liked = '1';
+            }
+        })
+
+
+        e.addEventListener('click', (event) => {
+            event.stopPropagation();
+            if (e.dataset.liked === '0') {
+                e.dataset.liked = '1';
+                ajaxRequest('POST', '../php/request.php/like', (d) => {
+                    console.log(d);
+                    e.children[0].children[0].setAttribute('d', 'M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z');
+
+                },`id=${e.dataset.id}`)
+            } else if (e.dataset.liked === '1') {
+                e.dataset.liked = '0';
+                ajaxRequest('DELETE', '../php/request.php/like/' + e.dataset.id, (d) => {
+                    console.log(d);
+                    e.children[0].children[0].setAttribute('d', 'm8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z');
+                })
+            }
+        })
+    })
 }
 
 function recherchePlaylist(playlists){
+
+    document.querySelector('#display2').hidden = false;
 
     $('#display2').html("");
 
@@ -126,18 +160,7 @@ function recherchePlaylist(playlists){
                                         + '<img src="../photo/profil.png"/>'
                                         + '<h5>' + playlists[i]['titre_playlist']
                                             + '<div class="subtitle"> '+ playlists[i]['nom_user']+' </div>'
-                                            + '<div id = "heart">'
-                                                + '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">\n'
-                                                + '<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>\n'
-                                                + '</svg>'
-                                            + '</div>'
-                                            + '<div id = "addPlaylistButton" >'
-                                                + '<svg xmlns = "http://www.w3.org/2000/svg" fill = "currentColor" className = "bi bi-plus-circle" viewBox = "0 0 16 16" >'
-                                                + '<path d = "M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" / >'
-                                                + '<path d = "M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />'
-                                                + '</svg> '
-                                            + '</div>'
-                                            + '<button type="button" class="btn btn-primary infos btn-light mb-2" data-toggle="modal" data-target="#modalMusique" value="'+ musiques[i]['id_musique'] +'"> Infos'
+                                            + '<button type="button" class="btn btn-primary infos btn-light mb-2" data-toggle="modal" data-target="#modalMusique" value="'+ playlists[i]['id_musique'] +'"> Infos'
                                             + '</button> '
                                         + '</h5>'
                                     + '</li>');
@@ -146,6 +169,8 @@ function recherchePlaylist(playlists){
 }
 
 function rechercheAlbum(albums){
+
+    document.querySelector('#display2').hidden = false;
 
     $('#display2').html("");
 
@@ -163,17 +188,6 @@ function rechercheAlbum(albums){
                                         + '<img src="'+ albums[i]['image_album']+'"/>'
                                         + '<h5> <button  class="clicAlbum" value="'+ albums[i]['id_album'] +'" >' + albums[i]['titre_album']
                                             + ' </button> <div class="subtitle"> '+ albums[i]['nom_artiste'] +' </div>'
-                                            + '<div id = "heart">'
-                                                + '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">\n'
-                                                + '<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>\n'
-                                                + '</svg>'
-                                            + '</div>'
-                                            + '<div id = "addPlaylistButton" >'
-                                                + '<svg xmlns = "http://www.w3.org/2000/svg" fill = "currentColor" className = "bi bi-plus-circle" viewBox = "0 0 16 16" >'
-                                                + '<path d = "M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" / >'
-                                                + '<path d = "M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />'
-                                                + '</svg> '
-                                            + '</div>'
                                             + '<button type="button" class="btn btn-primary infosalbum btn-light mb-2" data-toggle="modal" data-target="#modalMusique" value="'+ albums[i]['id_album'] +'" > INFOS'
                                             + '</button> '
                                         + '</h5>'
@@ -183,6 +197,8 @@ function rechercheAlbum(albums){
 }
 
 function rechercheArtiste(artistes){
+
+    document.querySelector('#display2').hidden = false;
 
     $('#display2').html("");
 
@@ -197,20 +213,9 @@ function rechercheArtiste(artistes){
         for (let i=0; i < artistes.length; i++) {
             $('#tabrecherche').append('<li class="songItem">'
                                             + '<span>'+ (i+1) +'</span>'
-                                            + '<img src="../photo/agartha.jpg"/>'
+                                            + '<img src="'+ (artistes[i]['image_artiste'] ? artistes[i]['image_artiste'] : '../photo/img.png') + '"/>'
                                             + '<h5> <button  class="clicArtiste" value="'+ artistes[i]['id_artiste'] +'" >' + artistes[i]['nom_artiste']
                                             + '</button> <div class="subtitle"> ' + artistes[i]['type_artiste'] + ' </div>'
-                                            + '<div id = "heart">'
-                                                + '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">\n'
-                                                + '<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>\n'
-                                                + '</svg>'
-                                            + '</div>'
-                                            + '<div id = "addPlaylistButton" >'
-                                                + '<svg xmlns = "http://www.w3.org/2000/svg" fill = "currentColor" className = "bi bi-plus-circle" viewBox = "0 0 16 16" >'
-                                                + '<path d = "M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" / >'
-                                                + '<path d = "M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />'
-                                                + '</svg> '
-                                            + '</div>'
                                             /* + '<button type="button" class="btn btn-primary infos btn-light mb-2" data-toggle="modal" data-target="#modalMusique" > Infos'*/
                                             + '</button> '
                                             + '</h5>'

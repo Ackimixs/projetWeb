@@ -29,7 +29,8 @@
 .musiqueImg {
     width: 256px;
     height: 256px;
-    background: white;
+    background: rgb(64,142,187);
+    background: linear-gradient(140deg, rgba(64,142,187,1) 0%, rgba(145,105,217,1) 59%, rgba(255,255,255,1) 100%);
     align-items: center;
     justify-content: center;
     display: flex;
@@ -71,6 +72,14 @@
     border-radius: 50%;
 }
 
+.dropdownMusique-icon:hover ~ .dropdownMusique-content {
+    display: block;
+}
+
+.dropdownMusique-content:hover {
+    display: block;
+}
+
 .dropdownMusique-icon:hover {
     color: #F8EDEB;
     background: #581896;
@@ -79,8 +88,8 @@
 .dropdownMusique-content {
     display: none;
     position: absolute;
-    bottom: 100%;
-    left: 100%;
+    bottom: 85%;
+    left: 90%;
     background-color: #581896;
     color: white;
     padding: 10px;
@@ -114,4 +123,14 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.newPlaylist {
+    width: 30px;
+    height: 30px;
+    border-radius: 30%;
+}
+
+.checkboxPublicDiv > label {
+    padding-right: 10px;
 }

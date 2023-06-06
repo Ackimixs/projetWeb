@@ -33,8 +33,7 @@ $('#display2').on('click', '.infosmusique', () =>
 );
 
 function musiqueModal(infos) {
-    console.warn(infos);
-    let temps = Math.round((infos['temps_musique']/60000) * 100) / 100
+    let temps = parseSeconds(infos['temps_musique'] / 1000);
     $('#modalMusiqueTitle').html(infos['titre_musique']);
     $('#modalMusiqueInner').html('<p class="info"> Nom Artiste : '+ infos['nom_artiste'] +' </p>' +
                                         '<p class="info"> Nom Album : '+ infos['titre_album'] +' </p>' +

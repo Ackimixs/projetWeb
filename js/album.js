@@ -47,27 +47,62 @@ function displayAlbum(album) {
 
     $('#tabAlbum').html("");
     for (let i=0 ; i < album.length ; i++) {
-        $('#tabAlbum').append('<li class="songAlbum">'
+        $('#tabAlbum').append('<li class="songAlbum" data-id="' + album[i]['id_musique'] + '">'
             + '<span>'+ (i+1) +'</span>'
             + '<img src="'+ album[i]['image_album'] +'"/>'
             + '<h5>' + album[i]['titre_musique']
             + '<div class="subtitle"> '+ album[i]['nom_artiste'] +'</div>'
-            + '<div id = "heart">'
+            + '<div id = "heart" class="albumMusiqueHeart" data-id="' + album[i]['id_musique'] + '" data-liked="0">'
             + '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">\n'
             + '<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>\n'
             + '</svg>'
-            + '</div>'
-            + '<div id = "addPlaylistButton" >'
-            + '<svg xmlns = "http://www.w3.org/2000/svg" fill = "currentColor" className = "bi bi-plus-circle" viewBox = "0 0 16 16" >'
-            + '<path d = "M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" / >'
-            + '<path d = "M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />'
-            + '</svg> '
             + '</div>'
             + '<button type="button" class="btn btn-primary infosmusique btn-light mb-2" data-toggle="modal" data-target="#modalMusique" value="'+ album[i]['id_musique'] +'"> INFOS'
             + '</button> '
             + '</h5>'
             + '</li>');
     }
+    setTimeout(() => {
+        addFunctionnalites();
+    })
 }
 
 
+function addFunctionnalites() {
+    let songItem = document.querySelectorAll(".songAlbum");
+    songItem.forEach(e => {
+        e.addEventListener('click', () => {
+            playSong(e.dataset.id);
+        })
+    })
+
+    let heart = document.querySelectorAll('.albumMusiqueHeart')
+    heart.forEach(e => {
+        ajaxRequest("GET", '../php/request.php/like/' + e.dataset.id, (d) => {
+            console.log(d);
+            if (d) {
+                e.children[0].children[0].setAttribute('d', 'M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z');
+                e.dataset.liked = '1';
+            }
+        })
+
+
+        e.addEventListener('click', (event) => {
+            event.stopPropagation();
+            if (e.dataset.liked === '0') {
+                e.dataset.liked = '1';
+                ajaxRequest('POST', '../php/request.php/like', (d) => {
+                    console.log(d);
+                    e.children[0].children[0].setAttribute('d', 'M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z');
+
+                },`id=${e.dataset.id}`)
+            } else if (e.dataset.liked === '1') {
+                e.dataset.liked = '0';
+                ajaxRequest('DELETE', '../php/request.php/like/' + e.dataset.id, (d) => {
+                    console.log(d);
+                    e.children[0].children[0].setAttribute('d', 'm8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z');
+                })
+            }
+        })
+    })
+}

@@ -320,7 +320,12 @@ class User
     static function getFileAttente($id_user) {
         try {
             $db = Db::connectionDB();
-            $request = "SELECT * FROM file_attente WHERE id_user = :id_user ORDER BY date_ajout ASC";
+            $request = "SELECT * FROM file_attente
+                        INNER JOIN musique m on m.id_musique = file_attente.id_musique
+                        INNER JOIN album a on a.id_album = m.id_album
+                        INNER JOIN artiste a2 on a2.id_artiste = a.id_artiste
+                        WHERE id_user = :id_user 
+                        ORDER BY date_ajout";
             $stmt = $db->prepare($request);
             $stmt->bindParam(':id_user', $id_user);
             $stmt->execute();
@@ -378,7 +383,13 @@ class User
     static function getAllLike($id_user) {
         try {
             $db = Db::connectionDB();
-            $request = "SELECT * FROM like_musique WHERE id_user = :id_user";
+            $request = "SELECT *
+                        FROM like_musique
+                        INNER JOIN musique ON musique.id_musique = like_musique.id_musique
+                        INNER JOIN album a on a.id_album = musique.id_album
+                        INNER JOIN artiste a2 on a2.id_artiste = musique.id_artiste_principale
+                        WHERE id_user = :id_user
+                        ORDER BY date_ajout DESC";
             $stmt = $db->prepare($request);
             $stmt->bindParam(':id_user', $id_user);
             $stmt->execute();
@@ -418,5 +429,23 @@ class User
             return false;
         }
         return true;
+    }
+
+    //
+    // Prend une musqiue random dans la file d'attente du user
+    //
+    static function getRandomFileAttente($id_user) {
+        try {
+            $db = Db::connectionDB();
+            $request = "SELECT * FROM file_attente WHERE id_user = :id_user ORDER BY RANDOM() LIMIT 1";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':id_user', $id_user);
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $exception) {
+            error_log($exception->getMessage());
+            return false;
+        }
+        return $data;
     }
 }

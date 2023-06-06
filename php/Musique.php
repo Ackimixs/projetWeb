@@ -75,7 +75,7 @@ class Musique
             $stmt->bindParam(':recherche', $recherche);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if ($result && $result[0]['id_musique'] == ''){
+            if (empty($result) || $result[0]['id_musique'] == ''){
                 return 'Musique introuvable.';
             }
             else {

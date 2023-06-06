@@ -2,6 +2,7 @@ let autoPlay = false;
 let muted = false;
 let loadingMusic = false;
 let currentMusique = null;
+let shuffleMode = false;
 
 let audioTag = document.querySelector('#audioTag');
 let playButton = document.querySelector('.playButton');
@@ -16,7 +17,8 @@ let previousButton = document.querySelector('.previousButton');
 const volumeSlider = document.querySelector('.volume-slider');
 let likedSvg = document.querySelector('.likedButton');
 let notLikedSvg = document.querySelector('.notLikedButton');
-
+let shuffleSvg = document.querySelector('#shuffleButton');
+let fileAttenteButton = document.querySelector('#attenteMusic');
 
 const audioMuted = document.querySelector('#audioMuted');
 const audioNotMuted = document.querySelectorAll('.audioNotMuted');
@@ -182,22 +184,27 @@ notLikedSvg.addEventListener('click', () => {
     notLikedSvg.hidden = true;
 })
 
+shuffleSvg.addEventListener('click', () => {
+    if (loadingMusic) return;
+    shuffleMode = !shuffleMode;
+    if (shuffleMode) {
+        shuffleSvg.style.color = "#b3aab7";
+    } else {
+        shuffleSvg.style.color = "white";
+    }
+})
+
+fileAttenteButton.addEventListener('click', () => {
+    afficherInfoPlaylist('file_attente');
+    showPlaylistInfo();
+})
+
 function setLastSong(data) {
     if (data.length > 0) {
         getMusique(data[0].id_musique, true);
     } else {
         audioTag.currentTime = 0;
     }
-}
-
-function parseSeconds(seconds) {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = Math.floor(seconds % 60);
-
-    const minutesFormatted = String(minutes).padStart(2, '0');
-    const secondsFormatted = String(remainingSeconds).padStart(2, '0');
-
-    return `${minutesFormatted}:${secondsFormatted}`;
 }
 
 function getRandomInteger(min, max) {
@@ -266,7 +273,7 @@ function handleMuted() {
 
 function playNext() {
     if (loadingMusic) return;
-    ajaxRequest("GET", "../php/request.php/file-attente", (data) => {
+    ajaxRequest("GET", "../php/request.php/file-attente" + (shuffleMode ? '/random' : ''), (data) => {
         if (data.length > 0) {
             getMusique(data[0].id_musique);
             ajaxRequest("DELETE", '../php/request.php/file-attente/' + data[0].id_musique);
@@ -447,7 +454,7 @@ setTimeout(() => {
 }, 1000)
 
 document.querySelector('.newPlaylist').addEventListener('click', () => {
-    const myModalAlternative = new bootstrap.Modal(document.querySelector('#exampleModal'), {focus: true});
+    const myModalAlternative = new bootstrap.Modal(document.querySelector('#createPlaylistModal'), {focus: true});
     myModalAlternative.show();
 })
 

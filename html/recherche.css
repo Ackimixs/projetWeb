@@ -1,4 +1,4 @@
-
+/*
 html{
     border: 0;
     padding: 0;
@@ -83,7 +83,7 @@ input{
     height: 100%;
     align-items: center;
     padding: 0.2rem 1rem;
-}
+}*/
 
 #attenteMusic {
     margin-right: 3rem;
@@ -138,7 +138,7 @@ input{
 #tabAlbum li h5 #heart,
 #tabrecherche li h5 #heart{
     position: absolute;
-    left: 800px;
+    left: 850px;
     top: 40px;
     width: 40px;
     height: 40px;
@@ -223,4 +223,5 @@ input{
 #display #display2 .enTeteAlbum{
     position: center;
     margin-left: 10rem;
+    color: black;
 }

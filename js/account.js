@@ -1,18 +1,18 @@
-//attribution des différents éléments de la page html à des variables
 let profile = document.querySelector('.changeProfil');
 let profileImg = document.querySelector('#profileImg');
+let mainProfileImg = document.querySelector('#profileImgHeader');
 let profileSvg = document.querySelector('#profileSvg');
 let logout = document.querySelector('#logoutIcon');
 let fileInput = document.querySelector('#profileImageInput');
 
 //Fonction permettant de charger les informations du profil au moment où la page se charge
-window.addEventListener('load', () => {//event au chargement 
+window.addEventListener('load', () => {//event au chargement
 
     //Cette partie là permet de charger la photo de profil de l'utilisateur
     ajaxRequest("GET", '../php/request.php/profile-picture', (data) => {
         if (data) {
             profileImg.src = '../' + data;
-            profileImg.hidden = false; 
+            profileImg.hidden = false;
             profileSvg.hidden = true;
         } else {
             profileImg.hidden = true;
@@ -52,7 +52,8 @@ profile.addEventListener('click', () => {  //event on click
         ajaxRequest('POST', '../php/request.php/profile-picture', () => { //requête POST pour ajouter la photo de profil
             ajaxRequest("GET", '../php/request.php/profile-picture', (data) => {
                 profileImg.src = ''
-                profileImg.src = '../' + data + '?timestamp=' + new Date().getTime(); // Evite la mise en cache de l'image en ajoutant un timestamp
+                profileImg.src = '../' + data + '?timestamp=' + new Date().getTime(); // Append timestamp
+                mainProfileImg.src = '../' + data + '?timestamp=' + new Date().getTime(); // Append timestamp
                 profileImg.hidden = false;
                 profileSvg.hidden = true;
             })
@@ -64,7 +65,14 @@ profile.addEventListener('click', () => {  //event on click
 let birthdayInput = document.querySelector('#birthday')
 //Fonction permettant de calculer l'âge en fonction de la date de naissance de manière dynamique
 birthdayInput.addEventListener('change', () => {
-    document.querySelector('#age').value = (new Date().getFullYear() - new Date(birthdayInput.value).getFullYear()).toString() + ' ans';
+    const date1 = new Date();
+    const date2 = new Date(birthdayInput.value);
+    let differenceYears = date1.getFullYear() - date2.getFullYear();
+    if (date1.getMonth() < date2.getMonth() || (date1.getMonth() === date2.getMonth() && date1.getDate() < date2.getDate())) {
+      differenceYears--;
+    }
+
+    document.querySelector('#age').value = differenceYears.toString() + ' ans';
 })
 
 
@@ -76,16 +84,22 @@ document.querySelector('.modif2').addEventListener('click', () => { //event on c
     let password = document.querySelector('#password').value;
     let birthday = document.querySelector('#birthday').value;
 
-    console.log(email, nom, prenom, password, birthday);
-
     ajaxRequest('POST', '../php/request.php/user/update', (d) => {
         ajaxRequest("GET", '../php/request.php/user/session', (data) => { //Récupère les nouvelles données et les affectent aux champs
             if (data) {
                 // console.log(data);
+                console.log(new Date().getFullYear() - new Date(data.date_naissance).getFullYear());
                 document.querySelector('#email').value = data.mail;
                 document.querySelector('#nom').value = data.nom_user;
                 document.querySelector('#prenom').value = data.prenom_user;
-                document.querySelector('#age').value = (new Date().getFullYear() - new Date(data.date_naissance).getFullYear()).toString() + ' ans';
+                const date1 = new Date();
+                const date2 = new Date(data.date_naissance);
+                let differenceYears = date1.getFullYear() - date2.getFullYear();
+                if (date1.getMonth() < date2.getMonth() || (date1.getMonth() === date2.getMonth() && date1.getDate() < date2.getDate())) {
+                  differenceYears--;
+                }
+
+                document.querySelector('#age').value = differenceYears.toString() + ' ans';
                 document.querySelector('#birthday').value = data.date_naissance;
             }
         })
