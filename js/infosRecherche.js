@@ -23,7 +23,7 @@ $('#tabrecherche').on('click', '.infosmusique', () =>
     }
 );
 
-$('#tabAlbum').on('click', '.infosmusique', () =>
+$('#display2').on('click', '.infosmusique', () =>
     {
 
         let idmusique = $(event.target).closest('.infosmusique').attr('value');
@@ -62,9 +62,11 @@ $('#tabrecherche').on('click', '.infosalbum', () =>
 
 function albumModal(infos) {
 
+    let crea = infos[0]['date_album'].substr(0,10);
+
     $('#modalMusiqueTitle').html(infos[0]['titre_album']);
     $('#modalMusiqueInner').html('<p class="info"> Nom Artiste : '+ infos[0]['nom_artiste'] +' </p>' +
-        '<p class="info"> Date : '+ infos[0]['date_album'] +' </p>' +
+        '<p class="info"> Date : '+ crea +' </p>' +
         '<p class="info"> Genre : '+ infos[0]['genre_album'] +' </p>');
 
 }
