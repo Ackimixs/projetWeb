@@ -19,18 +19,25 @@ sudo apt-get install apache2, php, php-pgsql, postgresql
 
 ```bash
 sudo -u postgres psql
-CREATE ROLE spotifai_user WITH LOGIN PASSWORD 'your_password';
-CREATE DATABASE spotifai owner spotifai_user;
+CREATE ROLE spotifaie_user WITH LOGIN PASSWORD 'your_password';
+CREATE DATABASE spotifaie owner spotifai_user;
 \q
 ```
 
 ## Setup the Project
 
 ```bash
-cd /var/www
+cd /var/www/html
 git clone https://github.com/ackimixs/spotifaie.git
 
 fill the php/hidden.constants.php with your informations and rename it to constants.php
+```
+
+## FIll the database
+
+```bash
+psql -d spotifaie -U spotifaie_user -f sql/Creation.sql
+psql -d spotifaie -U spotifaie_user -f sql/data_dump.sql
 ```
 
 ## Configuration
@@ -42,9 +49,9 @@ sudo nano /etc/apache2/sites-available/spotifai.conf
 ```apacheconf
 <VirtualHost *:80>
     ServerAdmin webmaster@localhost
-    DocumentRoot /var/www/spotifai/public
+    DocumentRoot /var/www/html/spotifaie
 
-    <Directory /var/www/spotifai/public>
+    <Directory /var/www/html/spotifaie>
         AllowOverride All
         Order Allow,Deny
         Allow from All
