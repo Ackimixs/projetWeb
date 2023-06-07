@@ -24,7 +24,7 @@ function displayArtiste(artiste) {
         '                                    <img src="../photo/profil.png"\n' +
         '                                         class="rounded-circle img-fluid" style="width: 100px;" />\n' +
         '                                </div>\n' +
-        '                                <h4 class="mb-2">'+ artiste[0]['nom_artiste'] +'</h4>\n' +
+        '                                <h4 class="mb-2" style="color: black;">'+ artiste[0]['nom_artiste'] +'</h4>\n' +
         '                                <p class="text-muted mb-4"> Type Artiste : <span class="mx-2">|</span> '+ artiste[0]['type_artiste'] +'</p>\n' +
         '                            </div>\n' +
         '                        </div>\n' +
