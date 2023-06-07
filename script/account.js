@@ -112,3 +112,9 @@ document.querySelector('.modif2').addEventListener('click', () => { //event on c
         })
     }, `email=${email}&nom=${nom}&prenom=${prenom}&password=${password}&date=${birthday}`);
 })
+
+document.querySelector('#clearHistoriqueButton').addEventListener('click', () => {
+    ajaxRequest('DELETE', '../php/request.php/historique', (d) => {
+        console.log(d);
+    })
+})

@@ -271,10 +271,12 @@ switch($requestRessource)
                     if ($id == 'last') {
                         $musique = User::getLastHistorique($_SESSION['user']['id_user']);
                         if ($musique) {
-                            User::removeFromHistorique($_SESSION['user']['id_user'], $musique['id_musique']);
+                            $data = User::removeFromHistorique($_SESSION['user']['id_user'], $musique['id_musique']);
                         }
+                    } else if ($id != null) {
+                        $data = User::removeFromHistorique($_SESSION['user']['id_user'], $id);
                     } else {
-                        User::removeFromHistorique($_SESSION['user']['id_user'], $id);
+                        $data = User::removeAllHistorique($_SESSION['user']['id_user']);
                     }
                     $data = true;
                 } else {

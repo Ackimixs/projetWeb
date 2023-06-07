@@ -5,6 +5,12 @@ const refreshAccueil = () => {
     ajaxRequest("GET", "../php/request.php/historique", (data) => {
         let recentDiv = document.querySelector('#recentMusiqueContainer');
         recentDiv.innerHTML = '';
+
+        if (data.length === 0) {
+            document.querySelector("#recentMusique").hidden = true;
+            return;
+        }
+
         data.forEach((musique) => {
             let musiqueContainer = document.createElement('div');
             musiqueContainer.classList.add('imgContainer');
@@ -128,6 +134,7 @@ const refreshAccueil = () => {
     })
 
 
+    // Add event listener to dropdown
     setTimeout(() => {
         // add to queue and play next three dot
         let dropdownItem = document.querySelectorAll('.dropdownMusique-item');
@@ -163,6 +170,7 @@ const refreshAccueil = () => {
     }, 500)
 
 
+    // Add event on click on musique
     setTimeout(() => {
         let musiqueContainer = document.querySelectorAll('.imgContainer');
         musiqueContainer.forEach((container) => {

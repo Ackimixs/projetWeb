@@ -278,7 +278,9 @@ class User
         }
         catch (PDOException $exception){
             error_log("[" . basename(__FILE__) . "][" . __LINE__ . "] ". 'Request error: ' . $exception->getMessage());
+            return false;
         }
+        return true;
     }
 
 
@@ -447,5 +449,19 @@ class User
             return false;
         }
         return $data;
+    }
+
+    static function removeAllHistorique($id_user) {
+        try {
+            $db = Db::connectionDB();
+            $request = "DELETE FROM historique WHERE id_user = :id_user";
+            $stmt = $db->prepare($request);
+            $stmt->bindParam(':id_user', $id_user);
+            $stmt->execute();
+        } catch (PDOException $exception) {
+            error_log($exception->getMessage());
+            return false;
+        }
+        return true;
     }
 }

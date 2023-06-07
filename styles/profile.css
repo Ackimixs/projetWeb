@@ -97,7 +97,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .modif2 {
@@ -152,4 +151,18 @@
 
 .input:focus ~ .placeholder {
     color: #F8EDEB;
+}
+
+.clearHistorique {
+    grid-column: 5;
+    grid-row: 7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#clearHistoriqueButton {
+    height: 50px;
+    width: 35%;
+    background-color: #F8EDEB;
 }
