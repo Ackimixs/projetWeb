@@ -28,12 +28,12 @@ const setMusique = (musique, historiquePlay = false) => {
     console.log("Playing", musique.id_musique, historiquePlay)
 
     if (!historiquePlay) {
-        ajaxRequest("POST", "../php/request.php/historique", () => {}, `id=${musique.id_musique}`);
+        ajaxRequest("POST", "php/request.php/historique", () => {}, `id=${musique.id_musique}`);
     }
 
     musiqueName.innerText = musique.titre_musique + " - " + musique.nom_artiste;
 
-    ajaxRequest('GET', '../php/request.php/like/' + musique.id_musique, (isLiked) => {
+    ajaxRequest('GET', 'php/request.php/like/' + musique.id_musique, (isLiked) => {
         if (isLiked) {
             likedSvg.hidden = false;
             notLikedSvg.hidden = true;
@@ -172,14 +172,14 @@ volumeSlider.addEventListener('input', () => {
 
 likedSvg.addEventListener('click', () => {
     if (loadingMusic) return;
-    ajaxRequest("DELETE", "../php/request.php/like/" + currentMusique.id_musique);
+    ajaxRequest("DELETE", "php/request.php/like/" + currentMusique.id_musique);
     likedSvg.hidden = true;
     notLikedSvg.hidden = false;
 })
 
 notLikedSvg.addEventListener('click', () => {
     if (loadingMusic) return;
-    ajaxRequest("POST", "../php/request.php/like", () => {}, `id=${currentMusique.id_musique}`);
+    ajaxRequest("POST", "php/request.php/like", () => {}, `id=${currentMusique.id_musique}`);
     likedSvg.hidden = false;
     notLikedSvg.hidden = true;
 })
@@ -212,7 +212,7 @@ function getRandomInteger(min, max) {
 }
 
 function getMusique(id_musique, historiquePlay = false) {
-    ajaxRequest("GET", "../php/request.php/musique/" + id_musique, (data) => {
+    ajaxRequest("GET", "php/request.php/musique/" + id_musique, (data) => {
         setMusique(data, historiquePlay);
     });
 }
@@ -273,10 +273,10 @@ function handleMuted() {
 
 function playNext() {
     if (loadingMusic) return;
-    ajaxRequest("GET", "../php/request.php/file-attente" + (shuffleMode ? '/random' : ''), (data) => {
+    ajaxRequest("GET", "php/request.php/file-attente" + (shuffleMode ? '/random' : ''), (data) => {
         if (data.length > 0) {
             getMusique(data[0].id_musique);
-            ajaxRequest("DELETE", '../php/request.php/file-attente/' + data[0].id_musique);
+            ajaxRequest("DELETE", 'php/request.php/file-attente/' + data[0].id_musique);
         } else {
             getMusique(getRandomInteger(1, 800));
         }
@@ -285,18 +285,18 @@ function playNext() {
 
 function playPrevious() {
     if (loadingMusic) return;
-    ajaxRequest('DELETE', '../php/request.php/historique/last', () => {
-        ajaxRequest("GET", '../php/request.php/historique', setLastSong);
+    ajaxRequest('DELETE', 'php/request.php/historique/last', () => {
+        ajaxRequest("GET", 'php/request.php/historique', setLastSong);
     });
 }
 
 function playPlaylist(id) {
     if (loadingMusic) return;
-    ajaxRequest("DELETE", '../php/request.php/file-attente', () => {
-        ajaxRequest("GET", '../php/request.php/playlist/' + id, (data) => {
-            ajaxRequest("GET", '../php/request.php/musique-playlist/' + data.id_playlist, (m) => {
+    ajaxRequest("DELETE", 'php/request.php/file-attente', () => {
+        ajaxRequest("GET", 'php/request.php/playlist/' + id, (data) => {
+            ajaxRequest("GET", 'php/request.php/musique-playlist/' + data.id_playlist, (m) => {
                 m.forEach(musique => {
-                    ajaxRequest("POST", '../php/request.php/file-attente', () => {}, `id=${musique.id_musique}`);
+                    ajaxRequest("POST", 'php/request.php/file-attente', () => {}, `id=${musique.id_musique}`);
                 })
                 playNext();
             })
@@ -307,10 +307,10 @@ function playPlaylist(id) {
 function playAlbum(id) {
     if (loadingMusic) return;
     autoPlay = true;
-    ajaxRequest("DELETE", '../php/request.php/file-attente', () => {
-        ajaxRequest("GET", '../php/request.php/album/' + id, (data) => {
+    ajaxRequest("DELETE", 'php/request.php/file-attente', () => {
+        ajaxRequest("GET", 'php/request.php/album/' + id, (data) => {
             data.forEach(musique => {
-                ajaxRequest("POST", '../php/request.php/file-attente', () => {}, `id=${musique.id_musique}`);
+                ajaxRequest("POST", 'php/request.php/file-attente', () => {}, `id=${musique.id_musique}`);
             })
             playNext();
         })
@@ -321,11 +321,11 @@ function playAlbum(id) {
 function playLikedSong() {
     if (loadingMusic) return;
     autoPlay = true;
-    ajaxRequest("DELETE", '../php/request.php/file-attente', () => {
-        ajaxRequest("GET", '../php/request.php/like', (data) => {
+    ajaxRequest("DELETE", 'php/request.php/file-attente', () => {
+        ajaxRequest("GET", 'php/request.php/like', (data) => {
             if (data.length > 0) {
                 data.forEach((element) => {
-                    ajaxRequest("POST", '../php/request.php/file-attente', () => {}, `id=${element.id_musique}`);
+                    ajaxRequest("POST", 'php/request.php/file-attente', () => {}, `id=${element.id_musique}`);
                 })
                 playNext();
             }
@@ -336,31 +336,31 @@ function playLikedSong() {
 function playSong(id_musique) {
     if (loadingMusic) return;
     autoPlay = true;
-    ajaxRequest("DELETE", "../php/request.php/file-attente/" + id_musique, () => {
+    ajaxRequest("DELETE", "php/request.php/file-attente/" + id_musique, () => {
         getMusique(id_musique);
     })
 }
 
 function addToQueueSong(id_musique) {
     if (loadingMusic) return;
-    ajaxRequest("POST", "../php/request.php/file-attente", () => {}, `id=${id_musique}`);
+    ajaxRequest("POST", "php/request.php/file-attente", () => {}, `id=${id_musique}`);
 }
 
 function addToQueuePlaylist(id_playlist) {
     if (loadingMusic) return;
-    ajaxRequest("GET", '../php/request.php/musique-playlist/' + id_playlist, (data) => {
+    ajaxRequest("GET", 'php/request.php/musique-playlist/' + id_playlist, (data) => {
         data.forEach(musique => {
-            ajaxRequest("POST", '../php/request.php/file-attente', () => {}, `id=${musique.id_musique}`);
+            ajaxRequest("POST", 'php/request.php/file-attente', () => {}, `id=${musique.id_musique}`);
         })
     })
 }
 
 function addToQueueLikedSong() {
     if (loadingMusic) return;
-    ajaxRequest("GET", '../php/request.php/like', (data) => {
+    ajaxRequest("GET", 'php/request.php/like', (data) => {
         if (data.length > 0) {
             data.forEach((element) => {
-                ajaxRequest("POST", '../php/request.php/file-attente', () => {}, `id=${element.id_musique}`);
+                ajaxRequest("POST", 'php/request.php/file-attente', () => {}, `id=${element.id_musique}`);
             })
         }
     })
@@ -405,7 +405,7 @@ function createDropdownItem(playlist) {
 
 
 
-ajaxRequest('GET', '../php/request.php/historique', (data) => {
+ajaxRequest('GET', 'php/request.php/historique', (data) => {
     if (data.length === 0) {
         getMusique(getRandomInteger(1, 300));
     } else {
@@ -415,12 +415,12 @@ ajaxRequest('GET', '../php/request.php/historique', (data) => {
 
 setTimeout(() => {
     // Add or delete a song from the user playlist
-    ajaxRequest("GET", '../php/request.php/user-playlist', (playlists) => {
+    ajaxRequest("GET", 'php/request.php/user-playlist', (playlists) => {
         // Add a song to a playlist
         playlists.forEach((playlist) => {
             createDropdownItem(playlist);
             if (currentMusique) {
-                ajaxRequest("GET", "../php/request.php/musique-playlist/isIn", (d) => {
+                ajaxRequest("GET", "php/request.php/musique-playlist/isIn", (d) => {
                     if (d.length > 0) {
                         let div = document.querySelectorAll(`.addToPlaylist`);
                         div.forEach((element) => {
@@ -442,7 +442,7 @@ setTimeout(() => {
                         let musique_id = svg.dataset.musicId;
                         svg.hidden = true;
                         svg.nextSibling.hidden = false;
-                        ajaxRequest("POST", '../php/request.php/musique-playlist', (response) => {
+                        ajaxRequest("POST", 'php/request.php/musique-playlist', (response) => {
                             console.log(response);
                         }, "id_playlist=" + playlist_id + "&id_musique=" + musique_id);
                     })
@@ -455,7 +455,7 @@ setTimeout(() => {
                     svg.addEventListener('click', () => {
                         let playlist_id = svg.dataset.id;
                         let musique_id = svg.dataset.musicId;
-                        ajaxRequest("DELETE", '../php/request.php/musique-playlist?' + "id_playlist=" + playlist_id + "&id_musique=" + musique_id, (response) => {
+                        ajaxRequest("DELETE", 'php/request.php/musique-playlist?' + "id_playlist=" + playlist_id + "&id_musique=" + musique_id, (response) => {
                             console.log(response);
                             svg.hidden = true;
                             svg.previousSibling.hidden = false;
@@ -479,10 +479,10 @@ document.querySelector(".addPlaylistButton").addEventListener('click', () => {
         let playlistName = document.querySelector('#playlistName').value;
         let isPublic = document.querySelector('#checkboxPublic').checked;
         if (playlistName) {
-            ajaxRequest('POST', '../php/request.php/playlist', (postPlaylist) => {
-                ajaxRequest("POST", '../php/request.php/musique-playlist', () => {
-                    ajaxRequest("GET", '../php/request.php/user/session', (data) => {
-                        ajaxRequest("POST", '../php/request.php/user-playlist', () => {
+            ajaxRequest('POST', 'php/request.php/playlist', (postPlaylist) => {
+                ajaxRequest("POST", 'php/request.php/musique-playlist', () => {
+                    ajaxRequest("GET", 'php/request.php/user/session', (data) => {
+                        ajaxRequest("POST", 'php/request.php/user-playlist', () => {
                         }, `id_user=${data.id_user}&id_playlist=${postPlaylist.id_playlist}`);
                     })
                     document.querySelector('#playlistName').value = '';

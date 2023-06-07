@@ -9,7 +9,7 @@ let fileInput = document.querySelector('#profileImageInput');
 window.addEventListener('load', () => {//event au chargement
 
     //Cette partie là permet de charger la photo de profil de l'utilisateur
-    ajaxRequest("GET", '../php/request.php/profile-picture', (data) => {
+    ajaxRequest("GET", 'php/request.php/profile-picture', (data) => {
         if (data) {
             profileImg.src = '../' + data;
             profileImg.hidden = false;
@@ -21,7 +21,7 @@ window.addEventListener('load', () => {//event au chargement
     })
 
     //Cette partie là permet d'attribuer les éléments au compte de la session en cours
-    ajaxRequest("GET", '../php/request.php/user/session', (data) => {
+    ajaxRequest("GET", 'php/request.php/user/session', (data) => {
         if (data) {
             // console.log(data);
             document.querySelector('#email').value = data.mail;
@@ -40,7 +40,7 @@ window.addEventListener('load', () => {//event au chargement
 })
 //Fonction permettant de se déconnecter et donc de renvoyer l'utilisateur sur la page de connexion
 logout.addEventListener('click', () => { //event on click
-    ajaxRequest('GET', '../php/request.php/logout', (res) => {
+    ajaxRequest('GET', 'php/request.php/logout', (res) => {
         console.log(res);
         window.location.href = 'login.php';
     });
@@ -56,8 +56,8 @@ profile.addEventListener('click', () => {  //event on click
         const formData = new FormData();
         formData.append('image', selectedFile); //ajoute le fichier sélectionné aux données
 
-        ajaxRequest('POST', '../php/request.php/profile-picture', () => { //requête POST pour ajouter la photo de profil
-            ajaxRequest("GET", '../php/request.php/profile-picture', (data) => {
+        ajaxRequest('POST', 'php/request.php/profile-picture', () => { //requête POST pour ajouter la photo de profil
+            ajaxRequest("GET", 'php/request.php/profile-picture', (data) => {
                 profileImg.src = ''
                 profileImg.src = '../' + data + '?timestamp=' + new Date().getTime(); // Append timestamp
                 mainProfileImg.src = '../' + data + '?timestamp=' + new Date().getTime(); // Append timestamp
@@ -91,8 +91,8 @@ document.querySelector('.modif2').addEventListener('click', () => { //event on c
     let password = document.querySelector('#password').value;
     let birthday = document.querySelector('#birthday').value;
 
-    ajaxRequest('POST', '../php/request.php/user/update', (d) => {
-        ajaxRequest("GET", '../php/request.php/user/session', (data) => { //Récupère les nouvelles données et les affectent aux champs
+    ajaxRequest('POST', 'php/request.php/user/update', (d) => {
+        ajaxRequest("GET", 'php/request.php/user/session', (data) => { //Récupère les nouvelles données et les affectent aux champs
             if (data) {
                 // console.log(data);
                 console.log(new Date().getFullYear() - new Date(data.date_naissance).getFullYear());
@@ -114,7 +114,7 @@ document.querySelector('.modif2').addEventListener('click', () => { //event on c
 })
 
 document.querySelector('#clearHistoriqueButton').addEventListener('click', () => {
-    ajaxRequest('DELETE', '../php/request.php/historique', (d) => {
+    ajaxRequest('DELETE', 'php/request.php/historique', (d) => {
         console.log(d);
     })
 })

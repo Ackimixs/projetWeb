@@ -117,7 +117,7 @@ function createAffichagePLaylist(info, isUserPlaylist = false) {
     heartLikedDiv.appendChild(heartLikedSvg);
 
     heartLikedDiv.hidden = false;
-    ajaxRequest("GET", '../php/request.php/like/' + info.id_musique, (data) => {
+    ajaxRequest("GET", 'php/request.php/like/' + info.id_musique, (data) => {
         if (data) {
             hearthDiv.hidden = true;
             heartLikedDiv.hidden = false;
@@ -127,13 +127,13 @@ function createAffichagePLaylist(info, isUserPlaylist = false) {
         }
     })
     hearthDiv.addEventListener('click', () => {
-        ajaxRequest("POST", '../php/request.php/like', (d) => {
+        ajaxRequest("POST", 'php/request.php/like', (d) => {
         }, `id=${info.id_musique}`);
         hearthDiv.hidden = true;
         heartLikedDiv.hidden = false;
     })
     heartLikedDiv.addEventListener('click', () => {
-        ajaxRequest("DELETE", '../php/request.php/like/' + info.id_musique, (d) => {
+        ajaxRequest("DELETE", 'php/request.php/like/' + info.id_musique, (d) => {
         })
         hearthDiv.hidden = false;
         heartLikedDiv.hidden = true;
@@ -214,14 +214,14 @@ function createAffichagePLaylist(info, isUserPlaylist = false) {
     let container = document.querySelector('#listeMorceaux')
     container.appendChild(morceauDiv);
 
-    ajaxRequest("GET", '../php/request.php/user-playlist', (playlists) => {
+    ajaxRequest("GET", 'php/request.php/user-playlist', (playlists) => {
         playlists.forEach(e => createDropdownItemInfo(e, dropdownContent));
     })
 }
 
 function afficherInfoPlaylist(type = "playlist", id = 1) {
     if (type === "playlist") {
-        ajaxRequest('GET', '../php/request.php/playlist/' + id.toString(), (d) => {
+        ajaxRequest('GET', 'php/request.php/playlist/' + id.toString(), (d) => {
 
             document.querySelector("#playlistInfoName").innerHTML = d.titre_playlist;
             if (d.image_playlist) {
@@ -248,8 +248,8 @@ function afficherInfoPlaylist(type = "playlist", id = 1) {
 
             document.querySelector('.ecouter').dataset.id = d.id_playlist;
 
-            ajaxRequest("GET", '../php/request.php/musique-playlist/' + id.toString(), (data) => {
-                ajaxRequest("GET", '../php/request.php/user-playlist/' + d.id_playlist, (user) => {
+            ajaxRequest("GET", 'php/request.php/musique-playlist/' + id.toString(), (data) => {
+                ajaxRequest("GET", 'php/request.php/user-playlist/' + d.id_playlist, (user) => {
                     data.forEach(e => createAffichagePLaylist(e, user.length > 0));
 
                     if (user.length === 0) {
@@ -257,7 +257,7 @@ function afficherInfoPlaylist(type = "playlist", id = 1) {
                     } else {
                         document.querySelector('.supprContainer').hidden = false;
                         document.querySelector('.suppr').addEventListener('click', () => {
-                            ajaxRequest("DELETE", `../php/request.php/playlist/${d.id_playlist}`, (data) => {
+                            ajaxRequest("DELETE", `php/request.php/playlist/${d.id_playlist}`, (data) => {
                                 document.querySelector('#listeMorceaux').remove();
                                 document.querySelector('#affichagePlaylist').hidden = true;
                                 document.querySelector('#accueil').hidden = false;
@@ -272,7 +272,7 @@ function afficherInfoPlaylist(type = "playlist", id = 1) {
                 let trash3Svgs = document.querySelectorAll(".deleteFromPlaylist");
                 trash3Svgs.forEach(svg => {
                     svg.addEventListener('click', () => {
-                        ajaxRequest("DELETE", `../php/request.php/musique-playlist?id_musique=${svg.dataset.id}&id_playlist=${d.id_playlist}`, (data) => {
+                        ajaxRequest("DELETE", `php/request.php/musique-playlist?id_musique=${svg.dataset.id}&id_playlist=${d.id_playlist}`, (data) => {
                             document.querySelectorAll('.Morceau').forEach(e => {
                                 if (e.dataset.id === svg.dataset.id) {
                                     e.remove();
@@ -302,7 +302,7 @@ function afficherInfoPlaylist(type = "playlist", id = 1) {
         document.querySelector("#one").innerHTML = "";
         document.querySelector("#one").appendChild(likedSongContainer);
 
-        ajaxRequest("GET", '../php/request.php/like', (data) => {
+        ajaxRequest("GET", 'php/request.php/like', (data) => {
             data.forEach(e => {
                 createAffichagePLaylist(e, true)
                 document.querySelector('.supprContainer').innerHTML = "";
@@ -317,7 +317,7 @@ function afficherInfoPlaylist(type = "playlist", id = 1) {
             let trash3Svgs = document.querySelectorAll(".deleteFromPlaylist");
             trash3Svgs.forEach(svg => {
                 svg.addEventListener('click', () => {
-                    ajaxRequest("DELETE", `../php/request.php/like/${svg.dataset.id}`, (data) => {
+                    ajaxRequest("DELETE", `php/request.php/like/${svg.dataset.id}`, (data) => {
                         document.querySelectorAll('.Morceau').forEach(e => {
                             if (e.dataset.id === svg.dataset.id) {
                                 e.remove();
@@ -343,7 +343,7 @@ function afficherInfoPlaylist(type = "playlist", id = 1) {
         document.querySelector("#one").appendChild(likedSongContainer);
         document.querySelector(".ecouter").hidden = true;
 
-        ajaxRequest("GET", '../php/request.php/file-attente', (data) => {
+        ajaxRequest("GET", 'php/request.php/file-attente', (data) => {
             data.forEach(e => {
                 createAffichagePLaylist(e, true)
                 document.querySelector('.supprContainer').innerHTML = "";
@@ -354,7 +354,7 @@ function afficherInfoPlaylist(type = "playlist", id = 1) {
             let trash3Svgs = document.querySelectorAll(".deleteFromPlaylist");
             trash3Svgs.forEach(svg => {
                 svg.addEventListener('click', () => {
-                    ajaxRequest("DELETE", `../php/request.php/file-attente/${svg.dataset.id}`, (data) => {
+                    ajaxRequest("DELETE", `php/request.php/file-attente/${svg.dataset.id}`, (data) => {
                         document.querySelectorAll('.Morceau').forEach(e => {
                             if (e.dataset.id === svg.dataset.id) {
                                 e.remove();
@@ -401,7 +401,7 @@ function createDropdownItemInfo(playlist, parent) {
         let musique_id = addSvg.dataset.musicId;
         addSvg.hidden = true;
         addSvg.nextSibling.hidden = false;
-        ajaxRequest("POST", '../php/request.php/musique-playlist', (response) => {
+        ajaxRequest("POST", 'php/request.php/musique-playlist', (response) => {
             console.log(response);
         }, "id_playlist=" + playlist_id + "&id_musique=" + musique_id);
     })
@@ -420,7 +420,7 @@ function createDropdownItemInfo(playlist, parent) {
         let musique_id = trashSvg.dataset.musicId;
         trashSvg.hidden = true;
         trashSvg.previousSibling.hidden = false;
-        ajaxRequest("DELETE", '../php/request.php/musique-playlist?' + "id_playlist=" + playlist_id + "&id_musique=" + musique_id, (response) => {
+        ajaxRequest("DELETE", 'php/request.php/musique-playlist?' + "id_playlist=" + playlist_id + "&id_musique=" + musique_id, (response) => {
             console.log(response);
         });
     })
@@ -431,7 +431,7 @@ function createDropdownItemInfo(playlist, parent) {
 
     parent.appendChild(dropdownItem);
 
-    ajaxRequest("GET", "../php/request.php/musique-playlist/isIn", (d) => {
+    ajaxRequest("GET", "php/request.php/musique-playlist/isIn", (d) => {
         if (d.length > 0) {
             dropdownItem.children[1].hidden = true;
             dropdownItem.children[2].hidden = false;

@@ -2,7 +2,7 @@
 
 const refreshAccueil = () => {
     // Premiere partie de l'accueil => ecouté recement
-    ajaxRequest("GET", "../php/request.php/historique", (data) => {
+    ajaxRequest("GET", "php/request.php/historique", (data) => {
         let recentDiv = document.querySelector('#recentMusiqueContainer');
         recentDiv.innerHTML = '';
 
@@ -16,7 +16,7 @@ const refreshAccueil = () => {
             musiqueContainer.classList.add('imgContainer');
             musiqueContainer.dataset.id = musique.id_musique;
             musiqueContainer.dataset.type = "musique";
-            ajaxRequest("GET", '../php/request.php/album/' + musique.id_album, (album) => {
+            ajaxRequest("GET", 'php/request.php/album/' + musique.id_album, (album) => {
                 album = album[0];
                 let img = document.createElement('img');
                 img.classList.add('musiqueImg');
@@ -36,7 +36,7 @@ const refreshAccueil = () => {
     })
 
     // Add the liked playlist to the other part of the 'accueil'
-    ajaxRequest("GET", '../php/request.php/like', (data) => {
+    ajaxRequest("GET", 'php/request.php/like', (data) => {
         let otherPlaylist = document.querySelector('#otherMusiqueContainer');
         otherPlaylist.innerHTML = '';
         let likedSongContainer = document.createElement('div');
@@ -59,7 +59,7 @@ const refreshAccueil = () => {
         otherPlaylist.appendChild(likedSongContainer);
 
 
-        ajaxRequest("GET", "../php/request.php/private-playlist", (d) => {
+        ajaxRequest("GET", "php/request.php/private-playlist", (d) => {
             d.forEach((privatePlaylist) => {
                 let playlistContainer = document.createElement('div');
                 playlistContainer.classList.add('imgContainer');
@@ -96,7 +96,7 @@ const refreshAccueil = () => {
 
 
             // Other playlist
-            ajaxRequest("GET", '../php/request.php/playlist/random', (randomPlaylists) => {
+            ajaxRequest("GET", 'php/request.php/playlist/random', (randomPlaylists) => {
                 randomPlaylists.forEach((playlist) => {
                     let playlistContainer = document.createElement('div');
                     playlistContainer.classList.add('imgContainer');

@@ -5,7 +5,7 @@ $('#tabrecherche').on('click', '.clicArtiste', (e) =>
         e.preventDefault();
         let idartiste = $(event.target).closest('.clicArtiste').attr('value');
         //console.log(idartiste);
-        ajaxRequest('GET', '../php/request.php/getArtiste', displayArtiste, 'idartiste='+idartiste);
+        ajaxRequest('GET', 'php/request.php/getArtiste', displayArtiste, 'idartiste='+idartiste);
     }
 );
 

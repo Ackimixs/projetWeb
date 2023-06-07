@@ -19,7 +19,7 @@ $('#tabrecherche').on('click', '.infosmusique', () =>
 
         let idmusique = $(event.target).closest('.infosmusique').attr('value');
         //console.error(idmusique);
-        ajaxRequest('GET', '../php/request.php/infosMusique', musiqueModal, 'idmusique='+idmusique);
+        ajaxRequest('GET', 'php/request.php/infosMusique', musiqueModal, 'idmusique='+idmusique);
     }
 );
 
@@ -28,7 +28,7 @@ $('#display2').on('click', '.infosmusique', () =>
 
         let idmusique = $(event.target).closest('.infosmusique').attr('value');
         //console.error(idmusique);
-        ajaxRequest('GET', '../php/request.php/infosMusique', musiqueModal, 'idmusique='+idmusique);
+        ajaxRequest('GET', 'php/request.php/infosMusique', musiqueModal, 'idmusique='+idmusique);
     }
 );
 
@@ -55,7 +55,7 @@ $('#tabrecherche').on('click', '.infosalbum', () =>
 
         let idalbum = $(event.target).closest('.infosalbum').attr('value');
         console.error(idalbum);
-        ajaxRequest('GET', '../php/request.php/infosAlbum', albumModal, 'idalbum='+idalbum);
+        ajaxRequest('GET', 'php/request.php/infosAlbum', albumModal, 'idalbum='+idalbum);
     }
 );
 
