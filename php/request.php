@@ -467,7 +467,9 @@ switch($requestRessource)
                 break;
            case 'DELETE':
                 if (isset($_SESSION["user"])) {
-                    $data = Playlist::musiqueInPlaylist($_GET['id_playlist'], $_GET['id_musique']);
+                    if (isset($_GET['id_playlist']) && isset($_GET['id_musique'])) {
+                        $data = Playlist::removeMusiqueFromPlaylist($_GET['id_playlist'], $_GET['id_musique']);
+                    }
                 } else {
                     $data = false;
                 }

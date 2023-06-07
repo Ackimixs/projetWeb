@@ -273,6 +273,7 @@ function afficherInfoPlaylist(type = "playlist", id = 1) {
                 trash3Svgs.forEach(svg => {
                     svg.addEventListener('click', () => {
                         ajaxRequest("DELETE", `php/request.php/musique-playlist?id_musique=${svg.dataset.id}&id_playlist=${d.id_playlist}`, (data) => {
+                            console.log(data);
                             document.querySelectorAll('.Morceau').forEach(e => {
                                 if (e.dataset.id === svg.dataset.id) {
                                     e.remove();
@@ -343,7 +344,7 @@ function afficherInfoPlaylist(type = "playlist", id = 1) {
         document.querySelector("#one").appendChild(likedSongContainer);
         document.querySelector(".ecouter").hidden = true;
 
-        ajaxRequest("GET", 'php/request.php/file-attente', (data) => {
+        ajaxRequest("GET", '../php/request.php/file-attente', (data) => {
             data.forEach(e => {
                 createAffichagePLaylist(e, true)
                 document.querySelector('.supprContainer').innerHTML = "";
@@ -354,7 +355,7 @@ function afficherInfoPlaylist(type = "playlist", id = 1) {
             let trash3Svgs = document.querySelectorAll(".deleteFromPlaylist");
             trash3Svgs.forEach(svg => {
                 svg.addEventListener('click', () => {
-                    ajaxRequest("DELETE", `php/request.php/file-attente/${svg.dataset.id}`, (data) => {
+                    ajaxRequest("DELETE", `../php/request.php/file-attente/${svg.dataset.id}`, (data) => {
                         document.querySelectorAll('.Morceau').forEach(e => {
                             if (e.dataset.id === svg.dataset.id) {
                                 e.remove();
@@ -401,7 +402,7 @@ function createDropdownItemInfo(playlist, parent) {
         let musique_id = addSvg.dataset.musicId;
         addSvg.hidden = true;
         addSvg.nextSibling.hidden = false;
-        ajaxRequest("POST", 'php/request.php/musique-playlist', (response) => {
+        ajaxRequest("POST", '../php/request.php/musique-playlist', (response) => {
             console.log(response);
         }, "id_playlist=" + playlist_id + "&id_musique=" + musique_id);
     })
@@ -420,7 +421,7 @@ function createDropdownItemInfo(playlist, parent) {
         let musique_id = trashSvg.dataset.musicId;
         trashSvg.hidden = true;
         trashSvg.previousSibling.hidden = false;
-        ajaxRequest("DELETE", 'php/request.php/musique-playlist?' + "id_playlist=" + playlist_id + "&id_musique=" + musique_id, (response) => {
+        ajaxRequest("DELETE", '../php/request.php/musique-playlist?' + "id_playlist=" + playlist_id + "&id_musique=" + musique_id, (response) => {
             console.log(response);
         });
     })
@@ -431,7 +432,7 @@ function createDropdownItemInfo(playlist, parent) {
 
     parent.appendChild(dropdownItem);
 
-    ajaxRequest("GET", "php/request.php/musique-playlist/isIn", (d) => {
+    ajaxRequest("GET", "../php/request.php/musique-playlist/isIn", (d) => {
         if (d.length > 0) {
             dropdownItem.children[1].hidden = true;
             dropdownItem.children[2].hidden = false;

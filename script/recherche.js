@@ -103,6 +103,8 @@ function rechercheMusique(musiques){
         }
     }
 
+
+
     let songItem = document.querySelectorAll(".songItem");
     songItem.forEach(e => {
         e.addEventListener('click', () => {
