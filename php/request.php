@@ -103,20 +103,29 @@ switch($requestRessource)
                 }
                 break;
 
-            case 'POST':
+            case 'PUT':
+                parse_str(file_get_contents('php://input'), $_PUT);
                 if (isset($_SESSION["user"])) {
-                    if (isset($_POST['password'])) {
-                        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                    if (isset($_PUT['password']) && strlen($_PUT['password']) > 1) {
+                        $password = password_hash($_PUT['password'], PASSWORD_DEFAULT);
                     } else {
-                        $password = $_SESSION['user']['password'];
+                        $password = $_SESSION['user']['motdepasse'];
                     }
-                    $data = User::modificationGeneralUser($_SESSION["user"]['id_user'], $_POST['nom'] ?? $_SESSION['user']['nom'], $_POST['prenom'] ?? $_SESSION['user']['prenom'], $_POST['email'] ?? $_SESSION['user']['mail'], $password, $_POST['date'] ?? $_SESSION['user']['date_naissance']);
+
+                    if (isset($_PUT['email']) && $_PUT['email'] != $_SESSION['user']['mail']) {
+                        if (User::getUserByEmail($_PUT['email'])) {
+                            $data = false;
+                            break;
+                        }
+                    }
+                    $data = User::modificationGeneralUser($_SESSION["user"]['id_user'], $_PUT['nom'] ?? $_SESSION['user']['nom'], $_PUT['prenom'] ?? $_SESSION['user']['prenom'], $_PUT['email'] ?? $_SESSION['user']['mail'], $password, $_PUT['date'] ?? $_SESSION['user']['date_naissance']);
                     $_SESSION['user'] = $data;
                 } else {
                     $data = false;
                 }
                 break;
-           default:
+
+            default:
                 // Requête invalide
                 header("HTTP/1.0 405 Method Not Allowed");
                 break;

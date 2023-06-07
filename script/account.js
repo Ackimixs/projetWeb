@@ -91,7 +91,7 @@ document.querySelector('.modif2').addEventListener('click', () => { //event on c
     let password = document.querySelector('#password').value;
     let birthday = document.querySelector('#birthday').value;
 
-    ajaxRequest('POST', 'php/request.php/user/update', (d) => {
+    ajaxRequest('PUT', 'php/request.php/user/update', (d) => {
         ajaxRequest("GET", 'php/request.php/user/session', (data) => { //Récupère les nouvelles données et les affectent aux champs
             if (data) {
                 // console.log(data);
